@@ -16,7 +16,6 @@
   --green:#22d3a0;--greenA:rgba(34,211,160,0.12);
   --orange:#f59e0b;--orangeA:rgba(245,158,11,0.1);
   --red:#ef4444;--redA:rgba(239,68,68,0.1);
-  --cyan:#06b6d4;--cyanA:rgba(6,182,212,0.1);
   --text:#f1f0ff;--text2:#9490b5;--text3:#5a5680;--text4:#3a3660;
   --r:18px;--rs:12px;
   --safe-t:max(20px,env(safe-area-inset-top));
@@ -37,8 +36,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .btn-danger{display:flex;align-items:center;justify-content:center;padding:12px;border:1.5px solid var(--red);border-radius:14px;background:var(--redA);color:var(--red);font-size:.85rem;font-weight:600;cursor:pointer;margin-top:8px}
 .tag{display:inline-flex;align-items:center;font-size:.7rem;font-weight:600;padding:4px 10px;border-radius:100px}
 .tag-accent{background:var(--accentA);color:var(--accent2)}.tag-green{background:var(--greenA);color:var(--green)}.tag-orange{background:var(--orangeA);color:var(--orange)}
-
-/* HOME */
 .home-hero{margin:0 16px 16px;padding:28px 24px;border-radius:var(--r);background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(167,139,250,.08));border:1px solid rgba(108,99,255,.2);text-align:center}
 .hero-emoji{font-size:2.5rem;display:block;margin-bottom:12px}.hero-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:4px}
 .hero-stats{display:flex;justify-content:center;gap:24px;margin-top:16px}.hero-stat-val{font-size:1.4rem;font-weight:800;color:#fff}.hero-stat-lbl{font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
@@ -51,8 +48,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .recent-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;background:var(--accentA)}
 .recent-info{flex:1}.recent-title{font-size:.88rem;font-weight:600}.recent-meta{font-size:.72rem;color:var(--text3);margin-top:2px}.recent-reps{font-size:.82rem;font-weight:700;color:var(--green);flex-shrink:0}
 .empty-state{padding:40px 20px;text-align:center;color:var(--text3);font-size:.85rem}
-
-/* CAL */
 .cal-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:16px}
 .cal-nav-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .cal-month{font-size:1rem;font-weight:700}
@@ -64,8 +59,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .cal-day .cal-dots{display:flex;gap:3px;position:absolute;bottom:5px}.cal-dot{width:5px;height:5px;border-radius:50%}
 .cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin:14px 20px}.legend-item{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--text3)}.legend-dot{width:8px;height:8px;border-radius:50%}
 .cal-detail{margin:16px 16px 0}.cal-detail-date{font-size:.9rem;font-weight:700;margin-bottom:12px}
-
-/* PROGRESS */
 .progress-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
 .prog-head{display:flex;justify-content:space-between;margin-bottom:14px}.prog-title{font-size:.95rem;font-weight:700}.prog-badge{font-size:.7rem;font-weight:700;color:var(--green);background:var(--greenA);padding:3px 10px;border-radius:100px}
 .prog-chart{height:120px;margin-bottom:12px}.prog-bars{display:flex;align-items:flex-end;gap:6px;height:100%}
@@ -73,15 +66,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .prog-bar{width:100%;min-height:4px;border-radius:6px 6px 3px 3px;background:linear-gradient(to top,var(--accent),var(--accent2))}.prog-bar-val{font-size:.6rem;font-weight:700;color:var(--text3)}.prog-bar-lbl{font-size:.55rem;color:var(--text4)}
 .prog-summary{display:flex;gap:16px}.prog-stat{text-align:center;flex:1}.prog-stat-val{font-size:1.3rem;font-weight:800;color:#fff}.prog-stat-lbl{font-size:.6rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
 .pr-badge{padding:2px 8px;border-radius:100px;background:var(--orangeA);color:var(--orange);font-size:.6rem;font-weight:700;margin-left:6px}
-
-/* MODAL */
 .modal-bg{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);align-items:flex-end;justify-content:center}.modal-bg.open{display:flex}
 .modal-sheet{width:100%;max-width:500px;background:var(--bg2);border-radius:20px 20px 0 0;padding:20px 20px max(20px,var(--safe-b));max-height:85vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
 .modal-handle{width:36px;height:4px;border-radius:2px;background:var(--text4);margin:0 auto 20px}.modal-title{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:16px}
 .modal-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;color:var(--text);font-size:.95rem;margin-bottom:12px}.modal-label{font-size:.75rem;font-weight:600;color:var(--text2);margin-bottom:6px;display:block}
-
-/* WORKOUT */
 .wo-overlay{display:none;position:fixed;inset:0;z-index:250;background:var(--bg);flex-direction:column;overflow:hidden}.wo-overlay.active{display:flex}
 .wo-topbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:var(--safe-t) 20px 14px;background:rgba(8,8,16,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
 .wo-topbar-tag{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2)}.wo-topbar-step{font-size:.95rem;font-weight:700}
@@ -102,8 +91,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .db-steps{background:var(--greenA);border:1px solid rgba(34,211,160,0.15)}.db-steps .detail-block-icon{background:rgba(34,211,160,0.2)}.db-steps .detail-block-title{color:var(--green)}.db-step{display:flex;gap:10px;font-size:.78rem;color:var(--text2);line-height:1.5;margin-bottom:4px}.db-step-num{width:20px;height:20px;border-radius:50%;background:rgba(34,211,160,0.15);color:var(--green);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .db-errors{background:var(--redA);border:1px solid rgba(239,68,68,0.15)}.db-errors .detail-block-icon{background:rgba(239,68,68,0.2)}.db-errors .detail-block-title{color:var(--red)}.db-error-item{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text2);margin-bottom:3px}.db-error-x{color:var(--red);font-weight:800;font-size:.7rem}
 .db-coach{background:linear-gradient(135deg,rgba(108,99,255,0.08),rgba(167,139,250,0.05));border:1px solid rgba(108,99,255,0.2)}.db-coach .detail-block-icon{background:linear-gradient(135deg,var(--accent),var(--accent2))}.db-coach .detail-block-title{color:var(--accent2)}.db-coach .db-text{font-style:italic;color:var(--text)}
-
-/* TIMER */
 .wo-timer{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:16px}
 .wo-ring{position:relative;width:190px;height:190px;display:flex;align-items:center;justify-content:center}.wo-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
 .wo-ring-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:7}.wo-ring-fg{fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s}
@@ -112,14 +99,10 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 .wo-timer-sub{font-size:.65rem;color:var(--text3);font-weight:600;letter-spacing:1px;text-transform:uppercase}
 .wo-set-dots{display:flex;gap:7px}.wo-set-d{width:28px;height:5px;border-radius:3px;background:rgba(255,255,255,.06)}.wo-set-d.done{background:var(--green)}.wo-set-d.cur{background:var(--accent)}
-
-/* REP CARD */
 .wo-rep-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:none;flex-direction:column;align-items:center;gap:14px}.wo-rep-card.vis{display:flex}
 .wo-rep-lbl{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}.wo-rep-row{display:flex;align-items:center;gap:22px;user-select:none}
 .wo-rep-btn{width:54px;height:54px;border-radius:50%;border:2px solid rgba(108,99,255,.35);background:rgba(108,99,255,.06);color:var(--accent2);font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}.wo-rep-btn:active{background:var(--accent);color:#fff;transform:scale(.9)}
 .wo-rep-val{font-size:2.8rem;font-weight:800;color:#fff;min-width:65px;text-align:center;font-variant-numeric:tabular-nums}
-
-/* iOS TOGGLE */
 .smart-section{width:100%;margin-top:14px;border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;gap:12px}.smart-section.hidden{display:none}
 .toggle-row{display:flex;align-items:center;justify-content:space-between}
 .toggle-left{display:flex;align-items:center;gap:10px}.toggle-icon{font-size:1.2rem}
@@ -127,33 +110,27 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .ios-toggle{position:relative;width:51px;height:31px;flex-shrink:0}.ios-toggle input{opacity:0;width:0;height:0}
 .ios-slider{position:absolute;cursor:pointer;inset:0;background:rgba(255,255,255,0.12);border-radius:31px;transition:.3s}.ios-slider::before{content:'';position:absolute;height:27px;width:27px;left:2px;bottom:2px;background:white;border-radius:50%;transition:.3s;box-shadow:0 2px 4px rgba(0,0,0,.3)}
 .ios-toggle input:checked+.ios-slider{background:var(--green)}.ios-toggle input:checked+.ios-slider::before{transform:translateX(20px)}
-
 .smart-status{display:none;align-items:center;gap:8px;padding:8px 14px;border-radius:10px;font-size:.72rem;font-weight:700}.smart-status.vis{display:flex}
 .smart-status.cal{background:var(--orangeA);color:var(--orange)}.smart-status.on{background:var(--greenA);color:var(--green)}
 .status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-
-/* Debug bar for sensor tuning */
 .debug-info{display:none;padding:6px 10px;border-radius:8px;background:rgba(0,0,0,.4);font-size:.6rem;color:var(--text3);font-family:monospace;text-align:center;word-break:break-all}.debug-info.vis{display:block}
-
-.cam-preview{width:80px;height:60px;border-radius:10px;object-fit:cover;border:2px solid var(--green);filter:grayscale(80%)}
+.cam-preview{display:none;width:120px;height:90px;border-radius:12px;object-fit:cover;border:2px solid var(--green);box-shadow:0 4px 15px rgba(34,211,160,0.2)}
+.cam-preview.vis{display:block}
 .sensitivity-row{display:flex;align-items:center;gap:10px;width:100%;padding:0 4px}
 .sens-label{font-size:.68rem;color:var(--text3);flex-shrink:0;width:70px}
 .sens-slider{flex:1;-webkit-appearance:none;appearance:none;height:4px;border-radius:2px;background:rgba(255,255,255,.1);outline:none}
 .sens-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:20px;height:20px;border-radius:50%;background:var(--accent);cursor:pointer;box-shadow:0 0 6px rgba(108,99,255,.5)}
-
 .wo-actions{position:fixed;bottom:0;left:0;right:0;z-index:260;padding:12px 16px max(14px,var(--safe-b));background:linear-gradient(to top,var(--bg) 80%,transparent);display:flex;gap:10px}
 .wo-btn{border:none;border-radius:14px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px}.wo-btn:active{transform:scale(.96)}
 .wo-btn-main{flex:1;padding:16px;font-size:.95rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 18px rgba(108,99,255,.28)}
 .wo-btn-icon{width:52px;height:52px;font-size:1rem}.wo-btn-pause{background:var(--orangeA);border:1.5px solid rgba(245,158,11,.2);color:var(--orange)}.wo-btn-skip{background:rgba(255,255,255,.04);border:1.5px solid var(--border);color:var(--text3)}
-
 .plank-ov{display:none;position:fixed;inset:0;z-index:280;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px 24px;text-align:center}.plank-ov.active{display:flex}
 .plank-nm{font-size:1.6rem;font-weight:800;color:#fff}.plank-phase{font-size:.85rem;font-weight:700;color:var(--accent2)}
 .plank-ring{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center}.plank-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
 .plk-ring-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:8}.plk-ring-fg{fill:none;stroke:var(--green);stroke-width:8;stroke-linecap:round;stroke-dasharray:597.35;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s}
 .plank-big{font-size:4.5rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-3px;z-index:1}.plank-big.warn{color:var(--orange)}.plank-big.crit{color:var(--red);animation:blink .5s infinite}
 .plank-tip-box{max-width:300px;font-size:.82rem;color:var(--text2);background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:14px 18px;line-height:1.6}
-
 .sum-ov{display:none;position:fixed;inset:0;z-index:270;background:var(--bg);flex-direction:column;align-items:center;overflow-y:auto;padding:max(60px,var(--safe-t)) 20px 40px;gap:20px}.sum-ov.active{display:flex}
 .sum-title{font-size:1.8rem;font-weight:800;color:#fff}.sum-sub{font-size:.85rem;color:var(--text2);margin-top:4px}
 .sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:400px}.sum-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:18px;text-align:center}.sum-stat-val{font-size:2rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}.sum-stat-lbl{font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:3px}
@@ -163,8 +140,6 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .cd-num{font-size:8rem;font-weight:800;color:var(--accent);animation:countPop .8s ease}
 @keyframes countPop{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
 .cd-label{font-size:1rem;color:var(--text2);font-weight:600;text-align:center}
-
-/* Hinweis-Box */
 .sensor-hint{margin-top:8px;padding:10px 14px;border-radius:10px;background:rgba(108,99,255,0.06);border:1px solid rgba(108,99,255,0.15);font-size:.72rem;color:var(--text2);line-height:1.5}
 .sensor-hint strong{color:var(--accent2)}
 </style>
@@ -207,9 +182,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 <div class="page" id="pageProgress"><div class="page-head"><div class="page-title">Fortschritt</div></div><div id="progCharts"></div></div>
 
 <div class="modal-bg" id="logModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title" id="mT"></div><div id="mB"></div></div></div>
-<div class="cd-ov" id="cdOv"><div class="cd-num" id="cdNum">3</div><div class="cd-label">Handy jetzt in die Hosentasche!</div></div>
+<div class="cd-ov" id="cdOv"><div class="cd-num" id="cdNum">3</div><div class="cd-label" id="cdLabel">Handy jetzt in die Hosentasche!</div></div>
 
-<!-- WORKOUT -->
 <div class="wo-overlay" id="woOv">
   <div class="wo-topbar"><div><div class="wo-topbar-tag" id="woTag"></div><div class="wo-topbar-step" id="woStep"></div></div><div class="wo-topbar-right"><div class="wo-topbar-time" id="woEl">00:00</div><button class="wo-close-btn" onclick="abortWo()">✕</button></div></div>
   <div class="wo-scroll-area">
@@ -225,12 +199,11 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
           <label class="ios-toggle"><input type="checkbox" id="smartTog" onchange="onToggle(this.checked)"><span class="ios-slider"></span></label>
         </div>
         <div class="smart-status" id="smStat"><div class="status-dot"></div><span id="smStatTxt">...</span></div>
-        <video id="camV" playsinline autoplay muted style="display:none" class="cam-preview"></video>
+        <video id="camV" playsinline autoplay muted class="cam-preview"></video>
         <canvas id="camC" style="display:none"></canvas>
-        <!-- Sensitivity Slider for Camera -->
         <div class="sensitivity-row" id="sensRow" style="display:none">
           <span class="sens-label">Empfindl.</span>
-          <input type="range" class="sens-slider" id="sensSlider" min="10" max="70" value="40" oninput="camSens=parseInt(this.value)">
+          <input type="range" class="sens-slider" id="sensSlider" min="5" max="50" value="20" oninput="camSens=parseInt(this.value)">
         </div>
         <div class="debug-info" id="dbg"></div>
         <div class="sensor-hint" id="sensorHint"></div>
@@ -255,24 +228,26 @@ let woT,woE,woI,woS,woPh,woTmr,woElT,woSt,woRV,woLg,woTS,woPd;
 let wkL=null,smOn=false,snT='none',rCD=false,infoO=false;
 let audioCtx=null;
 
-// ═══ IMPROVED SENSOR STATE ═══
-// Motion: track ALL axes, find dominant during calibration
-let motionHistory=[];     // [{x,y,z}]
+// Motion
+let motionHistory=[];
 let calibrated=false;
 let calibTimer=null;
 let baseline={x:0,y:0,z:0};
-let dominantAxis='y';     // Will be auto-detected
+let dominantAxis='y';
 let motionPhase='neutral';
-let peakVal=0, valleyVal=0;
-const MOTION_THRESHOLD=1.8;  // Lowered for better pocket detection
-const MOTION_COOLDOWN=1000;  // ms
+let peakVal=0,valleyVal=0;
+let lastRepTime=0;
+const MOTION_THRESHOLD=1.8;
+const MOTION_COOLDOWN=800;
 
-// Camera: adaptive thresholds
+// Camera
 let vS=null,cL=null,cH=[];
 let camBaseline=-1;
 let camState='up';
-let camSens=40; // Sensitivity: 10-70 (lower = more sensitive)
-let camMin=Infinity, camMax=-Infinity; // Track actual range
+let camSens=20;
+let camCalibDone=false;
+let camCalibSamples=[];
+let camRepCooldown=false;
 
 function loadDB(){try{const d=localStorage.getItem('cali_db');if(d)db=JSON.parse(d)}catch(e){}}
 function saveDB(){try{localStorage.setItem('cali_db',JSON.stringify(db))}catch(e){}}
@@ -281,6 +256,25 @@ function tday(){return dkey(new Date())}
 async function rqW(){try{if('wakeLock' in navigator)wkL=await navigator.wakeLock.request('screen')}catch(e){}}
 function rlW(){if(wkL){wkL.release();wkL=null}}
 function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
+
+function repBeep(){
+  try{
+    const c=getAC();
+    const o=c.createOscillator(),g=c.createGain();
+    o.connect(g);g.connect(c.destination);
+    o.frequency.value=880;o.type='sine';
+    g.gain.setValueAtTime(0.35,c.currentTime);
+    g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.12);
+    o.start();o.stop(c.currentTime+0.12);
+    const o2=c.createOscillator(),g2=c.createGain();
+    o2.connect(g2);g2.connect(c.destination);
+    o2.frequency.value=1320;o2.type='sine';
+    g2.gain.setValueAtTime(0.15,c.currentTime);
+    g2.gain.exponentialRampToValueAtTime(0.001,c.currentTime+0.08);
+    o2.start();o2.stop(c.currentTime+0.08);
+  }catch(e){}
+}
+
 function beep(f,dur,v=.2){try{const c=getAC(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur/1000);o.start();o.stop(c.currentTime+dur/1000)}catch(e){}}
 function alarmDone(){[880,1100,1320].forEach((f,i)=>setTimeout(()=>beep(f,280),i*160))}
 function speak(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t));u.lang='de-DE';u.rate=1.3;speechSynthesis.speak(u)}
@@ -289,20 +283,13 @@ function switchTab(t){document.querySelectorAll('.page,.tab').forEach(e=>e.class
 function togInfo(){infoO=!infoO;document.getElementById('infoTog').classList.toggle('open',infoO);document.getElementById('exDet').classList.toggle('open',infoO)}
 function buildInfo(n){const i=EI[n];if(!i)return'';let h='';h+=`<div class="detail-block db-desc"><div class="detail-block-header"><div class="detail-block-icon">📋</div><div class="detail-block-title">Info</div></div><div class="db-text">${i.d}</div></div>`;h+=`<div class="detail-block db-steps"><div class="detail-block-header"><div class="detail-block-icon">📐</div><div class="detail-block-title">Ausführung</div></div><div>${i.s.map((s,j)=>`<div class="db-step"><div class="db-step-num">${j+1}</div><div>${s}</div></div>`).join('')}</div></div>`;h+=`<div class="detail-block db-errors"><div class="detail-block-header"><div class="detail-block-icon">⚠️</div><div class="detail-block-title">Fehler</div></div><div>${i.e.map(e=>`<div class="db-error-item"><span class="db-error-x">✕</span>${e}</div>`).join('')}</div></div>`;h+=`<div class="detail-block db-coach"><div class="detail-block-header"><div class="detail-block-icon">🧠</div><div class="detail-block-title">Coach</div></div><div class="db-text">"${i.c}"</div></div>`;return h}
 
-/* HOME */
 function renderHome(){const h=new Date().getHours();document.getElementById('greeting').textContent=(h<12?'Morgen':h<18?'Tag':'Abend')+' 💪';document.getElementById('hWo').textContent=db.history.length;let tr=0,tm=0;db.history.forEach(e=>{tr+=(e.totalReps||0);tm+=(e.durationSec||0)});document.getElementById('hReps').textContent=tr>999?(tr/1000).toFixed(1)+'k':tr;document.getElementById('hMin').textContent=Math.round(tm/60);let streak=0;const td=new Date();for(let i=0;i<365;i++){const d=new Date(td);d.setDate(d.getDate()-i);if(db.history.some(h=>h.date===dkey(d)))streak++;else break}const sb=document.getElementById('heroStreak');if(streak>0){sb.style.display='inline-flex';document.getElementById('streakVal').textContent=streak}else sb.style.display='none';const rc=document.getElementById('recentCard');if(!db.history.length){rc.innerHTML='<div class="empty-state">📊 Starte!</div>';return}let html='';db.history.slice(-5).reverse().forEach(e=>{const ico=e.type==='A'?'🅰️':e.type==='B'?'🅱️':e.type==='run'?'🏃':e.type==='rest'?'🧘':'📝';const tit=e.type==='A'?'Workout A':e.type==='B'?'Workout B':e.type==='run'?`Lauf${e.distance?' '+e.distance+'km':''}`:e.type==='rest'?'Ruhetag':(e.label||'Custom');html+=`<div class="recent-item"><div class="recent-icon">${ico}</div><div class="recent-info"><div class="recent-title">${tit}</div><div class="recent-meta">${e.date}</div></div><div class="recent-reps">${e.totalReps?e.totalReps:''}${e.durationSec&&!e.totalReps?Math.round(e.durationSec/60)+'m':''}</div></div>`});rc.innerHTML=html}
-
-/* CAL */
 function initCal(){const n=new Date();calY=n.getFullYear();calM=n.getMonth()}
 function calNav(d){calM+=d;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}renderCal()}
 function renderCal(){document.getElementById('calMonth').textContent=MO[calM]+' '+calY;const fD=(new Date(calY,calM,1).getDay()+6)%7,dIM=new Date(calY,calM+1,0).getDate();let h='';for(let i=0;i<fD;i++)h+='<div class="cal-day other"></div>';for(let d=1;d<=dIM;d++){const k=`${calY}-${String(calM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;const ents=db.history.filter(e=>e.date===k);let dots='';if(ents.length){dots='<div class="cal-dots">';const ts=new Set(ents.map(e=>e.type));if(ts.has('A'))dots+='<div class="cal-dot" style="background:var(--accent)"></div>';if(ts.has('B'))dots+='<div class="cal-dot" style="background:var(--accent2)"></div>';if(ts.has('run'))dots+='<div class="cal-dot" style="background:var(--green)"></div>';if(ts.has('custom')||ts.has('rest'))dots+='<div class="cal-dot" style="background:var(--orange)"></div>';dots+='</div>'}h+=`<div class="cal-day${k===tday()?' today':''}${calSel===k?' selected':''}" onclick="calSel='${k}';renderCal();showDay('${k}')">${d}${dots}</div>`}document.getElementById('calDays').innerHTML=h;if(calSel)showDay(calSel)}
 function showDay(k){const ents=db.history.filter(e=>e.date===k);const p=k.split('-');document.getElementById('calDetailDate').textContent=`${parseInt(p[2])}. ${MO[parseInt(p[1])-1]}`;if(!ents.length){document.getElementById('calDetailBody').innerHTML='<div style="text-align:center;padding:20px;color:var(--text3)">—</div>'}else{let h='';ents.forEach(e=>{const ico=e.type==='A'?'🅰️':e.type==='B'?'🅱️':e.type==='run'?'🏃':'📝';const tit=e.type==='A'?'Workout A':e.type==='B'?'Workout B':e.type==='run'?'Lauf':(e.label||e.type);let det='';if(e.exercises)e.exercises.forEach(ex=>{det+=`<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:.75rem;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${ex.name}</span><span style="color:var(--accent2);font-weight:600">${ex.reps.join('·')}</span></div>`});const gi=db.history.indexOf(e);h+=`<div class="card" style="margin:0 0 8px"><div style="padding:16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:1.2rem">${ico}</span><div><div style="font-weight:700">${tit}</div><div style="font-size:.68rem;color:var(--text3)">${e.totalReps?e.totalReps+' Reps':''}</div></div></div>${det}<button class="btn-danger" onclick="delEntry(${gi},'${k}')">🗑 Löschen</button></div></div>`});document.getElementById('calDetailBody').innerHTML=h}document.getElementById('calDetail').style.display='block'}
 function delEntry(i,k){if(!confirm('Löschen?'))return;db.history.splice(i,1);saveDB();renderCal();showDay(k);renderHome()}
-
-/* PROGRESS */
 function renderProg(){const tracks=['Pull-Ups','Push-Ups','Dips','Chin-Ups','Pike Push-Ups','Bulgarian Split Squats','Hanging Leg Raises'];let html='';tracks.forEach(n=>{const sess=[];db.history.forEach(h=>{if(!h.exercises)return;const f=h.exercises.find(e=>e.name===n);if(f&&f.reps.length)sess.push({date:h.date,max:Math.max(...f.reps)})});if(!sess.length)return;const l8=sess.slice(-8),mxV=Math.max(...l8.map(s=>s.max),1),best=Math.max(...sess.map(s=>s.max)),cur=sess[sess.length-1].max,diff=cur-sess[0].max;let bars='';l8.forEach((s,i)=>{const pct=Math.round((s.max/mxV)*100);bars+=`<div class="prog-bar-wrap"><div class="prog-bar-val">${s.max}</div><div class="prog-bar" style="height:${Math.max(pct,8)}%;${i===l8.length-1?'background:linear-gradient(to top,var(--green),var(--accent2))':''}"></div><div class="prog-bar-lbl">${s.date.slice(5)}</div></div>`});html+=`<div class="progress-card"><div class="prog-head"><div class="prog-title">${n}${cur===best&&sess.length>1?'<span class="pr-badge">🏅</span>':''}</div><div class="prog-badge">${diff>=0?'+':''}${diff}</div></div><div class="prog-chart"><div class="prog-bars">${bars}</div></div><div class="prog-summary"><div class="prog-stat"><div class="prog-stat-val">${best}</div><div class="prog-stat-lbl">Best</div></div><div class="prog-stat"><div class="prog-stat-val">${cur}</div><div class="prog-stat-lbl">Aktuell</div></div><div class="prog-stat"><div class="prog-stat-val">${sess.length}</div><div class="prog-stat-lbl">Sessions</div></div></div></div>`});if(!html)html='<div class="empty-state">📈 Trainiere für Daten!</div>';document.getElementById('progCharts').innerHTML=html}
-
-/* MODAL */
 function openModal(type){const m=document.getElementById('logModal');let t,b;if(type==='run'){t='🏃 Lauf';b=`<label class="modal-label">km</label><input type="number" id="mD" value="7" step="0.5" class="modal-input" style="text-align:center;font-weight:700;font-size:1.1rem"><label class="modal-label">Min</label><input type="number" id="mDu" value="45" class="modal-input" style="text-align:center;font-weight:700;font-size:1.1rem"><label class="modal-label">Notiz</label><input type="text" id="mN" class="modal-input"><button class="btn-primary" onclick="saveE('run')">💾</button><button class="btn-secondary" onclick="closeM()" style="margin-top:8px">×</button>`}else if(type==='rest'){t='🧘 Rest';b=`<div style="text-align:center;padding:20px;font-size:3rem">😴</div><button class="btn-primary" onclick="saveE('rest')">💾</button><button class="btn-secondary" onclick="closeM()" style="margin-top:8px">×</button>`}else{t='📝 Custom';b=`<label class="modal-label">Name</label><input type="text" id="mL" class="modal-input"><label class="modal-label">Min</label><input type="number" id="mDu" value="30" class="modal-input" style="text-align:center;font-weight:700"><button class="btn-primary" onclick="saveE('custom')">💾</button><button class="btn-secondary" onclick="closeM()" style="margin-top:8px">×</button>`}document.getElementById('mT').textContent=t;document.getElementById('mB').innerHTML=b;m.classList.add('open')}
 function closeM(){document.getElementById('logModal').classList.remove('open')}
 function saveE(type){const e={type,date:tday(),timestamp:Date.now()};const n=document.getElementById('mN');if(n&&n.value)e.note=n.value;if(type==='run'){e.distance=parseFloat(document.getElementById('mD').value)||0;e.durationSec=(parseInt(document.getElementById('mDu').value)||0)*60}else if(type==='custom'){e.label=document.getElementById('mL')?.value||'Custom';e.durationSec=(parseInt(document.getElementById('mDu').value)||0)*60}db.history.push(e);saveDB();closeM();renderHome();renderCal()}
@@ -314,7 +301,7 @@ function importDB(e){const f=e.target.files[0];if(!f)return;const r=new FileRead
 function launchWo(t){getAC();rqW();woT=t;woE=W[t];woI=0;woS=0;woTS=0;woPd=false;woLg=woE.map(e=>({name:e.name,reps:[]}));woSt=Date.now();document.getElementById('woOv').classList.add('active');document.getElementById('woTag').textContent='WORKOUT '+t;document.getElementById('woDots').innerHTML=woE.map((_,i)=>`<div class="wo-dot" id="wd${i}"></div>`).join('');clearInterval(woElT);woElT=setInterval(()=>{const s=Math.floor((Date.now()-woSt)/1000);document.getElementById('woEl').textContent=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`},1000);renderEx()}
 
 function renderEx(){stopSm();infoO=false;document.getElementById('infoTog').classList.remove('open');document.getElementById('exDet').classList.remove('open');const x=woE[woI];woPh='ready';clearInterval(woTmr);document.getElementById('woCat').textContent=x.cat;document.getElementById('woName').textContent=x.name;document.getElementById('woTip').textContent=x.tip;document.getElementById('tS').textContent=`Satz ${woS+1}/${x.sets}`;document.getElementById('tR').textContent=x.isPlank?x.reps:(x.isMax?'Max':x.reps);document.getElementById('tP').textContent=`⏱${x.rest>=60?Math.floor(x.rest/60)+'m':x.rest+'s'}`;document.getElementById('woStep').textContent=`${woI+1}/${woE.length}`;document.getElementById('exDetIn').innerHTML=buildInfo(x.name);const sd=document.getElementById('setDots');sd.innerHTML='';for(let i=0;i<x.sets;i++){const d=document.createElement('div');d.className='wo-set-d'+(i<woS?' done':i===woS?' cur':'');sd.appendChild(d)}const ts=woE.reduce((a,e)=>a+e.sets,0);let ds=0;for(let i=0;i<woI;i++)ds+=woE[i].sets;ds+=woS;document.getElementById('woFill').style.width=Math.round(ds/ts*100)+'%';woE.forEach((_,i)=>{const d=document.getElementById('wd'+i);if(d)d.className='wo-dot'+(i<woI?' done':i===woI?' cur':'')});document.getElementById('tmrBig').textContent='—';document.getElementById('tmrBig').className='wo-timer-big';document.getElementById('tmrSub').textContent='BEREIT';document.getElementById('ringFg').style.strokeDashoffset='0';document.getElementById('ringFg').style.stroke='var(--accent)';
-const rc=document.getElementById('repCard');if(!x.isPlank){woRV=x.isMax?0:(parseInt(x.reps)||0);document.getElementById('repVal').textContent=woRV;rc.classList.add('vis');snT=x.sensor;const ss=document.getElementById('smartSec');const tog=document.getElementById('smartTog');if(snT!=='none'){ss.classList.remove('hidden');tog.checked=false;document.getElementById('sensRow').style.display='none';document.getElementById('dbg').classList.remove('vis');if(snT==='camera'){document.getElementById('togIco').textContent='📸';document.getElementById('togLbl').textContent='Kamera-Zähler';document.getElementById('togSub').textContent='Handy unter die Brust';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Handy flach auf den Boden legen, Frontkamera nach oben. Dein Körper verdunkelt die Kamera bei jeder Rep. Empfindlichkeit anpassbar!'}else{document.getElementById('togIco').textContent='📱';document.getElementById('togLbl').textContent='Bewegungs-Zähler';document.getElementById('togSub').textContent='Handy in die Hosentasche';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Handy in die Hosentasche stecken (egal wie). Der Sensor erkennt automatisch die Bewegungsrichtung. <strong>Bildschirm muss an bleiben!</strong>'}document.getElementById('smStat').className='smart-status';document.getElementById('camV').style.display='none'}else ss.classList.add('hidden')}else rc.classList.remove('vis');document.getElementById('btnM').textContent=x.isPlank?'Plank →':'Satz fertig ✓';document.querySelector('.wo-scroll-area').scrollTop=0}
+const rc=document.getElementById('repCard');if(!x.isPlank){woRV=x.isMax?0:(parseInt(x.reps)||0);document.getElementById('repVal').textContent=woRV;rc.classList.add('vis');snT=x.sensor;const ss=document.getElementById('smartSec');const tog=document.getElementById('smartTog');if(snT!=='none'){ss.classList.remove('hidden');tog.checked=false;document.getElementById('sensRow').style.display='none';document.getElementById('dbg').classList.remove('vis');if(snT==='camera'){document.getElementById('togIco').textContent='📸';document.getElementById('togLbl').textContent='Kamera-Zähler';document.getElementById('togSub').textContent='Handy unter die Brust';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Handy flach auf den Boden, Frontkamera nach oben. Bei jeder Rep piept es – hörst du einen Extra-Piep, drück −1.'}else{document.getElementById('togIco').textContent='📱';document.getElementById('togLbl').textContent='Bewegungs-Zähler';document.getElementById('togSub').textContent='Handy in die Hosentasche';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Bei jeder Rep hörst du einen Piep. Hörst du beim Abspringen einen Extra-Piep, drück danach −1.'}document.getElementById('smStat').className='smart-status';document.getElementById('camV').classList.remove('vis')}else ss.classList.add('hidden')}else rc.classList.remove('vis');document.getElementById('btnM').textContent=x.isPlank?'Plank →':'Satz fertig ✓';document.querySelector('.wo-scroll-area').scrollTop=0}
 
 function woNext(){const x=woE[woI];if(woPh==='ready'){if(x.isPlank){stPlk(x);return}stopSm();woLg[woI].reps.push(woRV);woTS++;woS++;if(woS>=x.sets){woI++;woS=0;if(woI>=woE.length){woFin();return}}stRest(woE[woI>=woE.length?woI-1:woI].rest)}else{clearInterval(woTmr);renderEx()}}
 function stRest(sec){woPh='rest';let t=sec;document.getElementById('btnM').textContent='Skip ⏭';document.getElementById('repCard').classList.remove('vis');document.getElementById('tmrSub').textContent='PAUSE';upRT(t,sec);clearInterval(woTmr);woTmr=setInterval(()=>{if(woPd)return;t--;upRT(t,sec);if(t<=5&&t>0){vib(80);beep(660,80,.15)}if(t<=0){clearInterval(woTmr);alarmDone();vib([200,80,200,80,300]);renderEx()}},1000)}
@@ -323,8 +310,6 @@ function adjR(d){woRV=Math.max(0,woRV+d);document.getElementById('repVal').textC
 function woPause(){woPd=!woPd;document.getElementById('btnP').textContent=woPd?'▶':'⏸'}
 function woSkip(){stopSm();clearInterval(woTmr);woI++;woS=0;if(woI>=woE.length){woFin();return}renderEx()}
 function abortWo(){if(!confirm('Abbrechen?'))return;stopSm();clearInterval(woTmr);clearInterval(woElT);rlW();document.getElementById('woOv').classList.remove('active');document.getElementById('plkOv').classList.remove('active')}
-
-/* PLANK */
 function stPlk(x){document.getElementById('plkOv').classList.add('active');document.getElementById('plkNm').textContent=x.name;document.getElementById('plkTip').textContent=x.tip;if(x.isSide){document.getElementById('plkPh').textContent='◀ LINKS';runPlk(x.plankSec,()=>{alarmDone();vib([200,100,200]);document.getElementById('plkPh').textContent='RECHTS ▶';speak('Wechseln');let sw=3;document.getElementById('plkBig').textContent='🔄';document.getElementById('plkBig').className='plank-big';document.getElementById('plkFg').style.stroke='var(--orange)';clearInterval(woTmr);woTmr=setInterval(()=>{sw--;if(sw<=0){clearInterval(woTmr);runPlk(x.plankSec,()=>{plkDone(x)})}},1000)})}else{document.getElementById('plkPh').textContent='';runPlk(x.plankSec,()=>{plkDone(x)})}}
 function runPlk(sec,cb){let t=sec;const tot=sec,circ=2*Math.PI*95;upPlk(t,tot,circ);clearInterval(woTmr);woTmr=setInterval(()=>{if(woPd)return;t--;upPlk(t,tot,circ);if(t<=5&&t>0){vib(80);beep(660,80,.15)}if(t<=0){clearInterval(woTmr);alarmDone();vib([300,100,300]);cb()}},1000)}
 function upPlk(t,tot,circ){document.getElementById('plkFg').style.strokeDashoffset=circ*(1-t/tot);const b=document.getElementById('plkBig');b.textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;b.className='plank-big'+(t<=5?' crit':t<=10?' warn':'');document.getElementById('plkFg').style.stroke=t<=5?'var(--red)':t<=10?'var(--orange)':'var(--green)'}
@@ -333,250 +318,213 @@ function plkEnd(){clearInterval(woTmr);plkDone(woE[woI])}
 function woFin(){stopSm();clearInterval(woTmr);clearInterval(woElT);rlW();const el=Math.floor((Date.now()-woSt)/1000);let tr=0;woLg.forEach(e=>tr+=e.reps.reduce((a,b)=>a+b,0));db.history.push({type:woT,date:tday(),durationSec:el,totalReps:tr,totalSets:woTS,exercises:woLg.map(e=>({name:e.name,reps:[...e.reps]}))});saveDB();document.getElementById('woOv').classList.remove('active');document.getElementById('sT').textContent=Math.round(el/60);document.getElementById('sS').textContent=woTS;document.getElementById('sR').textContent=tr;document.getElementById('sE').textContent=woE.length;document.getElementById('sumSub').textContent='Workout '+woT;let l='';woLg.forEach(e=>{l+=`<div class="sum-log-row"><span class="sum-log-name">${e.name}</span><span class="sum-log-reps">${e.reps.join('·')}</span></div>`});document.getElementById('sumLog').innerHTML=l;document.getElementById('sumOv').classList.add('active');alarmDone();vib([100,50,100,50,400])}
 function sumClose(){document.getElementById('sumOv').classList.remove('active');renderHome();renderCal()}
 
-/* ═══════════════════════════════════════
-   SMART SENSOR ENGINE v4.0
-   
-   FIXES:
-   1. iOS: Permission requested DIRECTLY in user gesture (toggle click)
-   2. Motion: Uses ALL 3 axes, auto-detects dominant axis during calibration
-   3. Motion: Works in ANY pocket orientation
-   4. Camera: Adaptive thresholds + sensitivity slider
-   5. Camera: Uses actual observed brightness range instead of fixed %
-═══════════════════════════════════════ */
-
-async function onToggle(checked) {
-  if (!checked) { stopSm(); return; }
-  
-  try {
-    if (snT === 'motion') {
-      // iOS: Request permission DIRECTLY in this user gesture handler
-      if (typeof DeviceMotionEvent !== 'undefined' && typeof DeviceMotionEvent.requestPermission === 'function') {
-        const perm = await DeviceMotionEvent.requestPermission();
-        if (perm !== 'granted') {
-          alert('Sensor verweigert. Gehe zu Einstellungen > Safari > Bewegung & Ausrichtung.');
-          document.getElementById('smartTog').checked = false;
-          return;
-        }
+/* ═══ SENSOR ═══ */
+async function onToggle(checked){
+  if(!checked){stopSm();return}
+  try{
+    if(snT==='motion'){
+      if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){
+        const perm=await DeviceMotionEvent.requestPermission();
+        if(perm!=='granted'){alert('Sensor verweigert.');document.getElementById('smartTog').checked=false;return}
       }
-      // Permission OK → start countdown
-      showCD(() => startMotion());
-      
-    } else if (snT === 'camera') {
-      // Request camera DIRECTLY in this user gesture handler
-      vS = await navigator.mediaDevices.getUserMedia({
-        video: { facingMode: 'user', width: { ideal: 160 }, height: { ideal: 120 } }
-      });
-      document.getElementById('camV').srcObject = vS;
-      document.getElementById('camV').style.display = 'block';
-      document.getElementById('sensRow').style.display = 'flex';
-      
-      smOn = true;
-      camBaseline = -1; camState = 'up'; cH = [];
-      camMin = Infinity; camMax = -Infinity;
-      updateStatus('cal', 'Kamera kalibriert...');
-      
-      setTimeout(() => {
-        cL = setInterval(processCam, 100);
-        if (smOn) {
-          updateStatus('on', 'Kamera aktiv!');
-          speak('Kamera bereit');
-        }
-      }, 1500);
+      document.getElementById('cdLabel').textContent='Handy jetzt in die Hosentasche!';
+      showCD(()=>startMotion());
+    }else if(snT==='camera'){
+      vS=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:160},height:{ideal:120}}});
+      document.getElementById('camV').srcObject=vS;
+      document.getElementById('camV').classList.add('vis');
+      document.getElementById('sensRow').style.display='flex';
+      document.getElementById('cdLabel').textContent='Handy auf den Boden legen!';
+      showCD(()=>startCamera());
     }
-  } catch (err) {
-    alert('Fehler: ' + err.message);
-    document.getElementById('smartTog').checked = false;
-  }
+  }catch(err){alert('Fehler: '+err.message);document.getElementById('smartTog').checked=false}
 }
 
-function showCD(cb) {
-  const ov = document.getElementById('cdOv'), n = document.getElementById('cdNum');
+function showCD(cb){
+  const ov=document.getElementById('cdOv'),n=document.getElementById('cdNum');
   ov.classList.add('active');
-  let c = 3; n.textContent = c; speak('Drei'); beep(440, 150);
-  const iv = setInterval(() => {
+  let c=3;n.textContent=c;speak('Drei');beep(440,150);
+  const iv=setInterval(()=>{
     c--;
-    if (c > 0) {
-      n.textContent = c;
-      n.style.animation = 'none'; void n.offsetHeight; n.style.animation = 'countPop .8s ease';
-      speak(c === 2 ? 'Zwei' : 'Eins'); beep(440, 150);
-    } else {
-      clearInterval(iv); ov.classList.remove('active');
-      speak('Los!'); beep(880, 200); cb();
-    }
-  }, 1200);
+    if(c>0){n.textContent=c;n.style.animation='none';void n.offsetHeight;n.style.animation='countPop .8s ease';speak(c===2?'Zwei':'Eins');beep(440,150)}
+    else{clearInterval(iv);ov.classList.remove('active');speak('Los!');beep(880,200);cb()}
+  },1200);
 }
 
-/* ─── MOTION v4: Auto-detect dominant axis ─── */
-function startMotion() {
-  motionHistory = [];
-  calibrated = false;
-  baseline = {x:0,y:0,z:0};
-  dominantAxis = 'y';
-  motionPhase = 'neutral';
-  peakVal = 0; valleyVal = 0;
-  
-  window.addEventListener('devicemotion', handleMotion, true);
-  smOn = true;
-  updateStatus('cal', 'Kalibriere... stillhalten');
-  
-  // Calibration: collect 2 seconds of data, then find baseline + dominant axis
-  calibTimer = setTimeout(() => {
-    if (!smOn || motionHistory.length < 10) return;
-    
-    // Calculate baseline for each axis
-    const len = motionHistory.length;
-    baseline.x = motionHistory.reduce((a, v) => a + v.x, 0) / len;
-    baseline.y = motionHistory.reduce((a, v) => a + v.y, 0) / len;
-    baseline.z = motionHistory.reduce((a, v) => a + v.z, 0) / len;
-    
-    // Find which axis has gravity (largest absolute baseline = that's "up/down")
-    // During pull-ups/squats, the body moves along the gravity axis
-    const absX = Math.abs(baseline.x);
-    const absY = Math.abs(baseline.y);
-    const absZ = Math.abs(baseline.z);
-    
-    if (absX >= absY && absX >= absZ) dominantAxis = 'x';
-    else if (absY >= absX && absY >= absZ) dominantAxis = 'y';
-    else dominantAxis = 'z';
-    
-    calibrated = true;
-    updateStatus('on', `Aktiv! Achse: ${dominantAxis.toUpperCase()}`);
+/* ─── MOTION ─── */
+function startMotion(){
+  motionHistory=[];calibrated=false;
+  baseline={x:0,y:0,z:0};dominantAxis='y';
+  motionPhase='neutral';peakVal=0;valleyVal=0;lastRepTime=0;
+  window.addEventListener('devicemotion',handleMotion,true);
+  smOn=true;
+  updateStatus('cal','Kalibriere... stillhalten');
+  calibTimer=setTimeout(()=>{
+    if(!smOn||motionHistory.length<10)return;
+    const len=motionHistory.length;
+    baseline.x=motionHistory.reduce((a,v)=>a+v.x,0)/len;
+    baseline.y=motionHistory.reduce((a,v)=>a+v.y,0)/len;
+    baseline.z=motionHistory.reduce((a,v)=>a+v.z,0)/len;
+    const ax=Math.abs(baseline.x),ay=Math.abs(baseline.y),az=Math.abs(baseline.z);
+    if(ax>=ay&&ax>=az)dominantAxis='x';
+    else if(ay>=ax&&ay>=az)dominantAxis='y';
+    else dominantAxis='z';
+    calibrated=true;
+    updateStatus('on',`Aktiv! Achse: ${dominantAxis.toUpperCase()}`);
     speak('Bereit');
-  }, 2500);
+  },2500);
 }
 
-function handleMotion(e) {
-  if (!smOn) return;
-  const a = e.accelerationIncludingGravity;
-  if (!a) return;
-  
-  const reading = { x: a.x || 0, y: a.y || 0, z: a.z || 0 };
+function handleMotion(e){
+  if(!smOn)return;
+  const a=e.accelerationIncludingGravity;
+  if(!a)return;
+  const reading={x:a.x||0,y:a.y||0,z:a.z||0};
   motionHistory.push(reading);
-  if (motionHistory.length > 60) motionHistory.shift();
-  
-  if (!calibrated) return;
-  
-  // Get smoothed value on dominant axis
-  const recent = motionHistory.slice(-10);
-  let smoothVal = 0;
-  recent.forEach(r => smoothVal += r[dominantAxis]);
-  smoothVal /= recent.length;
-  
-  const delta = smoothVal - baseline[dominantAxis];
-  const T = MOTION_THRESHOLD;
-  
-  // State machine for rep detection
-  switch (motionPhase) {
-    case 'neutral':
-      if (delta > T) { motionPhase = 'up'; peakVal = smoothVal; }
-      else if (delta < -T) { motionPhase = 'down_first'; valleyVal = smoothVal; }
+  if(motionHistory.length>60)motionHistory.shift();
+  if(!calibrated)return;
+  const recent=motionHistory.slice(-6);
+  let smoothVal=0;
+  recent.forEach(r=>smoothVal+=r[dominantAxis]);
+  smoothVal/=recent.length;
+  const delta=smoothVal-baseline[dominantAxis];
+  const T=MOTION_THRESHOLD;
+  switch(motionPhase){
+    case'neutral':
+      if(delta>T){motionPhase='up';peakVal=smoothVal}
+      else if(delta<-T){motionPhase='down_first';valleyVal=smoothVal}
       break;
-    case 'up':
-      if (smoothVal > peakVal) peakVal = smoothVal;
-      if (smoothVal < peakVal - 1.2) motionPhase = 'coming_down';
+    case'up':
+      if(smoothVal>peakVal)peakVal=smoothVal;
+      if(smoothVal<peakVal-1.2)motionPhase='coming_down';
       break;
-    case 'coming_down':
-      if (delta < -T * 0.3) { motionPhase = 'neutral'; countRep(); }
-      else if (delta > T) motionPhase = 'up';
+    case'coming_down':
+      if(delta<-T*0.3){motionPhase='neutral';countMotionRep()}
+      else if(delta>T)motionPhase='up';
       break;
-    case 'down_first':
-      if (smoothVal < valleyVal) valleyVal = smoothVal;
-      if (smoothVal > valleyVal + 1.2) motionPhase = 'coming_up';
+    case'down_first':
+      if(smoothVal<valleyVal)valleyVal=smoothVal;
+      if(smoothVal>valleyVal+1.2)motionPhase='coming_up';
       break;
-    case 'coming_up':
-      if (delta > T * 0.3) { motionPhase = 'neutral'; countRep(); }
-      else if (delta < -T) motionPhase = 'down_first';
+    case'coming_up':
+      if(delta>T*0.3){motionPhase='neutral';countMotionRep()}
+      else if(delta<-T)motionPhase='down_first';
       break;
   }
 }
 
-function countRep() {
-  if (rCD) return;
-  rCD = true;
+function countMotionRep(){
+  const now=Date.now();
+  if(now-lastRepTime<MOTION_COOLDOWN)return;
+  lastRepTime=now;
   regRep();
-  setTimeout(() => { rCD = false; }, MOTION_COOLDOWN);
 }
 
-/* ─── CAMERA v4: Adaptive brightness detection ─── */
-function processCam() {
-  const v = document.getElementById('camV'), c = document.getElementById('camC');
-  if (!v.videoWidth) return;
-  c.width = 40; c.height = 30;
-  const ctx = c.getContext('2d');
-  ctx.drawImage(v, 0, 0, 40, 30);
-  const data = ctx.getImageData(5, 5, 30, 20).data;
-  let sum = 0;
-  for (let i = 0; i < data.length; i += 16) {
-    sum += (data[i] + data[i+1] + data[i+2]) / 3;
+/* ─── CAMERA ─── */
+function startCamera(){
+  smOn=true;
+  camState='up';cH=[];
+  camBaseline=-1;
+  camCalibDone=false;
+  camCalibSamples=[];
+  camRepCooldown=false;
+  updateStatus('cal','Kalibriere Kamera...');
+  const video=document.getElementById('camV');
+  const waitReady=()=>{
+    if(video.videoWidth>0&&smOn){
+      cL=setInterval(processCam,80);
+    }else if(smOn){
+      setTimeout(waitReady,100);
+    }
+  };
+  setTimeout(waitReady,300);
+}
+
+function processCam(){
+  if(!smOn)return;
+  const v=document.getElementById('camV'),c=document.getElementById('camC');
+  if(!v||!v.videoWidth)return;
+  c.width=40;c.height=30;
+  const ctx=c.getContext('2d');
+  ctx.drawImage(v,0,0,40,30);
+  const data=ctx.getImageData(5,5,30,20).data;
+  let sum=0,count=0;
+  for(let i=0;i<data.length;i+=4){
+    sum+=data[i]*0.299+data[i+1]*0.587+data[i+2]*0.114;
+    count++;
   }
-  const avg = sum / (data.length / 16);
+  const brightness=sum/count;
+  cH.push(brightness);
+  if(cH.length>6)cH.shift();
+  const smooth=cH.reduce((a,b)=>a+b,0)/cH.length;
+  const dbg=document.getElementById('dbg');
+  dbg.classList.add('vis');
   
-  cH.push(avg);
-  if (cH.length > 12) cH.shift();
-  const smooth = cH.reduce((a, b) => a + b, 0) / cH.length;
-  
-  // Track actual observed range
-  if (smooth < camMin) camMin = smooth;
-  if (smooth > camMax) camMax = smooth;
-  
-  // Set baseline after initial readings
-  if (camBaseline === -1 && cH.length >= 5) {
-    camBaseline = smooth;
+  if(!camCalibDone){
+    camCalibSamples.push(smooth);
+    dbg.textContent=`Kalib: ${smooth.toFixed(0)} (${camCalibSamples.length}/25)`;
+    if(camCalibSamples.length>=25){
+      const sorted=[...camCalibSamples].sort((a,b)=>a-b);
+      camBaseline=sorted[Math.floor(sorted.length/2)];
+      camCalibDone=true;
+      camState='up';
+      updateStatus('on','Kamera aktiv!');
+      speak('Kamera bereit');
+    }
     return;
   }
-  if (camBaseline === -1) return;
   
-  // Adaptive thresholds based on sensitivity slider (10-70)
-  // Lower sensitivity value = triggers easier
-  const range = Math.max(camMax - camMin, 20); // At least 20 unit range
-  const darkThreshold = camBaseline - (range * camSens / 100);
-  const brightThreshold = camBaseline - (range * camSens / 300);
+  const dropPct=camSens/100;
+  const darkThreshold=camBaseline*(1-dropPct);
+  const brightThreshold=darkThreshold+(camBaseline-darkThreshold)*0.5;
+  const pctDrop=((camBaseline-smooth)/camBaseline*100);
+  dbg.textContent=`B:${smooth.toFixed(0)} base:${camBaseline.toFixed(0)} ▼${pctDrop.toFixed(0)}% ${camState}`;
   
-  // Alternative simpler approach: percentage of baseline
-  const darkPct = camSens / 100; // e.g. 40 → trigger when brightness drops to 40% of baseline
-  const brightPct = 0.5 + (camSens / 200); // e.g. 40 → recover at 70% of baseline
-  
-  // Debug display
-  const dbg = document.getElementById('dbg');
-  dbg.classList.add('vis');
-  dbg.textContent = `B:${smooth.toFixed(0)} base:${camBaseline.toFixed(0)} ${camState} sens:${camSens}`;
-  
-  if (camState === 'up' && smooth < camBaseline * (darkPct)) {
-    camState = 'down';
-  } else if (camState === 'down' && smooth > camBaseline * (brightPct)) {
-    camState = 'up';
-    regRep();
-    // Update baseline slightly to adapt to changing light
-    camBaseline = camBaseline * 0.95 + smooth * 0.05;
+  if(camState==='up'){
+    if(smooth<darkThreshold)camState='down';
+  }else if(camState==='down'){
+    if(smooth>brightThreshold){
+      camState='up';
+      if(!camRepCooldown){
+        camRepCooldown=true;
+        regRep();
+        camBaseline=camBaseline*0.93+smooth*0.07;
+        setTimeout(()=>{camRepCooldown=false},600);
+      }
+    }
   }
 }
 
-function regRep() { adjR(1); vib(120); speak(woRV); }
+function regRep(){
+  adjR(1);
+  repBeep();
+  vib(80);
+}
 
-function updateStatus(state, text) {
-  const bar = document.getElementById('smStat');
+function updateStatus(state,text){
+  const bar=document.getElementById('smStat');
   bar.classList.add('vis');
-  bar.className = 'smart-status vis ' + state;
-  document.getElementById('smStatTxt').textContent = text;
+  bar.className='smart-status vis '+state;
+  document.getElementById('smStatTxt').textContent=text;
 }
 
-function stopSm() {
-  smOn = false; calibrated = false; clearTimeout(calibTimer);
-  window.removeEventListener('devicemotion', handleMotion, true);
-  motionHistory = []; motionPhase = 'neutral';
-  clearInterval(cL); cL = null;
-  if (vS) { vS.getTracks().forEach(t => t.stop()); vS = null; }
-  document.getElementById('camV').style.display = 'none';
-  document.getElementById('sensRow').style.display = 'none';
+function stopSm(){
+  smOn=false;calibrated=false;clearTimeout(calibTimer);
+  window.removeEventListener('devicemotion',handleMotion,true);
+  motionHistory=[];motionPhase='neutral';
+  clearInterval(cL);cL=null;
+  camCalibDone=false;camCalibSamples=[];
+  if(vS){vS.getTracks().forEach(t=>t.stop());vS=null}
+  document.getElementById('camV').classList.remove('vis');
+  document.getElementById('sensRow').style.display='none';
   document.getElementById('dbg').classList.remove('vis');
-  const tog = document.getElementById('smartTog');
-  if (tog) tog.checked = false;
-  const bar = document.getElementById('smStat');
-  if (bar) bar.className = 'smart-status';
+  const tog=document.getElementById('smartTog');
+  if(tog)tog.checked=false;
+  const bar=document.getElementById('smStat');
+  if(bar)bar.className='smart-status';
 }
 
-/* INIT */
-loadDB(); initCal(); renderHome(); renderCal();
+loadDB();initCal();renderHome();renderCal();
 </script>
 </body>
 </html>
