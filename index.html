@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="theme-color" content="#080810">
@@ -10,973 +10,469 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 :root{
---bg:#080810;--bg2:#0c0c18;--card:#111122;--card2:#161630;
---border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
---accent:#6c63ff;--accent2:#a78bfa;--accentA:rgba(108,99,255,0.12);
---green:#22d3a0;--greenA:rgba(34,211,160,0.12);
---orange:#f59e0b;--orangeA:rgba(245,158,11,0.1);
---red:#ef4444;--redA:rgba(239,68,68,0.1);
---cyan:#06b6d4;--cyanA:rgba(6,182,212,0.12);
---text:#f1f0ff;--text2:#9490b5;--text3:#5a5680;--text4:#3a3660;
---r:18px;--rs:12px;
---safe-b:env(safe-area-inset-bottom,0px);
---tab-h:64px;--action-h:80px;
+  --bg:#080810;--bg2:#0c0c18;--card:#111122;--card2:#161630;
+  --border:rgba(255,255,255,0.06);--border2:rgba(255,255,255,0.1);
+  --accent:#6c63ff;--accent2:#a78bfa;--accentA:rgba(108,99,255,0.12);
+  --green:#22d3a0;--greenA:rgba(34,211,160,0.12);
+  --orange:#f59e0b;--orangeA:rgba(245,158,11,0.1);
+  --red:#ef4444;--redA:rgba(239,68,68,0.1);
+  --cyan:#06b6d4;--cyanA:rgba(6,182,212,0.1);
+  --text:#f1f0ff;--text2:#9490b5;--text3:#5a5680;--text4:#3a3660;
+  --r:18px;--rs:12px;
+  --safe-t:max(20px,env(safe-area-inset-top));
+  --safe-b:env(safe-area-inset-bottom,0px);
 }
-html{scroll-behavior:smooth;overflow-x:hidden}
-body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased;-webkit-overflow-scrolling:touch}
-
-/* TAB BAR */
-.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;display:flex;height:var(--tab-h);background:rgba(8,8,16,0.95);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-top:1px solid var(--border);padding-bottom:var(--safe-b)}
-.tab{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;cursor:pointer;border:none;background:none;color:var(--text3);font-size:.6rem;font-weight:600;letter-spacing:.5px;transition:color .2s;text-transform:uppercase}
-.tab svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2}
-.tab.active{color:var(--accent)}
-.tab.active svg{filter:drop-shadow(0 0 6px rgba(108,99,255,.5))}
-
-/* PAGES */
-.page{display:none;flex-direction:column;min-height:100vh;min-height:100dvh;padding-bottom:calc(var(--tab-h) + var(--safe-b) + 16px);overflow-y:auto;-webkit-overflow-scrolling:touch}
-.page.active{display:flex;animation:fadeUp .25s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
-
-/* COMMON */
-.page-head{padding:52px 20px 16px;position:sticky;top:0;z-index:10;background:linear-gradient(to bottom,var(--bg) 85%,transparent)}
-.page-title{font-size:1.5rem;font-weight:800;letter-spacing:-.5px}
-.page-sub{font-size:.8rem;color:var(--text2);margin-top:3px}
-.section-lbl{font-size:.63rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);padding:0 20px;margin:18px 0 8px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 10px;overflow:hidden}
-.card-pad{padding:18px}
-.btn-primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border:none;border-radius:14px;font-size:.95rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(108,99,255,.3);transition:all .2s}
-.btn-primary:active{transform:scale(.97)}
-.btn-primary:disabled{opacity:.3;cursor:not-allowed;box-shadow:none}
-.btn-secondary{display:flex;align-items:center;justify-content:center;gap:6px;padding:13px;border:1.5px solid var(--border2);border-radius:14px;background:transparent;color:var(--text2);font-size:.85rem;font-weight:600;cursor:pointer;transition:all .2s}
-.btn-secondary:active{background:rgba(255,255,255,.03);transform:scale(.97)}
-.tag{display:inline-flex;align-items:center;gap:4px;font-size:.68rem;font-weight:600;padding:4px 9px;border-radius:100px}
-.tag-accent{background:var(--accentA);color:var(--accent2)}
-.tag-green{background:var(--greenA);color:var(--green)}
-.tag-orange{background:var(--orangeA);color:var(--orange)}
-.tag-cyan{background:var(--cyanA);color:var(--cyan)}
-
-/* HOME */
-.home-hero{margin:0 16px 14px;padding:24px 20px;border-radius:var(--r);background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(167,139,250,.08));border:1px solid rgba(108,99,255,.2);text-align:center}
-.hero-emoji{font-size:2.2rem;display:block;margin-bottom:10px}
-.hero-title{font-size:1.15rem;font-weight:800;color:#fff;margin-bottom:3px}
-.hero-sub{font-size:.78rem;color:var(--text2)}
-.hero-stats{display:flex;justify-content:center;gap:20px;margin-top:14px}
-.hero-stat-val{font-size:1.3rem;font-weight:800;color:#fff}
-.hero-stat-lbl{font-size:.6rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
-.hero-streak{display:inline-flex;align-items:center;gap:5px;margin-top:14px;padding:5px 12px;border-radius:100px;background:var(--orangeA);border:1px solid rgba(245,158,11,.25);font-size:.72rem;font-weight:700;color:var(--orange)}
-.wo-select-card{display:flex;align-items:center;gap:12px;padding:16px 18px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s;-webkit-user-select:none;user-select:none}
-.wo-select-card:last-child{border-bottom:none}
-.wo-select-card:active{background:rgba(255,255,255,.03)}
-.wo-sel-icon{width:44px;height:44px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.wo-sel-icon.a{background:var(--accentA)}.wo-sel-icon.b{background:rgba(124,58,237,.12)}
-.wo-sel-info{flex:1;min-width:0}
-.wo-sel-title{font-size:.88rem;font-weight:700;color:var(--text)}
-.wo-sel-desc{font-size:.68rem;color:var(--text3);margin-top:2px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.wo-sel-arrow{color:var(--text4);font-size:1.2rem;flex-shrink:0}
-.quick-actions{display:flex;gap:8px;margin:0 16px 14px}
-.quick-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;padding:16px 8px;border-radius:var(--r);border:1px solid var(--border);background:var(--card);cursor:pointer;transition:all .15s}
-.quick-btn:active{transform:scale(.95);background:var(--card2)}
-.quick-icon{font-size:1.3rem}
-.quick-label{font-size:.65rem;font-weight:600;color:var(--text2);text-align:center;line-height:1.3}
-.recent-item{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--border)}
-.recent-item:last-child{border-bottom:none}
-.recent-icon{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;background:var(--accentA)}
-.recent-info{flex:1;min-width:0}
-.recent-title{font-size:.82rem;font-weight:600}
-.recent-meta{font-size:.68rem;color:var(--text3);margin-top:1px}
-.recent-reps{font-size:.78rem;font-weight:700;color:var(--green);flex-shrink:0}
-.empty-state{padding:32px 20px;text-align:center}
-.empty-icon{font-size:2rem;margin-bottom:10px;display:block}
-.empty-text{font-size:.8rem;color:var(--text3);line-height:1.5}
-
-/* CALENDAR */
-.cal-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:14px}
-.cal-nav-btn{width:38px;height:38px;border-radius:11px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.cal-nav-btn:active{background:var(--card2);transform:scale(.93)}
-.cal-month{font-size:.95rem;font-weight:700}
+html{scroll-behavior:smooth;overscroll-behavior-y:none}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;min-height:100dvh;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;display:flex;background:rgba(8,8,16,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);padding:6px 0 max(6px,var(--safe-b))}
+.tab{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 4px 4px;cursor:pointer;border:none;background:none;color:var(--text3);font-size:.62rem;font-weight:600;letter-spacing:.5px;text-transform:uppercase}
+.tab svg{width:22px;height:22px}.tab.active{color:var(--accent)}
+.page{display:none;flex-direction:column;min-height:100vh;min-height:100dvh;padding-bottom:90px}.page.active{display:flex;animation:fadeUp .3s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.page-head{padding:var(--safe-t) 20px 20px;position:sticky;top:0;z-index:10;background:linear-gradient(to bottom,var(--bg) 80%,transparent)}
+.page-title{font-size:1.6rem;font-weight:800;letter-spacing:-.5px}.page-sub{font-size:.82rem;color:var(--text2);margin-top:4px}
+.section-lbl{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);padding:0 20px;margin:20px 0 10px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--r);margin:0 16px 12px;overflow:hidden}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border:none;border-radius:14px;font-size:1rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 20px rgba(108,99,255,.3);transition:all .2s}.btn-primary:active{transform:scale(.97)}
+.btn-secondary{display:flex;align-items:center;justify-content:center;gap:6px;padding:14px;border:1.5px solid var(--border2);border-radius:14px;background:transparent;color:var(--text2);font-size:.9rem;font-weight:600;cursor:pointer}.btn-secondary:active{background:rgba(255,255,255,.05);transform:scale(.97)}
+.btn-danger{display:flex;align-items:center;justify-content:center;gap:6px;padding:12px;border:1.5px solid var(--red);border-radius:14px;background:var(--redA);color:var(--red);font-size:.85rem;font-weight:600;cursor:pointer;margin-top:8px}.btn-danger:active{transform:scale(.97)}
+.tag{display:inline-flex;align-items:center;gap:4px;font-size:.7rem;font-weight:600;padding:4px 10px;border-radius:100px}
+.tag-accent{background:var(--accentA);color:var(--accent2)}.tag-green{background:var(--greenA);color:var(--green)}.tag-orange{background:var(--orangeA);color:var(--orange)}
+.home-hero{margin:0 16px 16px;padding:28px 24px;border-radius:var(--r);background:linear-gradient(135deg,rgba(108,99,255,.15),rgba(167,139,250,.08));border:1px solid rgba(108,99,255,.2);text-align:center}
+.hero-emoji{font-size:2.5rem;display:block;margin-bottom:12px}.hero-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:4px}.hero-sub{font-size:.82rem;color:var(--text2)}
+.hero-stats{display:flex;justify-content:center;gap:24px;margin-top:16px}.hero-stat-val{font-size:1.4rem;font-weight:800;color:#fff}.hero-stat-lbl{font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
+.hero-streak{display:inline-flex;align-items:center;gap:6px;margin-top:16px;padding:6px 14px;border-radius:100px;background:var(--orangeA);border:1px solid rgba(245,158,11,.25);font-size:.75rem;font-weight:700;color:var(--orange)}
+.quick-actions{display:flex;gap:10px;margin:0 16px 16px}.quick-btn{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px;padding:20px 12px;border-radius:var(--r);border:1px solid var(--border);background:var(--card);cursor:pointer}.quick-btn:active{transform:scale(.96)}.quick-icon{font-size:1.5rem}.quick-label{font-size:.72rem;font-weight:600;color:var(--text2);text-align:center}
+.wo-select-card{display:flex;align-items:center;gap:14px;padding:18px 20px;border-bottom:1px solid var(--border);cursor:pointer}
+.wo-sel-icon{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}.wo-sel-icon.a{background:var(--accentA)}.wo-sel-icon.b{background:rgba(124,58,237,.12)}
+.wo-sel-info{flex:1}.wo-sel-title{font-size:.92rem;font-weight:700}.wo-sel-desc{font-size:.72rem;color:var(--text3);margin-top:2px}
+.recent-item{display:flex;align-items:center;gap:14px;padding:16px 20px;border-bottom:1px solid var(--border)}.recent-item:last-child{border-bottom:none}
+.recent-icon{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;background:var(--accentA)}
+.recent-info{flex:1}.recent-title{font-size:.88rem;font-weight:600}.recent-meta{font-size:.72rem;color:var(--text3);margin-top:2px}.recent-reps{font-size:.82rem;font-weight:700;color:var(--green);flex-shrink:0}
+.empty-state{padding:40px 20px;text-align:center;color:var(--text3);font-size:.85rem}
+.cal-nav{display:flex;align-items:center;justify-content:space-between;padding:0 20px;margin-bottom:16px}
+.cal-nav-btn{width:40px;height:40px;border-radius:12px;border:1px solid var(--border);background:var(--card);color:var(--text2);font-size:1.1rem;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cal-month{font-size:1rem;font-weight:700}
 .cal-grid{margin:0 16px;border-radius:var(--r);overflow:hidden;background:var(--card);border:1px solid var(--border)}
-.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border)}
-.cal-wd{text-align:center;padding:8px 0;font-size:.6rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
-.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;padding:4px}
-.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;cursor:pointer;position:relative;font-size:.78rem;font-weight:600;color:var(--text2)}
-.cal-day:active{transform:scale(.88)}
-.cal-day.other{color:var(--text4);opacity:.35}
-.cal-day.today{background:var(--accentA);color:var(--accent2);font-weight:700}
-.cal-day.selected{background:rgba(108,99,255,.2);color:var(--accent)}
-.cal-day .cal-dots{display:flex;gap:2px;position:absolute;bottom:3px}
-.cal-dot{width:4px;height:4px;border-radius:50%}
-.cal-dot.dA{background:var(--accent)}.cal-dot.dB{background:var(--accent2)}.cal-dot.dR{background:var(--green)}.cal-dot.dC{background:var(--orange)}
-.cal-legend{display:flex;flex-wrap:wrap;gap:10px;margin:12px 20px}
-.legend-item{display:flex;align-items:center;gap:5px;font-size:.65rem;color:var(--text3);font-weight:500}
-.legend-dot{width:7px;height:7px;border-radius:50%}
-.cal-detail{margin:14px 16px 0}
-.cal-detail-head{margin-bottom:10px;padding:0 4px}
-.cal-detail-date{font-size:.85rem;font-weight:700}
-.cal-detail-body{display:flex;flex-direction:column;gap:8px}
-
-/* PROGRESS */
-.progress-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px}
-.prog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.prog-title{font-size:.88rem;font-weight:700}
-.prog-badge{font-size:.68rem;font-weight:700;color:var(--green);background:var(--greenA);padding:3px 9px;border-radius:100px}
-.prog-chart{height:100px;margin-bottom:10px}
-.prog-bars{display:flex;align-items:flex-end;gap:4px;height:100%;padding:0 2px}
-.prog-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px;height:100%;justify-content:flex-end}
-.prog-bar{width:100%;min-height:3px;border-radius:5px 5px 2px 2px;background:linear-gradient(to top,var(--accent),var(--accent2));transition:height .5s}
-.prog-bar-val{font-size:.55rem;font-weight:700;color:var(--text3)}
-.prog-bar-lbl{font-size:.5rem;color:var(--text4);font-weight:600}
-.prog-summary{display:flex;gap:12px}
-.prog-stat{text-align:center;flex:1}
-.prog-stat-val{font-size:1.2rem;font-weight:800;color:#fff}
-.prog-stat-lbl{font-size:.55rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
-.pr-badge{display:inline-flex;padding:2px 7px;border-radius:100px;background:var(--orangeA);color:var(--orange);font-size:.58rem;font-weight:700;margin-left:4px}
-
-/* MODAL */
-.modal-bg{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:flex-end;justify-content:center}
-.modal-bg.open{display:flex;animation:fadeIn .2s}
+.cal-weekdays{display:grid;grid-template-columns:repeat(7,1fr);border-bottom:1px solid var(--border)}.cal-wd{text-align:center;padding:10px 0;font-size:.65rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
+.cal-days{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;padding:6px}
+.cal-day{aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:12px;cursor:pointer;position:relative;font-size:.82rem;font-weight:600;color:var(--text2)}
+.cal-day.other{color:var(--text4);opacity:.4}.cal-day.today{background:var(--accentA);color:var(--accent2)}.cal-day.selected{box-shadow:0 0 0 2px var(--accent)}
+.cal-day .cal-dots{display:flex;gap:3px;position:absolute;bottom:5px}.cal-dot{width:5px;height:5px;border-radius:50%}
+.cal-legend{display:flex;flex-wrap:wrap;gap:12px;margin:14px 20px}.legend-item{display:flex;align-items:center;gap:6px;font-size:.7rem;color:var(--text3)}.legend-dot{width:8px;height:8px;border-radius:50%}
+.cal-detail{margin:16px 16px 0}.cal-detail-date{font-size:.9rem;font-weight:700;margin-bottom:12px;padding:0 4px}
+.progress-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px}
+.prog-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}.prog-title{font-size:.95rem;font-weight:700}.prog-badge{font-size:.7rem;font-weight:700;color:var(--green);background:var(--greenA);padding:3px 10px;border-radius:100px}
+.prog-chart{position:relative;height:120px;margin-bottom:12px}.prog-bars{display:flex;align-items:flex-end;gap:6px;height:100%;padding:0 4px}
+.prog-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;height:100%;justify-content:flex-end}
+.prog-bar{width:100%;min-height:4px;border-radius:6px 6px 3px 3px;background:linear-gradient(to top,var(--accent),var(--accent2))}.prog-bar-val{font-size:.6rem;font-weight:700;color:var(--text3)}.prog-bar-lbl{font-size:.55rem;color:var(--text4);font-weight:600}
+.prog-summary{display:flex;gap:16px}.prog-stat{text-align:center;flex:1}.prog-stat-val{font-size:1.3rem;font-weight:800;color:#fff}.prog-stat-lbl{font-size:.6rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
+.pr-badge{display:inline-flex;padding:2px 8px;border-radius:100px;background:var(--orangeA);color:var(--orange);font-size:.6rem;font-weight:700;margin-left:6px}
+.modal-bg{display:none;position:fixed;inset:0;z-index:300;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);align-items:flex-end;justify-content:center}.modal-bg.open{display:flex;animation:fadeIn .2s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal-sheet{width:100%;max-width:500px;background:var(--bg2);border-radius:20px 20px 0 0;padding:16px 20px max(20px,var(--safe-b));max-height:80vh;overflow-y:auto;-webkit-overflow-scrolling:touch;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
+.modal-sheet{width:100%;max-width:500px;background:var(--bg2);border-radius:20px 20px 0 0;padding:20px 20px max(20px,var(--safe-b));max-height:85vh;overflow-y:auto;animation:slideUp .3s cubic-bezier(.4,0,.2,1)}
 @keyframes slideUp{from{transform:translateY(100%)}to{transform:translateY(0)}}
-.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--text4);margin:0 auto 16px}
-.modal-title{font-size:1rem;font-weight:700;text-align:center;margin-bottom:14px}
-.modal-input{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:13px;color:var(--text);font-size:1rem;font-weight:600;width:100%;-webkit-appearance:none}
-.modal-input:focus{outline:none;border-color:var(--accent)}
-.modal-label{font-size:.72rem;font-weight:600;color:var(--text2);margin-bottom:6px;display:block}
-
-/* WORKOUT OVERLAY */
-.wo-overlay{display:none;position:fixed;inset:0;z-index:250;background:var(--bg);flex-direction:column;overflow:hidden}
-.wo-overlay.active{display:flex;animation:fadeUp .25s ease}
-.wo-topbar{display:flex;align-items:center;justify-content:space-between;padding:48px 16px 12px;position:sticky;top:0;z-index:15;background:var(--bg);border-bottom:1px solid var(--border);flex-shrink:0}
-.wo-topbar-left{display:flex;align-items:center;gap:10px}
-.wo-close-btn{width:36px;height:36px;border-radius:50%;border:1.5px solid rgba(239,68,68,.3);background:rgba(239,68,68,.08);color:var(--red);font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.wo-close-btn:active{background:rgba(239,68,68,.2);transform:scale(.9)}
-.wo-topbar-info{display:flex;flex-direction:column;gap:1px}
-.wo-topbar-tag{font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2)}
-.wo-topbar-step{font-size:.85rem;font-weight:700}
-.wo-topbar-time{background:var(--card);border:1px solid var(--border);border-radius:100px;padding:5px 12px;font-size:.75rem;font-weight:700;color:var(--text2);font-variant-numeric:tabular-nums}
-.wo-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior-y:contain;padding-bottom:calc(var(--action-h) + var(--safe-b) + 20px)}
-.wo-progress{padding:14px 16px;flex-shrink:0}
-.wo-prog-track{height:3px;background:rgba(255,255,255,.04);border-radius:2px;overflow:hidden}
-.wo-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s;width:0%}
-.wo-dots{display:flex;gap:5px;justify-content:center;margin-top:8px}
-.wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.06);transition:all .3s}
-.wo-dot.done{background:var(--green);box-shadow:0 0 5px rgba(34,211,160,.4)}
-.wo-dot.cur{background:var(--accent);box-shadow:0 0 7px rgba(108,99,255,.5);transform:scale(1.3)}
-.wo-ex-card{margin:0 14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.wo-ex-top{padding:18px}
-.wo-ex-cat{font-size:.58rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
-.wo-ex-name{font-size:1.3rem;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.15;margin-bottom:8px}
-.wo-ex-tags{display:flex;flex-wrap:wrap;gap:4px}
+.modal-handle{width:36px;height:4px;border-radius:2px;background:var(--text4);margin:0 auto 20px}.modal-title{font-size:1.1rem;font-weight:700;text-align:center;margin-bottom:16px}
+.modal-input{width:100%;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;color:var(--text);font-size:.95rem;margin-bottom:12px}.modal-label{font-size:.75rem;font-weight:600;color:var(--text2);margin-bottom:6px;display:block}
+.wo-overlay{display:none;position:fixed;inset:0;z-index:250;background:var(--bg);flex-direction:column;overflow:hidden}.wo-overlay.active{display:flex;animation:fadeUp .2s ease}
+.wo-topbar{flex-shrink:0;display:flex;align-items:center;justify-content:space-between;padding:var(--safe-t) 20px 14px;background:rgba(8,8,16,0.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.wo-topbar-info{display:flex;flex-direction:column;gap:2px}.wo-topbar-tag{font-size:.65rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent2)}.wo-topbar-step{font-size:.95rem;font-weight:700}
+.wo-topbar-right{display:flex;align-items:center;gap:12px}.wo-topbar-time{font-size:.85rem;font-weight:700;color:var(--text2);font-variant-numeric:tabular-nums}
+.wo-close-btn{width:32px;height:32px;border-radius:50%;border:none;background:rgba(255,255,255,0.08);color:var(--text2);font-size:1.1rem;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.wo-scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-top:16px;padding-bottom:120px}
+.wo-progress{padding:0 20px 16px;display:flex;flex-direction:column;gap:8px}.wo-prog-track{height:3px;background:rgba(255,255,255,.05);border-radius:2px;overflow:hidden}.wo-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .5s;width:0%}
+.wo-dots{display:flex;gap:6px;justify-content:center}.wo-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.07)}.wo-dot.done{background:var(--green)}.wo-dot.cur{background:var(--accent);transform:scale(1.4)}
+.wo-ex-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.wo-ex-top{padding:20px}.wo-ex-cat{font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}.wo-ex-name{font-size:1.45rem;font-weight:800;color:#fff;letter-spacing:-.3px;line-height:1.15;margin-bottom:10px}.wo-ex-tags{display:flex;flex-wrap:wrap;gap:5px}
 .wo-ex-div{height:1px;background:var(--border)}
-.wo-ex-tip{padding:12px 18px;display:flex;gap:10px;align-items:flex-start}
-.wo-tip-icon{width:24px;height:24px;border-radius:7px;background:var(--accentA);display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0;margin-top:1px}
-.wo-tip-text{font-size:.75rem;color:var(--text2);line-height:1.55}
-
-/* LAST WORKOUT REFERENCE */
-.wo-last-ref{margin:0 14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 16px;display:flex;align-items:center;gap:10px}
-.wo-last-ref.hidden{display:none}
-.wo-last-icon{font-size:.9rem}
-.wo-last-text{font-size:.72rem;color:var(--text2);flex:1}
-.wo-last-val{font-size:.85rem;font-weight:700;color:var(--orange)}
-
-/* TIMER */
-.wo-timer{margin:0 14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px 16px;display:flex;flex-direction:column;align-items:center;gap:14px}
-.wo-phase{display:flex;align-items:center;gap:7px}
-.wo-phase-dot{width:6px;height:6px;border-radius:50%;background:var(--accent);animation:pDot 2s infinite}
-@keyframes pDot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(.6)}}
-.wo-phase-lbl{font-size:.65rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text2)}
-.wo-ring{position:relative;width:170px;height:170px;display:flex;align-items:center;justify-content:center}
-.wo-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.wo-ring-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:6}
-.wo-ring-fg{fill:none;stroke:var(--accent);stroke-width:6;stroke-linecap:round;stroke-dasharray:452.39;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s;filter:drop-shadow(0 0 6px rgba(108,99,255,.5))}
-.wo-ring-inner{display:flex;flex-direction:column;align-items:center;z-index:1;gap:1px}
-.wo-timer-big{font-size:2.8rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-2px;line-height:1;color:#fff;transition:color .4s}
-.wo-timer-big.warn{color:var(--orange)}.wo-timer-big.crit{color:var(--red);animation:blink .5s infinite}
-@keyframes blink{0%,100%{opacity:1}50%{opacity:.35}}
-.wo-timer-sub{font-size:.6rem;color:var(--text3);font-weight:600;letter-spacing:1px;text-transform:uppercase}
-.wo-set-dots{display:flex;gap:6px}
-.wo-set-d{width:26px;height:4px;border-radius:2px;background:rgba(255,255,255,.05);transition:all .3s}
-.wo-set-d.done{background:var(--green)}.wo-set-d.cur{background:var(--accent);box-shadow:0 0 5px rgba(108,99,255,.4)}
-
-/* REP INPUT */
-.wo-rep-card{margin:0 14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;display:none;flex-direction:column;align-items:center;gap:12px}
-.wo-rep-card.vis{display:flex}
-.wo-rep-lbl{font-size:.68rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}
-.wo-rep-row{display:flex;align-items:center;gap:20px}
-.wo-rep-btn{width:48px;height:48px;border-radius:50%;border:2px solid rgba(108,99,255,.3);background:rgba(108,99,255,.06);color:var(--accent2);font-size:1.4rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .12s}
-.wo-rep-btn:active{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(.88)}
-.wo-rep-val{font-size:2.6rem;font-weight:800;color:#fff;min-width:60px;text-align:center;font-variant-numeric:tabular-nums}
-
-/* ═══ AUTO-COUNT CARD ═══ */
-.ac-card{margin:0 14px 10px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px;display:none;flex-direction:column;gap:14px}
-.ac-card.vis{display:flex}
-
-.ac-toggle-row{display:flex;align-items:center;justify-content:space-between}
-.ac-toggle-info{display:flex;align-items:center;gap:10px}
-.ac-toggle-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1rem}
-.ac-toggle-icon.sensor{background:var(--cyanA)}
-.ac-toggle-icon.camera{background:var(--greenA)}
-.ac-toggle-label{font-size:.78rem;font-weight:600}
-.ac-toggle-sub{font-size:.62rem;color:var(--text3);margin-top:1px}
-
-/* Toggle switch */
-.toggle{width:48px;height:28px;border-radius:14px;background:var(--text4);position:relative;cursor:pointer;transition:background .2s;flex-shrink:0}
-.toggle.on{background:var(--accent)}
-.toggle-knob{width:22px;height:22px;border-radius:50%;background:#fff;position:absolute;top:3px;left:3px;transition:transform .2s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.toggle.on .toggle-knob{transform:translateX(20px)}
-
-/* Live counter display */
-.ac-live{display:none;flex-direction:column;align-items:center;gap:8px;padding:12px 0}
-.ac-live.active{display:flex}
-.ac-count{font-size:3.5rem;font-weight:800;color:var(--cyan);font-variant-numeric:tabular-nums;text-shadow:0 0 20px rgba(6,182,212,.4);transition:transform .15s}
-.ac-count.bump{transform:scale(1.15)}
-.ac-count-label{font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
-
-/* Sensor visualization */
-.ac-wave{width:100%;height:40px;position:relative;overflow:hidden;border-radius:8px;background:rgba(6,182,212,.05)}
-.ac-wave canvas{width:100%;height:100%}
-
-/* Camera preview */
-.ac-camera-wrap{position:relative;width:100%;aspect-ratio:4/3;border-radius:12px;overflow:hidden;background:#000;display:none}
-.ac-camera-wrap.active{display:block}
-.ac-camera-wrap video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
-.ac-camera-badge{position:absolute;top:8px;right:8px;background:rgba(239,68,68,.8);color:#fff;font-size:.6rem;font-weight:700;padding:3px 8px;border-radius:100px;letter-spacing:.5px}
-.ac-face-indicator{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.6);color:var(--green);font-size:.7rem;font-weight:600;padding:4px 12px;border-radius:100px;white-space:nowrap}
-
-/* ACTION BAR */
-.wo-actions{position:fixed;bottom:0;left:0;right:0;z-index:260;padding:10px 14px max(12px,var(--safe-b));background:rgba(8,8,16,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid var(--border);display:flex;gap:8px;height:var(--action-h);align-items:center}
-.wo-btn{border:none;border-radius:13px;font-weight:700;cursor:pointer;transition:all .15s;display:flex;align-items:center;justify-content:center;gap:5px}
-.wo-btn:active{transform:scale(.95)}
-.wo-btn-main{flex:1;padding:15px;font-size:.9rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 4px 14px rgba(108,99,255,.25)}
-.wo-btn-icon{width:48px;height:48px;font-size:.95rem}
-.wo-btn-pause{background:var(--orangeA);border:1.5px solid rgba(245,158,11,.2);color:var(--orange)}
-.wo-btn-skip{background:rgba(255,255,255,.04);border:1.5px solid var(--border);color:var(--text3)}
-
-/* EXIT CONFIRM */
-.exit-confirm{display:none;position:fixed;inset:0;z-index:400;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:24px}
-.exit-confirm.open{display:flex;animation:fadeIn .15s}
-.exit-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:28px 24px;max-width:320px;width:100%;text-align:center;animation:slideUp .25s cubic-bezier(.4,0,.2,1)}
-.exit-emoji{font-size:2.5rem;display:block;margin-bottom:12px}
-.exit-title{font-size:1.1rem;font-weight:700;margin-bottom:6px}
-.exit-text{font-size:.82rem;color:var(--text2);margin-bottom:20px;line-height:1.5}
-.exit-btns{display:flex;flex-direction:column;gap:8px}
-.exit-btn-stay{padding:14px;border:none;border-radius:13px;font-size:.9rem;font-weight:700;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff}
-.exit-btn-quit{padding:14px;border:none;border-radius:13px;font-size:.9rem;font-weight:700;cursor:pointer;background:var(--redA);border:1.5px solid rgba(239,68,68,.3);color:var(--red)}
-.exit-btn-stay:active,.exit-btn-quit:active{transform:scale(.97)}
-
-/* PLANK */
-.plank-ov{display:none;position:fixed;inset:0;z-index:280;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px 20px;text-align:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.plank-ov.active{display:flex;animation:fadeUp .25s}
-.plank-tag{font-size:.6rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text3)}
-.plank-nm{font-size:1.6rem;font-weight:800;color:#fff}
+.wo-ex-tip{padding:14px 20px;display:flex;gap:10px;align-items:flex-start}.wo-tip-icon{width:26px;height:26px;border-radius:8px;background:var(--accentA);display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}.wo-tip-text{font-size:.78rem;color:var(--text2);line-height:1.6;flex:1}
+.info-toggle{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;cursor:pointer;border-top:1px solid var(--border);background:rgba(108,99,255,0.03)}.info-toggle:active{background:rgba(108,99,255,0.08)}
+.info-toggle-left{display:flex;align-items:center;gap:8px}.info-toggle-text{font-size:.75rem;font-weight:700;color:var(--accent2)}.info-toggle-arrow{font-size:.8rem;color:var(--text3);transition:transform .3s}.info-toggle.open .info-toggle-arrow{transform:rotate(180deg)}
+.ex-detail{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1);background:rgba(0,0,0,0.15)}.ex-detail.open{max-height:2000px;transition:max-height .6s cubic-bezier(.4,0,.2,1)}
+.ex-detail-inner{padding:16px 20px 20px;display:flex;flex-direction:column;gap:14px}
+.detail-block{border-radius:12px;padding:14px 16px;display:flex;flex-direction:column;gap:8px}.detail-block-header{display:flex;align-items:center;gap:8px}.detail-block-icon{width:24px;height:24px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.7rem;flex-shrink:0}.detail-block-title{font-size:.72rem;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.db-desc{background:var(--accentA);border:1px solid rgba(108,99,255,0.15)}.db-desc .detail-block-icon{background:rgba(108,99,255,0.2)}.db-desc .detail-block-title{color:var(--accent2)}.db-text{font-size:.8rem;color:var(--text2);line-height:1.6}
+.db-steps{background:var(--greenA);border:1px solid rgba(34,211,160,0.15)}.db-steps .detail-block-icon{background:rgba(34,211,160,0.2)}.db-steps .detail-block-title{color:var(--green)}
+.db-step{display:flex;align-items:flex-start;gap:10px;font-size:.78rem;color:var(--text2);line-height:1.5;margin-bottom:4px}.db-step-num{width:20px;height:20px;border-radius:50%;background:rgba(34,211,160,0.15);color:var(--green);font-size:.6rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.db-breath{background:var(--cyanA);border:1px solid rgba(6,182,212,0.15)}.db-breath .detail-block-icon{background:rgba(6,182,212,0.2)}.db-breath .detail-block-title{color:var(--cyan)}
+.db-breath-row{display:flex;gap:8px}.db-breath-item{flex:1;padding:8px 10px;border-radius:8px;background:rgba(6,182,212,0.08);text-align:center}.db-breath-phase{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--cyan);margin-bottom:2px}.db-breath-action{font-size:.75rem;color:var(--text2);font-weight:600}
+.db-tempo{background:var(--orangeA);border:1px solid rgba(245,158,11,0.15)}.db-tempo .detail-block-icon{background:rgba(245,158,11,0.2)}.db-tempo .detail-block-title{color:var(--orange)}
+.db-tempo-row{display:flex;gap:8px}.db-tempo-item{flex:1;padding:8px 10px;border-radius:8px;background:rgba(245,158,11,0.08);text-align:center}.db-tempo-label{font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--orange);margin-bottom:2px}.db-tempo-val{font-size:.85rem;color:var(--text);font-weight:700}
+.db-rir{background:rgba(167,139,250,0.08);border:1px solid rgba(167,139,250,0.15)}.db-rir .detail-block-icon{background:rgba(167,139,250,0.2)}.db-rir .detail-block-title{color:var(--accent2)}
+.db-rir-row{display:flex;justify-content:space-between;padding:6px 10px;border-radius:8px;background:rgba(167,139,250,0.06);margin-bottom:3px}.db-rir-set{font-size:.72rem;font-weight:700;color:var(--text2)}.db-rir-val{font-size:.72rem;font-weight:700;color:var(--accent2)}
+.db-errors{background:var(--redA);border:1px solid rgba(239,68,68,0.15)}.db-errors .detail-block-icon{background:rgba(239,68,68,0.2)}.db-errors .detail-block-title{color:var(--red)}
+.db-error-item{display:flex;align-items:center;gap:8px;font-size:.78rem;color:var(--text2);margin-bottom:3px}.db-error-x{color:var(--red);font-weight:800;font-size:.7rem;flex-shrink:0}
+.db-coach{background:linear-gradient(135deg,rgba(108,99,255,0.08),rgba(167,139,250,0.05));border:1px solid rgba(108,99,255,0.2)}.db-coach .detail-block-icon{background:linear-gradient(135deg,var(--accent),var(--accent2))}.db-coach .detail-block-title{color:var(--accent2)}.db-coach .db-text{font-style:italic;color:var(--text)}
+.db-why{background:rgba(34,211,160,0.05);border:1px solid rgba(34,211,160,0.12)}.db-why .detail-block-icon{background:rgba(34,211,160,0.2)}.db-why .detail-block-title{color:var(--green)}
+.wo-timer{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:24px 20px;display:flex;flex-direction:column;align-items:center;gap:16px}
+.wo-ring{position:relative;width:190px;height:190px;display:flex;align-items:center;justify-content:center}.wo-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
+.wo-ring-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:7}.wo-ring-fg{fill:none;stroke:var(--accent);stroke-width:7;stroke-linecap:round;stroke-dasharray:502.65;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s}
+.wo-ring-inner{display:flex;flex-direction:column;align-items:center;z-index:1;gap:2px}
+.wo-timer-big{font-size:3.2rem;font-weight:800;font-variant-numeric:tabular-nums;letter-spacing:-2px;line-height:1;color:#fff}.wo-timer-big.warn{color:var(--orange)}.wo-timer-big.crit{color:var(--red);animation:blink .5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
+.wo-timer-sub{font-size:.65rem;color:var(--text3);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.wo-set-dots{display:flex;gap:7px}.wo-set-d{width:28px;height:5px;border-radius:3px;background:rgba(255,255,255,.06)}.wo-set-d.done{background:var(--green)}.wo-set-d.cur{background:var(--accent)}
+.wo-rep-card{margin:0 16px 12px;background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:20px;display:none;flex-direction:column;align-items:center;gap:14px}.wo-rep-card.vis{display:flex}
+.wo-rep-lbl{font-size:.7rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3)}.wo-rep-row{display:flex;align-items:center;gap:22px;user-select:none;-webkit-user-select:none}
+.wo-rep-btn{width:54px;height:54px;border-radius:50%;border:2px solid rgba(108,99,255,.35);background:rgba(108,99,255,.06);color:var(--accent2);font-size:1.8rem;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation}.wo-rep-btn:active{background:var(--accent);border-color:var(--accent);color:#fff;transform:scale(.9)}
+.wo-rep-val{font-size:2.8rem;font-weight:800;color:#fff;min-width:65px;text-align:center;font-variant-numeric:tabular-nums}
+.smart-section{width:100%;margin-top:14px;border-top:1px solid var(--border);padding-top:16px;display:flex;flex-direction:column;align-items:center;gap:10px}.smart-section.hidden{display:none}
+.smart-btn{width:100%;padding:14px;border:1.5px solid var(--accent);border-radius:14px;background:rgba(108,99,255,0.06);color:var(--accent2);font-size:.88rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}.smart-btn.active-sensor{background:var(--redA);border-color:var(--red);color:var(--red)}
+.smart-info{display:none;flex-direction:column;align-items:center;gap:8px;width:100%}.smart-info.vis{display:flex}
+.sensor-badge{display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;font-size:.72rem;font-weight:700}.sensor-badge.calibrating{background:var(--orangeA);color:var(--orange)}.sensor-badge.counting{background:var(--greenA);color:var(--green)}
+.cam-preview{width:100px;height:75px;border-radius:12px;object-fit:cover;border:2px solid var(--accent);filter:grayscale(100%) contrast(1.2)}
+.countdown-overlay{display:none;position:fixed;inset:0;z-index:290;background:rgba(8,8,16,0.95);flex-direction:column;align-items:center;justify-content:center;gap:20px}.countdown-overlay.active{display:flex}
+.countdown-num{font-size:8rem;font-weight:800;color:var(--accent);animation:countPop .8s ease}
+@keyframes countPop{0%{transform:scale(.3);opacity:0}50%{transform:scale(1.2)}100%{transform:scale(1);opacity:1}}
+.countdown-label{font-size:1rem;color:var(--text2);font-weight:600;max-width:280px;text-align:center;line-height:1.5}
+.wo-actions{position:fixed;bottom:0;left:0;right:0;z-index:260;padding:12px 16px max(14px,var(--safe-b));background:linear-gradient(to top,var(--bg) 80%,transparent);display:flex;gap:10px}
+.wo-btn{border:none;border-radius:14px;font-weight:700;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:6px}.wo-btn:active{transform:scale(.96)}
+.wo-btn-main{flex:1;padding:16px;font-size:.95rem;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;box-shadow:0 6px 18px rgba(108,99,255,.28)}
+.wo-btn-icon{width:52px;height:52px;font-size:1rem}.wo-btn-pause{background:var(--orangeA);border:1.5px solid rgba(245,158,11,.2);color:var(--orange)}.wo-btn-skip{background:rgba(255,255,255,.04);border:1.5px solid var(--border);color:var(--text3)}
+/* Plank with ring */
+.plank-ov{display:none;position:fixed;inset:0;z-index:280;background:var(--bg);flex-direction:column;align-items:center;justify-content:center;gap:24px;padding:40px 24px;text-align:center}.plank-ov.active{display:flex;animation:fadeUp .2s ease}
+.plank-nm{font-size:1.6rem;font-weight:800;color:#fff}.plank-phase{font-size:.85rem;font-weight:700;color:var(--accent2);margin-top:-8px}
 .plank-ring{position:relative;width:220px;height:220px;display:flex;align-items:center;justify-content:center}
-.plank-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}
-.plank-r-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:8}
-.plank-r-fg{fill:none;stroke:var(--green);stroke-width:8;stroke-linecap:round;stroke-dasharray:597.35;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s;filter:drop-shadow(0 0 8px rgba(34,211,160,.4))}
-.plank-big{font-size:4.5rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-2px;z-index:1;line-height:1;transition:color .4s}
-.plank-big.warn{color:var(--orange)}.plank-big.crit{color:var(--red);animation:blink .5s infinite}
-.plank-tip-box{max-width:280px;font-size:.78rem;color:var(--text2);line-height:1.5;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 16px}
-.plank-done-btn{width:100%;max-width:280px;padding:15px;border:none;border-radius:13px;font-size:.95rem;font-weight:700;background:linear-gradient(135deg,var(--green),#059669);color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(34,211,160,.2)}
-.plank-done-btn:active{transform:scale(.97)}
-
-/* SUMMARY */
-.sum-ov{display:none;position:fixed;inset:0;z-index:270;background:var(--bg);flex-direction:column;align-items:center;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:56px 20px max(32px,var(--safe-b));gap:20px}
-.sum-ov.active{display:flex;animation:fadeUp .3s}
-.sum-emoji{font-size:2.8rem;display:block;margin-bottom:8px}
-.sum-title{font-size:1.6rem;font-weight:800;color:#fff}
-.sum-sub-text{font-size:.82rem;color:var(--text2);margin-top:3px}
-.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;width:100%;max-width:380px}
-.sum-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:16px;text-align:center}
-.sum-stat-val{font-size:1.8rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
-.sum-stat-lbl{font-size:.6rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:2px}
-.sum-log{width:100%;max-width:380px;display:flex;flex-direction:column;gap:5px}
-.sum-log-lbl{font-size:.6rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:4px}
-.sum-log-row{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:12px 14px;display:flex;justify-content:space-between;align-items:center}
-.sum-log-name{font-size:.8rem;font-weight:600}
-.sum-log-reps{font-size:.72rem;color:var(--accent2);font-weight:600}
-.sum-btn{width:100%;max-width:380px;padding:15px;border:none;border-radius:13px;font-size:.95rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;cursor:pointer;box-shadow:0 4px 14px rgba(108,99,255,.22);margin-top:4px}
-.sum-btn:active{transform:scale(.97)}
+.plank-ring svg{position:absolute;inset:0;transform:rotate(-90deg)}.plk-ring-bg{fill:none;stroke:rgba(255,255,255,.03);stroke-width:8}.plk-ring-fg{fill:none;stroke:var(--green);stroke-width:8;stroke-linecap:round;stroke-dasharray:597.35;stroke-dashoffset:0;transition:stroke-dashoffset 1s linear,stroke .4s;filter:drop-shadow(0 0 8px rgba(34,211,160,.4))}
+.plank-big{font-size:4.5rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums;letter-spacing:-3px;z-index:1;line-height:1}.plank-big.warn{color:var(--orange)}.plank-big.crit{color:var(--red);animation:blink .5s infinite}
+.plank-tip-box{max-width:300px;font-size:.82rem;color:var(--text2);line-height:1.6;background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:14px 18px}
+.sum-ov{display:none;position:fixed;inset:0;z-index:270;background:var(--bg);flex-direction:column;align-items:center;overflow-y:auto;padding:max(60px,var(--safe-t)) 20px 40px;gap:20px}.sum-ov.active{display:flex;animation:fadeUp .3s ease}
+.sum-title{font-size:1.8rem;font-weight:800;color:#fff}.sum-sub{font-size:.85rem;color:var(--text2);margin-top:4px}
+.sum-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:400px}
+.sum-stat{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:18px;text-align:center}.sum-stat-val{font-size:2rem;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}.sum-stat-lbl{font-size:.65rem;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-top:3px}
+.sum-log{width:100%;max-width:400px;display:flex;flex-direction:column;gap:6px}
+.sum-log-row{background:var(--card);border:1px solid var(--border);border-radius:var(--rs);padding:13px 16px;display:flex;justify-content:space-between;align-items:center}.sum-log-name{font-size:.85rem;font-weight:600}.sum-log-reps{font-size:.75rem;color:var(--accent2);font-weight:600}
+.sum-btn{width:100%;max-width:400px;padding:16px;border:none;border-radius:14px;font-size:1rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;cursor:pointer;margin-top:6px}
 </style>
 </head>
 <body>
-
-<!-- TAB BAR -->
-<nav class="tab-bar" id="mainTabBar">
-  <button class="tab active" onclick="switchTab('home')" id="tabHome"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
-  <button class="tab" onclick="switchTab('calendar')" id="tabCalendar"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Kalender</button>
-  <button class="tab" onclick="switchTab('progress')" id="tabProgress"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Fortschritt</button>
+<nav class="tab-bar">
+  <button class="tab active" onclick="switchTab('home')" id="tabHome"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>Home</button>
+  <button class="tab" onclick="switchTab('calendar')" id="tabCalendar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Kalender</button>
+  <button class="tab" onclick="switchTab('progress')" id="tabProgress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Fortschritt</button>
 </nav>
 
-<!-- HOME -->
 <div class="page active" id="pageHome">
-  <div class="page-head"><div class="page-title" id="greeting">Guten Tag! 💪</div><div class="page-sub" id="todayInfo">Bereit?</div></div>
-  <div class="home-hero"><span class="hero-emoji">🏋️</span><div class="hero-title">6-Monats Calisthenics Plan</div><div class="hero-sub">Push · Pull · Beine · Core</div>
-    <div class="hero-stats"><div><div class="hero-stat-val" id="hWo">0</div><div class="hero-stat-lbl">Workouts</div></div><div><div class="hero-stat-val" id="hReps">0</div><div class="hero-stat-lbl">Total Reps</div></div><div><div class="hero-stat-val" id="hMin">0</div><div class="hero-stat-lbl">Minuten</div></div></div>
+  <div class="page-head"><div class="page-title" id="greeting">💪</div><div class="page-sub">Bereit für dein Training?</div></div>
+  <div class="home-hero"><span class="hero-emoji">🏋️</span><div class="hero-title">6-Monats Calisthenics</div><div class="hero-sub">Push · Pull · Beine · Core</div>
+    <div class="hero-stats"><div><div class="hero-stat-val" id="hWo">0</div><div class="hero-stat-lbl">Workouts</div></div><div><div class="hero-stat-val" id="hReps">0</div><div class="hero-stat-lbl">Reps</div></div><div><div class="hero-stat-val" id="hMin">0</div><div class="hero-stat-lbl">Minuten</div></div></div>
     <div class="hero-streak" id="heroStreak" style="display:none">🔥 <span id="streakVal">0</span> Tage Streak</div>
   </div>
   <div class="section-lbl">Workout starten</div>
   <div class="card" style="padding:0">
-    <div class="wo-select-card" onclick="launchWorkout('A')"><div class="wo-sel-icon a">🅰️</div><div class="wo-sel-info"><div class="wo-sel-title">Workout A – Kraft</div><div class="wo-sel-desc">Pull-Ups · Dips · Push-Ups · Split Squats · Leg Raises · Plank</div></div><div class="wo-sel-arrow">›</div></div>
-    <div class="wo-select-card" onclick="launchWorkout('B')"><div class="wo-sel-icon b">🅱️</div><div class="wo-sel-info"><div class="wo-sel-title">Workout B – Volumen</div><div class="wo-sel-desc">Chin-Ups · Pike Push-Ups · Aussie Rows · Squats · Knee Raises · Side Plank</div></div><div class="wo-sel-arrow">›</div></div>
+    <div class="wo-select-card" onclick="launchWorkout('A')"><div class="wo-sel-icon a">🅰️</div><div class="wo-sel-info"><div class="wo-sel-title">Workout A – Kraft</div><div class="wo-sel-desc">Pull-Ups · Dips · Split Squats · Push-Ups · Leg Raises · Plank</div></div><div>›</div></div>
+    <div class="wo-select-card" onclick="launchWorkout('B')"><div class="wo-sel-icon b">🅱️</div><div class="wo-sel-info"><div class="wo-sel-title">Workout B – Volumen</div><div class="wo-sel-desc">Chin-Ups · Pike PU · Step-Ups · Aussie Rows · Knee Raises · Side Plank</div></div><div>›</div></div>
   </div>
   <div class="section-lbl">Manuell eintragen</div>
   <div class="quick-actions">
-    <div class="quick-btn" onclick="openLogModal('run')"><div class="quick-icon">🏃</div><div class="quick-label">Lauf</div></div>
-    <div class="quick-btn" onclick="openLogModal('custom')"><div class="quick-icon">📝</div><div class="quick-label">Custom</div></div>
-    <div class="quick-btn" onclick="openLogModal('rest')"><div class="quick-icon">🧘</div><div class="quick-label">Ruhetag</div></div>
+    <div class="quick-btn" onclick="openModal('run')"><div class="quick-icon">🏃</div><div class="quick-label">Lauf</div></div>
+    <div class="quick-btn" onclick="openModal('custom')"><div class="quick-icon">📝</div><div class="quick-label">Custom</div></div>
+    <div class="quick-btn" onclick="openModal('rest')"><div class="quick-icon">🧘</div><div class="quick-label">Ruhetag</div></div>
+  </div>
+  <div class="section-lbl">Backup</div>
+  <div style="display:flex;gap:10px;margin:0 16px 16px">
+    <button class="btn-secondary" style="flex:1;font-size:.78rem" onclick="exportBackup()">📥 Export</button>
+    <button class="btn-secondary" style="flex:1;font-size:.78rem" onclick="document.getElementById('importFile').click()">📤 Import</button>
+    <input type="file" id="importFile" accept=".json" style="display:none" onchange="importBackup(event)">
   </div>
   <div class="section-lbl">Letzte Einträge</div>
-  <div class="card" style="padding:0" id="recentCard"><div class="empty-state"><span class="empty-icon">📊</span><div class="empty-text">Noch keine Workouts.<br>Starte dein erstes Training!</div></div></div>
+  <div class="card" style="padding:0" id="recentCard"><div class="empty-state">📊 Starte dein erstes Workout!</div></div>
 </div>
 
-<!-- CALENDAR -->
 <div class="page" id="pageCalendar">
-  <div class="page-head"><div class="page-title">Kalender</div><div class="page-sub">Dein Trainingsprotokoll</div></div>
+  <div class="page-head"><div class="page-title">Kalender</div><div class="page-sub">Trainingsprotokoll</div></div>
   <div class="cal-nav"><button class="cal-nav-btn" onclick="calNav(-1)">‹</button><div class="cal-month" id="calMonth"></div><button class="cal-nav-btn" onclick="calNav(1)">›</button></div>
   <div class="cal-grid"><div class="cal-weekdays"><div class="cal-wd">Mo</div><div class="cal-wd">Di</div><div class="cal-wd">Mi</div><div class="cal-wd">Do</div><div class="cal-wd">Fr</div><div class="cal-wd">Sa</div><div class="cal-wd">So</div></div><div class="cal-days" id="calDays"></div></div>
-  <div class="cal-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>Workout A</div><div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>Workout B</div><div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Lauf</div><div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>Custom</div></div>
-  <div class="cal-detail" id="calDetail" style="display:none"><div class="cal-detail-head"><div class="cal-detail-date" id="calDetailDate"></div></div><div class="cal-detail-body" id="calDetailBody"></div></div>
-  <div style="margin:16px 16px 0"><button class="btn-secondary" style="width:100%" onclick="openLogModal('custom')">+ Eintrag hinzufügen</button></div>
+  <div class="cal-legend"><div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>A</div><div class="legend-item"><div class="legend-dot" style="background:var(--accent2)"></div>B</div><div class="legend-item"><div class="legend-dot" style="background:var(--green)"></div>Lauf</div><div class="legend-item"><div class="legend-dot" style="background:var(--orange)"></div>Sonstig</div></div>
+  <div class="cal-detail" id="calDetail" style="display:none"><div class="cal-detail-date" id="calDetailDate"></div><div id="calDetailBody"></div></div>
 </div>
 
-<!-- PROGRESS -->
 <div class="page" id="pageProgress">
   <div class="page-head"><div class="page-title">Fortschritt</div><div class="page-sub">Deine Entwicklung</div></div>
-  <div id="progressCharts"></div>
+  <div id="progCharts"></div>
 </div>
 
-<!-- LOG MODAL -->
-<div class="modal-bg" id="logModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title" id="logModalTitle"></div><div id="logModalBody"></div></div></div>
+<div class="modal-bg" id="logModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title" id="modalTitle"></div><div id="modalBody"></div></div></div>
+<div class="countdown-overlay" id="countdownOv"><div class="countdown-num" id="countdownNum">3</div><div class="countdown-label">Handy jetzt in die Hosentasche!</div></div>
 
-<!-- WORKOUT OVERLAY -->
 <div class="wo-overlay" id="woOverlay">
-  <div class="wo-topbar">
-    <div class="wo-topbar-left">
-      <button class="wo-close-btn" onclick="woExit()">✕</button>
-      <div class="wo-topbar-info"><div class="wo-topbar-tag" id="woTag">WORKOUT A</div><div class="wo-topbar-step" id="woStep">Übung 1 von 6</div></div>
-    </div>
-    <div class="wo-topbar-time" id="woElapsed">00:00</div>
-  </div>
-  <div class="wo-scroll" id="woScroll">
+  <div class="wo-topbar"><div class="wo-topbar-info"><div class="wo-topbar-tag" id="woTag"></div><div class="wo-topbar-step" id="woStep"></div></div><div class="wo-topbar-right"><div class="wo-topbar-time" id="woElapsed">00:00</div><button class="wo-close-btn" onclick="abortWo()">✕</button></div></div>
+  <div class="wo-scroll-area">
     <div class="wo-progress"><div class="wo-prog-track"><div class="wo-prog-fill" id="woProgFill"></div></div><div class="wo-dots" id="woDots"></div></div>
-    <div class="wo-ex-card">
-      <div class="wo-ex-top"><div class="wo-ex-cat" id="woCat"></div><div class="wo-ex-name" id="woExName"></div>
-        <div class="wo-ex-tags"><span class="tag tag-accent" id="woTagSets"></span><span class="tag tag-green" id="woTagReps"></span><span class="tag tag-orange" id="woTagRest"></span></div>
-      </div><div class="wo-ex-div"></div>
-      <div class="wo-ex-tip"><div class="wo-tip-icon">💡</div><div class="wo-tip-text" id="woTip"></div></div>
-    </div>
-
-    <!-- Last workout reference -->
-    <div class="wo-last-ref hidden" id="woLastRef">
-      <div class="wo-last-icon">📋</div>
-      <div class="wo-last-text" id="woLastText">Letztes Mal</div>
-      <div class="wo-last-val" id="woLastVal">—</div>
-    </div>
-
-    <!-- Auto-count card -->
-    <div class="ac-card" id="acCard">
-      <!-- Accelerometer toggle -->
-      <div class="ac-toggle-row" id="acSensorRow">
-        <div class="ac-toggle-info">
-          <div class="ac-toggle-icon sensor">📡</div>
-          <div><div class="ac-toggle-label">Auto-Count</div><div class="ac-toggle-sub">Handy in Hosentasche</div></div>
-        </div>
-        <div class="toggle" id="acSensorToggle" onclick="toggleSensor()"><div class="toggle-knob"></div></div>
-      </div>
-      <!-- Camera toggle (Push-Ups only) -->
-      <div class="ac-toggle-row" id="acCameraRow" style="display:none">
-        <div class="ac-toggle-info">
-          <div class="ac-toggle-icon camera">📸</div>
-          <div><div class="ac-toggle-label">Kamera-Count</div><div class="ac-toggle-sub">⚠️ Experimentell</div></div>
-        </div>
-        <div class="toggle" id="acCameraToggle" onclick="toggleCamera()"><div class="toggle-knob"></div></div>
-      </div>
-      <!-- Live counter -->
-      <div class="ac-live" id="acLive">
-        <div class="ac-count-label">AUTO-GEZÄHLT</div>
-        <div class="ac-count" id="acCount">0</div>
-        <div class="ac-wave"><canvas id="acWaveCanvas" height="40"></canvas></div>
-      </div>
-      <!-- Camera preview -->
-      <div class="ac-camera-wrap" id="acCameraWrap">
-        <video id="acVideo" autoplay playsinline muted></video>
-        <div class="ac-camera-badge">EXPERIMENTAL</div>
-        <div class="ac-face-indicator" id="acFaceStatus">🔍 Gesicht wird gesucht...</div>
-      </div>
-    </div>
-
-    <!-- Timer -->
-    <div class="wo-timer">
-      <div class="wo-phase"><div class="wo-phase-dot" id="woPhaseDot"></div><div class="wo-phase-lbl" id="woPhaseLbl">BEREIT</div></div>
-      <div class="wo-ring"><svg viewBox="0 0 170 170"><circle class="wo-ring-bg" cx="85" cy="85" r="72"/><circle class="wo-ring-fg" id="woRingFg" cx="85" cy="85" r="72"/></svg><div class="wo-ring-inner"><div class="wo-timer-big" id="woTimerBig">—</div><div class="wo-timer-sub" id="woTimerSub">SATZ STARTEN</div></div></div>
-      <div class="wo-set-dots" id="woSetDots"></div>
-    </div>
-
-    <!-- Manual rep input -->
-    <div class="wo-rep-card" id="woRepCard">
-      <div class="wo-rep-lbl">Manuell korrigieren</div>
-      <div class="wo-rep-row">
-        <button class="wo-rep-btn" onclick="adjReps(-1)">−</button>
-        <div class="wo-rep-val" id="woRepVal">0</div>
-        <button class="wo-rep-btn" onclick="adjReps(1)">+</button>
-      </div>
-    </div>
+    <div class="wo-ex-card"><div class="wo-ex-top"><div class="wo-ex-cat" id="woCat"></div><div class="wo-ex-name" id="woExName"></div><div class="wo-ex-tags"><span class="tag tag-accent" id="woTS"></span><span class="tag tag-green" id="woTR"></span><span class="tag tag-orange" id="woTP"></span></div></div><div class="wo-ex-div"></div><div class="wo-ex-tip"><div class="wo-tip-icon">💡</div><div class="wo-tip-text" id="woTip"></div></div><div class="info-toggle" id="infoToggle" onclick="toggleInfo()"><div class="info-toggle-left"><span>📖</span><span class="info-toggle-text">Ausführung & Details</span></div><span class="info-toggle-arrow">▾</span></div><div class="ex-detail" id="exDetail"><div class="ex-detail-inner" id="exDetailInner"></div></div></div>
+    <div class="wo-timer"><div class="wo-ring"><svg viewBox="0 0 190 190"><circle class="wo-ring-bg" cx="95" cy="95" r="80"/><circle class="wo-ring-fg" id="woRingFg" cx="95" cy="95" r="80"/></svg><div class="wo-ring-inner"><div class="wo-timer-big" id="woTimerBig">—</div><div class="wo-timer-sub" id="woTimerSub">BEREIT</div></div></div><div class="wo-set-dots" id="woSetDots"></div></div>
+    <div class="wo-rep-card" id="woRepCard"><div class="wo-rep-lbl">Wiederholungen</div><div class="wo-rep-row"><button class="wo-rep-btn" onclick="adjR(-1)">−</button><div class="wo-rep-val" id="woRepVal">0</div><button class="wo-rep-btn" onclick="adjR(1)">+</button></div><div class="smart-section" id="smartSec"><button class="smart-btn" id="smartBtn" onclick="toggleSmart()"><span id="sBI">🤖</span><span id="sBT">Auto-Zähler</span></button><div class="smart-info" id="smartInfo"><div class="sensor-badge" id="sBdg"><span id="sBdgT">...</span></div><video id="camV" playsinline autoplay muted style="display:none" class="cam-preview"></video><canvas id="camC" style="display:none"></canvas></div></div></div>
   </div>
-
-  <div class="wo-actions">
-    <button class="wo-btn wo-btn-icon wo-btn-pause" id="woBtnPause" onclick="woPause()">⏸</button>
-    <button class="wo-btn wo-btn-main" id="woBtnMain" onclick="woNext()">Satz fertig ✓</button>
-    <button class="wo-btn wo-btn-icon wo-btn-skip" onclick="woSkip()">⏭</button>
-  </div>
+  <div class="wo-actions"><button class="wo-btn wo-btn-icon wo-btn-pause" id="woBP" onclick="woPause()">⏸</button><button class="wo-btn wo-btn-main" id="woBM" onclick="woNext()">Satz fertig ✓</button><button class="wo-btn wo-btn-icon wo-btn-skip" onclick="woSkip()">⏭</button></div>
 </div>
 
-<!-- EXIT CONFIRM -->
-<div class="exit-confirm" id="exitConfirm">
-  <div class="exit-box"><span class="exit-emoji">⚠️</span><div class="exit-title">Workout abbrechen?</div><div class="exit-text">Dein bisheriger Fortschritt wird gespeichert.</div><div class="exit-btns"><button class="exit-btn-stay" onclick="exitStay()">Weiter trainieren 💪</button><button class="exit-btn-quit" onclick="exitQuit()">Workout beenden</button></div></div>
-</div>
-
-<!-- PLANK -->
 <div class="plank-ov" id="plankOv">
-  <div><div class="plank-tag">Halte-Timer</div><div class="plank-nm" id="plankNm">Plank</div></div>
-  <div class="plank-ring"><svg viewBox="0 0 210 210"><circle class="plank-r-bg" cx="105" cy="105" r="95"/><circle class="plank-r-fg" id="plankRFg" cx="105" cy="105" r="95"/></svg><div class="plank-big" id="plankBig">01:00</div></div>
-  <div class="plank-tip-box" id="plankTipBox"></div>
-  <button class="plank-done-btn" onclick="plankSkip()">✓ Fertig</button>
+  <button class="wo-close-btn" style="position:absolute;top:var(--safe-t);right:20px" onclick="abortWo()">✕</button>
+  <div class="plank-nm" id="plkNm"></div>
+  <div class="plank-phase" id="plkPhase"></div>
+  <div class="plank-ring"><svg viewBox="0 0 220 220"><circle class="plk-ring-bg" cx="110" cy="110" r="95"/><circle class="plk-ring-fg" id="plkRFg" cx="110" cy="110" r="95"/></svg><div class="plank-big" id="plkBig">01:00</div></div>
+  <div class="plank-tip-box" id="plkTip"></div>
+  <button class="btn-primary" style="max-width:300px" onclick="plkEnd()">✓ Fertig</button>
 </div>
 
-<!-- SUMMARY -->
-<div class="sum-ov" id="sumOv">
-  <div style="text-align:center"><span class="sum-emoji">🏆</span><div class="sum-title">Geschafft!</div><div class="sum-sub-text" id="sumSubTxt"></div></div>
-  <div class="sum-grid"><div class="sum-stat"><div class="sum-stat-val" id="sTime">00:00</div><div class="sum-stat-lbl">Dauer</div></div><div class="sum-stat"><div class="sum-stat-val" id="sSets">0</div><div class="sum-stat-lbl">Sätze</div></div><div class="sum-stat"><div class="sum-stat-val" id="sReps">0</div><div class="sum-stat-lbl">Reps</div></div><div class="sum-stat"><div class="sum-stat-val" id="sEx">6</div><div class="sum-stat-lbl">Übungen</div></div></div>
-  <div class="sum-log"><div class="sum-log-lbl">Protokoll</div><div id="sLogRows"></div></div>
-  <button class="sum-btn" onclick="sumClose()">✓ Speichern & Schließen</button>
-</div>
+<div class="sum-ov" id="sumOv"><span style="font-size:3rem">🏆</span><div class="sum-title">Geschafft!</div><div class="sum-sub" id="sumSub"></div><div class="sum-grid"><div class="sum-stat"><div class="sum-stat-val" id="sTime">0</div><div class="sum-stat-lbl">Minuten</div></div><div class="sum-stat"><div class="sum-stat-val" id="sSets">0</div><div class="sum-stat-lbl">Sätze</div></div><div class="sum-stat"><div class="sum-stat-val" id="sReps">0</div><div class="sum-stat-lbl">Reps</div></div><div class="sum-stat"><div class="sum-stat-val" id="sEx">0</div><div class="sum-stat-lbl">Übungen</div></div></div><div class="sum-log" id="sumLog"></div><button class="sum-btn" onclick="sumClose()">✓ Zurück</button></div>
 
 <script>
-/* ═══ DATA ═══ */
 const CAT={pull:'ZIEHEN',push:'DRÜCKEN',legs:'BEINE',core:'CORE'};
-const WORKOUTS={
-A:[
-{name:'Pull-Ups',cat:CAT.pull,sets:4,reps:'Max',rest:180,tip:'Vollständig hängen lassen, Schulterblätter zuerst nach unten ziehen, dann hochziehen. Brust Richtung Stange.',isMax:true,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.8},
-{name:'Dips',cat:CAT.push,sets:4,reps:'8–12',rest:120,tip:'Oberkörper leicht nach vorne lehnen. Kontrollierte Bewegung, Schultern stabil halten.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.5},
-{name:'Push-Ups',cat:CAT.push,sets:3,reps:'Max',rest:90,tip:'Hände schulterbreit, Körper gerade. Brust fast zum Boden, Lockout oben.',isMax:true,isPlank:false,accel:true,cam:true,acAxis:'y',acThresh:1.2},
-{name:'Bulgarian Split Squats',cat:CAT.legs,sets:3,reps:'10 / Bein',rest:120,tip:'Hinteres Bein auf Erhöhung. Knie stabil über dem Fuß. Langsame, kontrollierte Bewegung.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.5},
-{name:'Hanging Leg Raises',cat:CAT.core,sets:3,reps:'10–12',rest:90,tip:'Beine möglichst gestreckt, ohne Schwung anheben. Core aktiv anspannen.',isMax:false,isPlank:false,accel:false,cam:false},
-{name:'Plank',cat:CAT.core,sets:3,reps:'60s halten',rest:60,tip:'Unterarme schulterbreit. Körper gerade – Po nicht hoch oder durchhängen. Bauchnabel einziehen.',isMax:false,isPlank:true,plankSec:60,accel:false,cam:false}
-],
-B:[
-{name:'Chin-Ups',cat:CAT.pull,sets:4,reps:'6–10',rest:180,tip:'Untergriff, volle Range of Motion. Kinn über die Stange. Bizeps und Rücken arbeiten zusammen.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.8},
-{name:'Pike Push-Ups',cat:CAT.push,sets:4,reps:'8–12',rest:120,tip:'Hüfte hoch, Körper bildet ein V. Kopf Richtung Boden senken. Fokus auf Schultern.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.2},
-{name:'Australian Pull-Ups',cat:CAT.pull,sets:3,reps:'12–15',rest:90,tip:'Körper gerade, Brust zur Stange. Schulterblätter zusammenziehen am oberen Punkt.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'z',acThresh:1.3},
-{name:'Step-Ups / Squats',cat:CAT.legs,sets:3,reps:'12',rest:120,tip:'Ganzer Fuß auf Box, Knie über Fußspitze. Bei Squats: hüftbreit, Rücken aufrecht.',isMax:false,isPlank:false,accel:true,cam:false,acAxis:'y',acThresh:1.5},
-{name:'Hanging Knee Raises',cat:CAT.core,sets:3,reps:'12–15',rest:90,tip:'Knie zur Brust ziehen, Core anspannen. Kontrolliert ablassen, nicht schaukeln.',isMax:false,isPlank:false,accel:false,cam:false},
-{name:'Side Plank',cat:CAT.core,sets:3,reps:'40s / Seite',rest:60,tip:'Ellbogen unter der Schulter. Hüfte hoch drücken. Körper bildet eine gerade Linie.',isMax:false,isPlank:true,plankSec:40,accel:false,cam:false}
-]};
-const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+const MO=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 
-/* ═══ STATE ═══ */
-let db={history:[],prs:{}};
-let calYear,calMonth,calSel=null;
-let woType,woExs,woEI,woSI,woPhase,woTmr,woElTmr,woTL,woTT,woPsd,woStart,woRepV,woLog,woTS;
+const EI={'Pull-Ups':{d:'Aus vollem Hang kontrolliert hochziehen bis Kinn über Stange.',s:['Stange schulterbreit greifen','Vollständig hängen','Schulterblätter runterziehen','Körper hochziehen','Brust zur Stange','Kontrolliert ablassen'],bi:'Unten',bo:'Beim Hochziehen',tu:'1–2s',td:'2–3s',r:[['Satz 1','2 RIR'],['Satz 2','2 RIR'],['Satz 3','1–2 RIR'],['Satz 4','Max']],e:['Schwung','Nur Arme','Halbe Wdh','Schultern hoch'],c:'Zieh die Ellbogen nach unten statt dich hochzuziehen.',w:'Wichtigste Übung für Rückenbreite und V-Form.'},'Dips':{d:'Effektivste Übung für Brust, Trizeps und Schultern.',s:['Auf Bars abstützen','Leicht vorne neigen','Ellbogen nach hinten','Kontrolliert absenken','Explosiv hoch'],bi:'Beim Absenken',bo:'Beim Hochdrücken',tu:'1–2s',td:'2s',r:[['Satz 1–2','2 RIR'],['Satz 3','1–2 RIR'],['Satz 4','0–1 RIR']],e:['Schultern hoch','Zu aufrecht','Zu flach'],c:'Leicht vorne lehnen = mehr Brust.',w:'Baut schnell Oberkörperkraft auf.'},'Push-Ups':{d:'Klassiker für Brust, Schultern, Trizeps und Core.',s:['Hände schulterbreit','Körper gerade','Brust zum Boden','Explosiv hoch','Lockout oben'],bi:'Beim Absenken',bo:'Beim Hochdrücken',tu:'1s',td:'2s',r:[['Satz 1','2 RIR'],['Satz 2','1–2 RIR'],['Satz 3','Max']],e:['Hüfte durchhängen','Kopf vorne','Halbe Wdh'],c:'Bauch + Gesäß anspannen = stabile Linie.',w:'Brustkraft und Core-Stabilität.'},'Pike Push-Ups':{d:'Schulterfokussierte Push-Up Variante.',s:['Hände auf Boden','Hüfte hoch (V-Form)','Kopf Richtung Boden','Wieder hoch'],bi:'Beim Absenken',bo:'Beim Hoch',tu:'1–2s',td:'2s',r:[['Alle','2 RIR']],e:['Hüfte zu tief','Ellbogen außen'],c:'Je höher die Hüfte, desto mehr Schulter.',w:'Vorstufe zum Handstand Push-Up.'},'Australian Pull-Ups':{d:'Horizontaler Zug für oberen Rücken.',s:['Unter Stange positionieren','Körper gerade','Brust zur Stange','Schulterblätter zusammen','Kontrolliert ab'],bi:'Unten',bo:'Beim Hochziehen',tu:'1–2s',td:'2s',r:[['Alle','1–2 RIR']],e:['Hüfte durchhängen','Nur Arme'],c:'Schulterblätter oben aktiv zusammendrücken.',w:'Rückenstärke und Haltung.'},'Bulgarian Split Squats':{d:'Einbeinige Übung für Kraft und Balance.',s:['Hinterer Fuß auf Bank','Vorderer Fuß stabil','Langsam ab','Knie über Fuß','Explosiv hoch'],bi:'Beim Ab',bo:'Beim Hoch',tu:'1–2s',td:'3s',r:[['Alle','1–2 RIR']],e:['Knie innen','Zu kurz'],c:'Leicht vorne lehnen für Balance.',w:'Beinkraft und Laufleistung.'},'Hanging Leg Raises':{d:'Core-Übung im Hang.',s:['An Stange hängen','Bauch anspannen','Gestreckte Beine hoch','Kurz halten','Kontrolliert ab'],bi:'Beim Ab',bo:'Beim Hoch',tu:'1–2s',td:'2s',r:[['Alle','1–2 RIR']],e:['Schwung','Rücken durchhängen'],c:'Bauch anspannen VOR dem Anheben.',w:'Core und Körperkontrolle.'},'Hanging Knee Raises':{d:'Einstieg für Leg Raises.',s:['An Stange hängen','Core aktiv','Knie zur Brust','Halten','Kontrolliert ab'],bi:'Beim Ab',bo:'Beim Hoch',tu:'1–2s',td:'2s',r:[['Alle','1–2 RIR']],e:['Schaukeln','Rumpf instabil'],c:'Bei 15+ → gestreckte Leg Raises.',w:'Core für Leg Raises und L-Sits.'},'Chin-Ups':{d:'Pull-Up im Untergriff – Bizeps + Rücken.',s:['Untergriff greifen','Voll aushängen','Schulterblätter runter','Kinn über Stange','Kontrolliert ab'],bi:'Unten',bo:'Beim Hochziehen',tu:'1–2s',td:'2–3s',r:[['Satz 1–2','2 RIR'],['Satz 3','1–2 RIR'],['Satz 4','0–1 RIR']],e:['Nur Bizeps','Kein voller Hang','Schwung'],c:'Schulterblätter zuerst, dann ziehen.',w:'Bester Armkraftaufbau.'},'Step-Ups / Squats':{d:'Grundlegende Beinübung.',s:['Ganzer Fuß auf Box','Aus vorderem Bein hoch','Kontrolliert ab','Squats: hüftbreit, gerade','Tief, Gewicht auf Fersen'],bi:'Beim Ab',bo:'Beim Hoch',tu:'1–2s',td:'2–3s',r:[['Alle','1–2 RIR']],e:['Knie innen','Ferse hoch','Rücken rund'],c:'Knie aktiv nach außen drücken.',w:'Athletische Basis.'},'Plank':{d:'Isometrische Core-Übung.',s:['Unterarme schulterbreit','Kopf bis Fersen gerade','Bauch + Gesäß anspannen','Halten'],bi:'Ruhig atmen',bo:'Kontinuierlich',tu:'—',td:'—',r:[['Halte','bis kurz vor Versagen']],e:['Hüfte durch','Po hoch','Schultern hoch'],c:'Bauchnabel zur Wirbelsäule.',w:'Grundlage für alle Übungen.'},'Side Plank':{d:'Seitliche Core-Übung.',s:['Auf Seite, Ellbogen unter Schulter','Hüfte hoch','Gerade Linie','Halten','Seite wechseln'],bi:'Ruhig atmen',bo:'Kontinuierlich',tu:'—',td:'—',r:[['Halte','bis kurz vor Versagen']],e:['Hüfte sinkt','Kippen','Schulter instabil'],c:'Hüfte aktiv nach OBEN drücken.',w:'Seitliche Rumpfmuskulatur.'}};
+
+const W={A:[
+{name:'Pull-Ups',cat:CAT.pull,sets:4,reps:'Max',rest:180,isMax:true,sensor:'motion',tip:'Vollständig hängen, Schulterblätter runter, Brust zur Stange.'},
+{name:'Dips',cat:CAT.push,sets:4,reps:'8–12',rest:120,isMax:false,sensor:'motion',tip:'Leicht vorne lehnen, kontrolliert, Schultern stabil.'},
+{name:'Bulgarian Split Squats',cat:CAT.legs,sets:3,reps:'10/Bein',rest:120,isMax:false,sensor:'motion',tip:'Hinteres Bein erhöht. Knie stabil.'},
+{name:'Push-Ups',cat:CAT.push,sets:3,reps:'Max',rest:90,isMax:true,sensor:'camera',tip:'Schulterbreit, Körper gerade, Brust zum Boden.'},
+{name:'Hanging Leg Raises',cat:CAT.core,sets:3,reps:'10–12',rest:90,isMax:false,sensor:'none',tip:'Gestreckt ohne Schwung anheben.'},
+{name:'Plank',cat:CAT.core,sets:3,reps:'60s',rest:60,isMax:false,isPlank:true,plankSec:60,sensor:'none',tip:'Gerade, Po nicht durch.'}
+],B:[
+{name:'Chin-Ups',cat:CAT.pull,sets:4,reps:'6–10',rest:180,isMax:false,sensor:'motion',tip:'Untergriff, volle ROM, Kinn über Stange.'},
+{name:'Pike Push-Ups',cat:CAT.push,sets:4,reps:'8–12',rest:120,isMax:false,sensor:'camera',tip:'Hüfte hoch, V-Form, Schulter-Fokus.'},
+{name:'Step-Ups / Squats',cat:CAT.legs,sets:3,reps:'12',rest:120,isMax:false,sensor:'motion',tip:'Ganzer Fuß auf Box, Knie über Fußspitze.'},
+{name:'Australian Pull-Ups',cat:CAT.pull,sets:3,reps:'12–15',rest:90,isMax:false,sensor:'none',tip:'Gerade, Brust zur Stange.'},
+{name:'Hanging Knee Raises',cat:CAT.core,sets:3,reps:'12–15',rest:90,isMax:false,sensor:'none',tip:'Knie zur Brust, nicht schaukeln.'},
+{name:'Side Plank',cat:CAT.core,sets:3,reps:'40s/Seite',rest:60,isMax:false,isPlank:true,plankSec:40,isSide:true,sensor:'none',tip:'Ellbogen unter Schulter, Hüfte hoch.'}
+]};
+
+let db={history:[]},calY,calM,calSel=null;
+let woT,woE,woI,woS,woPh,woTmr,woElT,woSt,woRV,woLg,woTS,woPd;
+let wkL=null,smOn=false,snT='none',rCD=false,infoO=false;
+const SM=8;let yH=[],clb=false,clT=null,bY=0,mP='neutral',lP=0,lV=0;const MN=2.5;
+let vS=null,cL=null,cBL=-1,cSt='up',cH=[];
 let audioCtx=null;
 
-// Auto-count state
-let acSensorOn=false,acCameraOn=false;
-let acCount_=0,acMotionHandler=null;
-let acLastY=0,acDirection=0,acCooldown=false;
-let acWaveData=[];
-let acWaveCtx=null,acWaveAnim=null;
-let acVideoStream=null,acFaceInterval=null;
-let acFaceLastSize=0,acFaceDir=0,acFaceCooldown=false;
-
-/* ═══ STORAGE ═══ */
 function loadDB(){try{const d=localStorage.getItem('cali_db');if(d)db=JSON.parse(d)}catch(e){}}
 function saveDB(){try{localStorage.setItem('cali_db',JSON.stringify(db))}catch(e){}}
 function dkey(d){return`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`}
-function today(){return dkey(new Date())}
-
-/* ═══ AUDIO ═══ */
+function tday(){return dkey(new Date())}
+async function rqW(){try{if('wakeLock' in navigator)wkL=await navigator.wakeLock.request('screen')}catch(e){}}
+function rlW(){if(wkL){wkL.release();wkL=null}}
 function getAC(){if(!audioCtx)audioCtx=new(window.AudioContext||window.webkitAudioContext)();return audioCtx}
-function beep(f,d,v=.18){try{const c=getAC(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+d/1000);o.start();o.stop(c.currentTime+d/1000)}catch(e){}}
-function beepRep(){beep(1200,60,.25);setTimeout(()=>beep(1600,80,.2),70)}
-function alarmDone(){[880,1100,1320].forEach((f,i)=>setTimeout(()=>beep(f,260),i*150))}
-function alarmTick(){beep(440,60,.08)}
-function vib(p){try{navigator.vibrate(p)}catch(e){}}
-
-/* ═══ TABS ═══ */
-function switchTab(t){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  const id='page'+t.charAt(0).toUpperCase()+t.slice(1);
-  document.getElementById(id).classList.add('active');
-  document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');
-  if(t==='home')renderHome();if(t==='calendar')renderCal();if(t==='progress')renderProgress();
-  document.getElementById(id).scrollTop=0;
-}
+function beep(f,dur,v=.2){try{const c=getAC(),o=c.createOscillator(),g=c.createGain();o.connect(g);g.connect(c.destination);o.frequency.value=f;o.type='sine';g.gain.setValueAtTime(v,c.currentTime);g.gain.exponentialRampToValueAtTime(.001,c.currentTime+dur/1000);o.start();o.stop(c.currentTime+dur/1000)}catch(e){}}
+function alarmDone(){[880,1100,1320].forEach((f,i)=>setTimeout(()=>beep(f,280),i*160))}
+function speak(t){if(!('speechSynthesis' in window))return;speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t));u.lang='de-DE';u.rate=1.3;speechSynthesis.speak(u)}
+function vib(ms){try{navigator.vibrate(Array.isArray(ms)?ms:[ms])}catch(e){}}
+function switchTab(t){document.querySelectorAll('.page,.tab').forEach(e=>e.classList.remove('active'));document.getElementById('page'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');document.getElementById('tab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.add('active');if(t==='home')renderHome();if(t==='calendar')renderCal();if(t==='progress')renderProg()}
+function toggleInfo(){infoO=!infoO;document.getElementById('infoToggle').classList.toggle('open',infoO);document.getElementById('exDetail').classList.toggle('open',infoO)}
+function buildInfo(n){const i=EI[n];if(!i)return'';let h='';
+h+=`<div class="detail-block db-desc"><div class="detail-block-header"><div class="detail-block-icon">📋</div><div class="detail-block-title">Beschreibung</div></div><div class="db-text">${i.d}</div></div>`;
+h+=`<div class="detail-block db-steps"><div class="detail-block-header"><div class="detail-block-icon">📐</div><div class="detail-block-title">Ausführung</div></div><div>${i.s.map((s,j)=>`<div class="db-step"><div class="db-step-num">${j+1}</div><div>${s}</div></div>`).join('')}</div></div>`;
+h+=`<div class="detail-block db-breath"><div class="detail-block-header"><div class="detail-block-icon">🌬️</div><div class="detail-block-title">Atmung</div></div><div class="db-breath-row"><div class="db-breath-item"><div class="db-breath-phase">Ein</div><div class="db-breath-action">${i.bi}</div></div><div class="db-breath-item"><div class="db-breath-phase">Aus</div><div class="db-breath-action">${i.bo}</div></div></div></div>`;
+if(i.tu!=='—')h+=`<div class="detail-block db-tempo"><div class="detail-block-header"><div class="detail-block-icon">⏱️</div><div class="detail-block-title">Tempo</div></div><div class="db-tempo-row"><div class="db-tempo-item"><div class="db-tempo-label">Hoch</div><div class="db-tempo-val">${i.tu}</div></div><div class="db-tempo-item"><div class="db-tempo-label">Runter</div><div class="db-tempo-val">${i.td}</div></div></div></div>`;
+h+=`<div class="detail-block db-rir"><div class="detail-block-header"><div class="detail-block-icon">🎯</div><div class="detail-block-title">Reps im Tank</div></div><div>${i.r.map(r=>`<div class="db-rir-row"><span class="db-rir-set">${r[0]}</span><span class="db-rir-val">${r[1]}</span></div>`).join('')}</div></div>`;
+h+=`<div class="detail-block db-errors"><div class="detail-block-header"><div class="detail-block-icon">⚠️</div><div class="detail-block-title">Fehler</div></div><div>${i.e.map(e=>`<div class="db-error-item"><span class="db-error-x">✕</span>${e}</div>`).join('')}</div></div>`;
+h+=`<div class="detail-block db-coach"><div class="detail-block-header"><div class="detail-block-icon">🧠</div><div class="detail-block-title">Coach</div></div><div class="db-text">"${i.c}"</div></div>`;
+h+=`<div class="detail-block db-why"><div class="detail-block-header"><div class="detail-block-icon">💪</div><div class="detail-block-title">Warum?</div></div><div class="db-text">${i.w}</div></div>`;
+return h}
 
 /* ═══ HOME ═══ */
 function renderHome(){
   const h=new Date().getHours();document.getElementById('greeting').textContent=(h<12?'Guten Morgen':h<18?'Guten Tag':'Guten Abend')+' 💪';
-  const dow=['Sonntag','Montag','Dienstag','Mittwoch','Donnerstag','Freitag','Samstag'][new Date().getDay()];
-  document.getElementById('todayInfo').textContent=dow+' – Bereit für dein Training?';
-  const hist=db.history;document.getElementById('hWo').textContent=hist.length;
-  let tr=0,tm=0;hist.forEach(h=>{if(h.totalReps)tr+=h.totalReps;if(h.durationSec)tm+=h.durationSec});
+  document.getElementById('hWo').textContent=db.history.length;
+  let tr=0,tm=0;db.history.forEach(e=>{tr+=(e.totalReps||0);tm+=(e.durationSec||0)});
   document.getElementById('hReps').textContent=tr>999?(tr/1000).toFixed(1)+'k':tr;
   document.getElementById('hMin').textContent=Math.round(tm/60);
-  let streak=0;const td=new Date();for(let i=0;i<365;i++){const d=new Date(td);d.setDate(d.getDate()-i);if(hist.some(h=>h.date===dkey(d)))streak++;else break}
+  let streak=0;const td=new Date();for(let i=0;i<365;i++){const d=new Date(td);d.setDate(d.getDate()-i);if(db.history.some(h=>h.date===dkey(d)))streak++;else break}
   const sb=document.getElementById('heroStreak');if(streak>0){sb.style.display='inline-flex';document.getElementById('streakVal').textContent=streak}else sb.style.display='none';
   const rc=document.getElementById('recentCard');
-  if(!hist.length){rc.innerHTML='<div class="empty-state"><span class="empty-icon">📊</span><div class="empty-text">Noch keine Workouts.<br>Starte dein erstes Training!</div></div>';return}
-  let html='';hist.slice(-5).reverse().forEach(h=>{
-    const ico=h.type==='A'?'🅰️':h.type==='B'?'🅱️':h.type==='run'?'🏃':h.type==='rest'?'🧘':'📝';
-    const title=h.type==='A'?'Workout A':h.type==='B'?'Workout B':h.type==='run'?'Lauf':h.type==='rest'?'Ruhetag':(h.label||'Custom');
-    html+=`<div class="recent-item"><div class="recent-icon">${ico}</div><div class="recent-info"><div class="recent-title">${title}</div><div class="recent-meta">${h.date}</div></div><div class="recent-reps">${h.totalReps?h.totalReps+' reps':''}</div></div>`;
-  });rc.innerHTML=html;
-}
+  if(!db.history.length){rc.innerHTML='<div class="empty-state">📊 Starte dein erstes Workout!</div>';return}
+  let html='';db.history.slice(-6).reverse().forEach(e=>{
+    const ico=e.type==='A'?'🅰️':e.type==='B'?'🅱️':e.type==='run'?'🏃':e.type==='rest'?'🧘':'📝';
+    const tit=e.type==='A'?'Workout A':e.type==='B'?'Workout B':e.type==='run'?`Lauf${e.distance?' · '+e.distance+'km':''}`:e.type==='rest'?'Ruhetag':(e.label||'Custom');
+    const det=e.totalReps?e.totalReps+' reps':e.durationSec?Math.round(e.durationSec/60)+' min':'';
+    html+=`<div class="recent-item"><div class="recent-icon">${ico}</div><div class="recent-info"><div class="recent-title">${tit}</div><div class="recent-meta">${e.date}${e.note?' · '+e.note:''}</div></div><div class="recent-reps">${det}</div></div>`});
+  rc.innerHTML=html}
 
 /* ═══ CALENDAR ═══ */
-function initCal(){const n=new Date();calYear=n.getFullYear();calMonth=n.getMonth()}
-function calNav(dir){calMonth+=dir;if(calMonth>11){calMonth=0;calYear++}if(calMonth<0){calMonth=11;calYear--}renderCal()}
+function initCal(){const n=new Date();calY=n.getFullYear();calM=n.getMonth()}
+function calNav(d){calM+=d;if(calM>11){calM=0;calY++}if(calM<0){calM=11;calY--}renderCal()}
 function renderCal(){
-  document.getElementById('calMonth').textContent=MONTHS[calMonth]+' '+calYear;
-  const first=new Date(calYear,calMonth,1);let sd=first.getDay()-1;if(sd<0)sd=6;
-  const dim=new Date(calYear,calMonth+1,0).getDate();const tk=today();
-  let html='';const pd=new Date(calYear,calMonth,0).getDate();
-  for(let i=sd-1;i>=0;i--)html+=`<div class="cal-day other">${pd-i}</div>`;
-  for(let d=1;d<=dim;d++){
-    const key=`${calYear}-${String(calMonth+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
-    const entries=db.history.filter(h=>h.date===key);let dots='';
-    if(entries.length){dots='<div class="cal-dots">';const ts=new Set(entries.map(e=>e.type));
-    if(ts.has('A'))dots+='<div class="cal-dot dA"></div>';if(ts.has('B'))dots+='<div class="cal-dot dB"></div>';
-    if(ts.has('run'))dots+='<div class="cal-dot dR"></div>';if(ts.has('custom')||ts.has('rest'))dots+='<div class="cal-dot dC"></div>';dots+='</div>'}
-    html+=`<div class="cal-day${key===tk?' today':''}${key===calSel?' selected':''}" onclick="calSelect('${key}')">${d}${dots}</div>`;
-  }
-  const rem=(sd+dim)%7;if(rem)for(let i=1;i<=7-rem;i++)html+=`<div class="cal-day other">${i}</div>`;
-  document.getElementById('calDays').innerHTML=html;if(calSel)calSelect(calSel);
-}
-function calSelect(key){
-  calSel=key;renderCal();
-  const entries=db.history.filter(h=>h.date===key);const det=document.getElementById('calDetail');
-  const p=key.split('-');document.getElementById('calDetailDate').textContent=`${parseInt(p[2])}. ${MONTHS[parseInt(p[1])-1]} ${p[0]}`;
-  if(!entries.length){document.getElementById('calDetailBody').innerHTML='<div class="card" style="margin:0"><div class="card-pad" style="text-align:center;font-size:.78rem;color:var(--text3)">📭 Kein Eintrag</div></div>'}
-  else{let h='';entries.forEach(e=>{const ico=e.type==='A'?'🅰️':e.type==='B'?'🅱️':e.type==='run'?'🏃':e.type==='rest'?'🧘':'📝';
-    const title=e.type==='A'?'Workout A':e.type==='B'?'Workout B':e.type==='run'?'Lauf':e.type==='rest'?'Ruhetag':(e.label||'Custom');
-    let d='';if(e.exercises)e.exercises.forEach(ex=>{d+=`<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid var(--border);font-size:.7rem"><span style="color:var(--text2)">${ex.name}</span><span style="color:var(--accent2);font-weight:600">${ex.reps.join(' · ')}</span></div>`});
-    const dur=e.durationSec?Math.floor(e.durationSec/60)+' Min':'';
-    h+=`<div class="card" style="margin:0"><div class="card-pad"><div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="font-size:1.1rem">${ico}</span><div><div style="font-weight:700;font-size:.82rem">${title}</div><div style="font-size:.62rem;color:var(--text3)">${dur}${e.totalReps?' · '+e.totalReps+' Reps':''}</div></div></div>${d}</div></div>`});
-    document.getElementById('calDetailBody').innerHTML=h}
-  det.style.display='block';
-}
+  document.getElementById('calMonth').textContent=MO[calM]+' '+calY;
+  const fD=(new Date(calY,calM,1).getDay()+6)%7,dIM=new Date(calY,calM+1,0).getDate();
+  let h='';for(let i=0;i<fD;i++)h+='<div class="cal-day other"></div>';
+  for(let d=1;d<=dIM;d++){
+    const k=`${calY}-${String(calM+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const ents=db.history.filter(e=>e.date===k);let dots='';
+    if(ents.length){dots='<div class="cal-dots">';const ts=new Set(ents.map(e=>e.type));
+    if(ts.has('A'))dots+='<div class="cal-dot" style="background:var(--accent)"></div>';if(ts.has('B'))dots+='<div class="cal-dot" style="background:var(--accent2)"></div>';
+    if(ts.has('run'))dots+='<div class="cal-dot" style="background:var(--green)"></div>';if(ts.has('custom')||ts.has('rest'))dots+='<div class="cal-dot" style="background:var(--orange)"></div>';dots+='</div>'}
+    h+=`<div class="cal-day${k===tday()?' today':''}${calSel===k?' selected':''}" onclick="calSel='${k}';renderCal();showDay('${k}')">${d}${dots}</div>`}
+  document.getElementById('calDays').innerHTML=h;if(calSel)showDay(calSel)}
 
-/* ═══ LOG MODAL ═══ */
-function openLogModal(type){
-  const body=document.getElementById('logModalBody');let title='',html='';
-  if(type==='run'){title='🏃 Lauf eintragen';html=`<div style="display:flex;flex-direction:column;gap:12px"><label class="modal-label">Distanz (km)</label><input type="number" id="logDist" value="7" step="0.5" class="modal-input" style="text-align:center"><label class="modal-label">Dauer (Min)</label><input type="number" id="logDur" value="45" class="modal-input" style="text-align:center"><label class="modal-label">Notiz</label><input type="text" id="logNote" placeholder="Optional" class="modal-input"><button class="btn-primary" onclick="saveLog('run')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()">Abbrechen</button></div>`}
-  else if(type==='rest'){title='🧘 Ruhetag';html=`<div style="display:flex;flex-direction:column;gap:12px;text-align:center"><div style="font-size:2.5rem;padding:12px">😴</div><div style="color:var(--text2);font-size:.82rem">Regeneration ist wichtig!</div><label class="modal-label" style="text-align:left">Notiz</label><input type="text" id="logNote" placeholder="Optional" class="modal-input"><button class="btn-primary" onclick="saveLog('rest')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()">Abbrechen</button></div>`}
-  else{title='📝 Custom';html=`<div style="display:flex;flex-direction:column;gap:12px"><label class="modal-label">Bezeichnung</label><input type="text" id="logLabel" placeholder="z.B. Mobility" class="modal-input"><label class="modal-label">Dauer (Min)</label><input type="number" id="logDur" value="30" class="modal-input" style="text-align:center"><label class="modal-label">Notiz</label><input type="text" id="logNote" placeholder="Optional" class="modal-input"><button class="btn-primary" onclick="saveLog('custom')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()">Abbrechen</button></div>`}
-  document.getElementById('logModalTitle').textContent=title;body.innerHTML=html;document.getElementById('logModal').classList.add('open');
-}
-function closeModal(){document.getElementById('logModal').classList.remove('open')}
-function saveLog(type){
-  const e={type,date:today(),timestamp:Date.now()};const n=document.getElementById('logNote');if(n&&n.value)e.note=n.value;
-  if(type==='run'){e.distance=parseFloat(document.getElementById('logDist').value)||0;e.durationSec=(parseInt(document.getElementById('logDur').value)||0)*60}
-  else if(type==='rest')e.durationSec=0;
-  else{e.label=document.getElementById('logLabel').value||'Custom';e.durationSec=(parseInt(document.getElementById('logDur').value)||0)*60}
-  db.history.push(e);saveDB();closeModal();renderHome();renderCal();
-}
+function showDay(k){
+  const ents=db.history.filter(e=>e.date===k);const p=k.split('-');
+  document.getElementById('calDetailDate').textContent=`${parseInt(p[2])}. ${MO[parseInt(p[1])-1]} ${p[0]}`;
+  if(!ents.length){document.getElementById('calDetailBody').innerHTML='<div style="text-align:center;padding:20px;color:var(--text3)">Kein Eintrag</div>'}
+  else{let h='';ents.forEach((e,idx)=>{
+    const ico=e.type==='A'?'🅰️':e.type==='B'?'🅱️':e.type==='run'?'🏃':e.type==='rest'?'🧘':'📝';
+    const tit=e.type==='A'?'Workout A':e.type==='B'?'Workout B':e.type==='run'?'Lauf':e.type==='rest'?'Ruhetag':(e.label||'Custom');
+    let det='';if(e.exercises)e.exercises.forEach(ex=>{det+=`<div style="display:flex;justify-content:space-between;padding:4px 0;font-size:.75rem;border-bottom:1px solid var(--border)"><span style="color:var(--text2)">${ex.name}</span><span style="color:var(--accent2);font-weight:600">${ex.reps.join(' · ')}</span></div>`});
+    if(e.distance)det+=`<div style="font-size:.75rem;color:var(--text2);margin-top:4px">${e.distance} km · ${Math.round((e.durationSec||0)/60)} min${e.note?' · '+e.note:''}</div>`;
+    if(e.note&&!e.distance)det+=`<div style="font-size:.75rem;color:var(--text3);margin-top:4px;font-style:italic">${e.note}</div>`;
+    // Find actual index in db.history for deletion
+    const globalIdx=db.history.indexOf(e);
+    h+=`<div class="card" style="margin:0 0 8px"><div style="padding:16px"><div style="display:flex;align-items:center;gap:10px;margin-bottom:8px"><span style="font-size:1.2rem">${ico}</span><div style="flex:1"><div style="font-weight:700;font-size:.88rem">${tit}</div><div style="font-size:.68rem;color:var(--text3)">${e.totalReps?e.totalReps+' Reps · ':''}<span>${e.durationSec?Math.round(e.durationSec/60)+' Min':''}</span></div></div></div>${det}<button class="btn-danger" onclick="deleteEntry(${globalIdx},'${k}')">🗑 Eintrag löschen</button></div></div>`});
+    document.getElementById('calDetailBody').innerHTML=h}
+  document.getElementById('calDetail').style.display='block'}
+
+function deleteEntry(idx,k){
+  if(!confirm('Eintrag wirklich löschen?'))return;
+  db.history.splice(idx,1);saveDB();renderCal();showDay(k);renderHome()}
 
 /* ═══ PROGRESS ═══ */
-function renderProgress(){
-  const c=document.getElementById('progressCharts');
-  const track=['Pull-Ups','Push-Ups','Dips','Chin-Ups','Pike Push-Ups','Hanging Leg Raises'];
-  let html='';
-  track.forEach(name=>{const sess=[];db.history.forEach(h=>{if(!h.exercises)return;const f=h.exercises.find(e=>e.name===name);if(f&&f.reps.length){sess.push({date:h.date,max:Math.max(...f.reps),total:f.reps.reduce((a,b)=>a+b,0)})}});
-    if(!sess.length)return;const l8=sess.slice(-8),maxV=Math.max(...l8.map(s=>s.max),1),best=Math.max(...sess.map(s=>s.max));
-    const curr=sess[sess.length-1].max,diff=curr-sess[0].max,diffS=diff>=0?'+'+diff:''+diff,isPR=curr===best&&sess.length>1;
-    let bars='';l8.forEach((s,i)=>{const pct=Math.round(s.max/maxV*100),dp=s.date.split('-');
-      bars+=`<div class="prog-bar-wrap"><div class="prog-bar-val">${s.max}</div><div class="prog-bar" style="height:${Math.max(pct,6)}%;${i===l8.length-1?'background:linear-gradient(to top,var(--green),var(--accent2))':''}"></div><div class="prog-bar-lbl">${dp[2]}.${dp[1]}</div></div>`});
-    html+=`<div class="progress-card"><div class="prog-head"><div class="prog-title">${name}${isPR?' <span class="pr-badge">🏅 PR!</span>':''}</div><div class="prog-badge">${diffS}</div></div><div class="prog-chart"><div class="prog-bars">${bars}</div></div><div class="prog-summary"><div class="prog-stat"><div class="prog-stat-val">${best}</div><div class="prog-stat-lbl">Best</div></div><div class="prog-stat"><div class="prog-stat-val">${curr}</div><div class="prog-stat-lbl">Aktuell</div></div><div class="prog-stat"><div class="prog-stat-val">${sess.length}</div><div class="prog-stat-lbl">Sessions</div></div></div></div>`});
-  if(!html)html='<div class="empty-state"><span class="empty-icon">📈</span><div class="empty-text">Noch keine Daten.</div></div>';
-  c.innerHTML=html;
-}
+function renderProg(){
+  const tracks=['Pull-Ups','Push-Ups','Dips','Chin-Ups','Pike Push-Ups','Bulgarian Split Squats','Hanging Leg Raises','Australian Pull-Ups','Hanging Knee Raises','Step-Ups / Squats'];
+  let html='';tracks.forEach(n=>{
+    const sess=[];db.history.forEach(h=>{if(!h.exercises)return;const f=h.exercises.find(e=>e.name===n);if(f&&f.reps.length){const mx=Math.max(...f.reps);sess.push({date:h.date,max:mx})}});
+    if(!sess.length)return;
+    const l8=sess.slice(-8),mxV=Math.max(...l8.map(s=>s.max),1),best=Math.max(...sess.map(s=>s.max));
+    const cur=sess[sess.length-1].max,diff=cur-sess[0].max,ds=diff>=0?'+'+diff:String(diff);
+    let bars='';l8.forEach((s,i)=>{const pct=Math.round((s.max/mxV)*100);const lbl=s.date.slice(5);
+    bars+=`<div class="prog-bar-wrap"><div class="prog-bar-val">${s.max}</div><div class="prog-bar" style="height:${Math.max(pct,8)}%;${i===l8.length-1?'background:linear-gradient(to top,var(--green),var(--accent2))':''}"></div><div class="prog-bar-lbl">${lbl}</div></div>`});
+    html+=`<div class="progress-card"><div class="prog-head"><div class="prog-title">${n}${cur===best&&sess.length>1?'<span class="pr-badge">🏅 PR!</span>':''}</div><div class="prog-badge">${ds}</div></div><div class="prog-chart"><div class="prog-bars">${bars}</div></div><div class="prog-summary"><div class="prog-stat"><div class="prog-stat-val">${best}</div><div class="prog-stat-lbl">Best</div></div><div class="prog-stat"><div class="prog-stat-val">${cur}</div><div class="prog-stat-lbl">Aktuell</div></div><div class="prog-stat"><div class="prog-stat-val">${sess.length}</div><div class="prog-stat-lbl">Sessions</div></div></div></div>`});
+  if(!html)html='<div class="empty-state">📈 Absolviere Workouts für Fortschrittsdaten!</div>';
+  document.getElementById('progCharts').innerHTML=html}
 
-/* ═══════════════════════════════════════
-   ACCELEROMETER AUTO-COUNT
-═══════════════════════════════════════ */
-function toggleSensor(){
-  const ex=woExs[woEI];
-  acSensorOn=!acSensorOn;
-  document.getElementById('acSensorToggle').classList.toggle('on',acSensorOn);
-  if(acSensorOn){
-    if(acCameraOn)toggleCamera(); // disable camera if sensor on
-    startAccel(ex);
-  }else{stopAccel()}
-}
-
-function startAccel(ex){
-  acCount_=0;updateACDisplay();
-  document.getElementById('acLive').classList.add('active');
-  acLastY=0;acDirection=0;acCooldown=false;
-  acWaveData=new Array(60).fill(0);
-  initWaveCanvas();
-
-  const axis=ex.acAxis||'y';
-  const thresh=ex.acThresh||1.5;
-
-  acMotionHandler=function(e){
-    const a=e.accelerationIncludingGravity;
-    if(!a)return;
-    let val=0;
-    if(axis==='y')val=a.y||0;
-    else if(axis==='z')val=a.z||0;
-    else val=a.x||0;
-
-    // Wave visualization
-    acWaveData.push(val);if(acWaveData.length>60)acWaveData.shift();
-    drawWave();
-
-    // Rep detection: detect full up-down cycle
-    const delta=val-acLastY;
-    acLastY=val;
-
-    if(!acCooldown){
-      if(acDirection===0&&delta>thresh){acDirection=1}
-      else if(acDirection===1&&delta<-thresh){
-        acDirection=0;acCount_++;acCooldown=true;
-        updateACDisplay();beepRep();vib([30]);
-        // Bump animation
-        const el=document.getElementById('acCount');el.classList.add('bump');setTimeout(()=>el.classList.remove('bump'),150);
-        // Sync to rep input
-        woRepV=acCount_;document.getElementById('woRepVal').textContent=woRepV;
-        setTimeout(()=>{acCooldown=false},400);
-      }
-    }
-  };
-
-  if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){
-    DeviceMotionEvent.requestPermission().then(r=>{if(r==='granted')window.addEventListener('devicemotion',acMotionHandler)}).catch(e=>console.log('Sensor denied',e));
-  }else{
-    window.addEventListener('devicemotion',acMotionHandler);
-  }
-}
-
-function stopAccel(){
-  if(acMotionHandler){window.removeEventListener('devicemotion',acMotionHandler);acMotionHandler=null}
-  document.getElementById('acLive').classList.remove('active');
-  cancelAnimationFrame(acWaveAnim);
-}
-
-function updateACDisplay(){document.getElementById('acCount').textContent=acCount_}
-
-function initWaveCanvas(){
-  const canvas=document.getElementById('acWaveCanvas');
-  canvas.width=canvas.offsetWidth*2;canvas.height=80;
-  acWaveCtx=canvas.getContext('2d');
-}
-
-function drawWave(){
-  if(!acWaveCtx)return;
-  const ctx=acWaveCtx,w=ctx.canvas.width,h=ctx.canvas.height;
-  ctx.clearRect(0,0,w,h);
-  ctx.beginPath();ctx.strokeStyle='rgba(6,182,212,0.6)';ctx.lineWidth=2;
-  const step=w/acWaveData.length;
-  acWaveData.forEach((v,i)=>{
-    const y=h/2-v*3;
-    if(i===0)ctx.moveTo(0,y);else ctx.lineTo(i*step,y);
-  });
-  ctx.stroke();
-  // Glow line
-  ctx.beginPath();ctx.strokeStyle='rgba(6,182,212,0.15)';ctx.lineWidth=6;
-  acWaveData.forEach((v,i)=>{const y=h/2-v*3;if(i===0)ctx.moveTo(0,y);else ctx.lineTo(i*step,y)});
-  ctx.stroke();
-}
-
-/* ═══════════════════════════════════════
-   CAMERA FACE-DETECTION AUTO-COUNT
-═══════════════════════════════════════ */
-function toggleCamera(){
-  const ex=woExs[woEI];
-  acCameraOn=!acCameraOn;
-  document.getElementById('acCameraToggle').classList.toggle('on',acCameraOn);
-  if(acCameraOn){
-    if(acSensorOn)toggleSensor();
-    startCamera();
-  }else{stopCamera()}
-}
-
-async function startCamera(){
-  acCount_=0;updateACDisplay();
-  document.getElementById('acLive').classList.add('active');
-  document.getElementById('acCameraWrap').classList.add('active');
-  document.getElementById('acFaceStatus').textContent='🔍 Gesicht wird gesucht...';
-
-  try{
-    acVideoStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:320},height:{ideal:240}},audio:false});
-    const video=document.getElementById('acVideo');video.srcObject=acVideoStream;
-
-    // Use canvas-based face detection (brightness analysis as proxy)
-    const canvas=document.createElement('canvas');canvas.width=160;canvas.height=120;
-    const ctx=canvas.getContext('2d',{willReadFrequently:true});
-
-    acFaceLastSize=0;acFaceDir=0;acFaceCooldown=false;
-    let faceDetected=false;
-    let brightnessHistory=[];
-
-    acFaceInterval=setInterval(()=>{
-      ctx.drawImage(video,0,0,160,120);
-      const imageData=ctx.getImageData(40,20,80,80); // center region
-      const data=imageData.data;
-
-      // Calculate average brightness of center
-      let totalBright=0,skinPixels=0;
-      for(let i=0;i<data.length;i+=16){ // sample every 4th pixel
-        const r=data[i],g=data[i+1],b=data[i+2];
-        const bright=(r+g+b)/3;
-        totalBright+=bright;
-        // Simple skin-color detection
-        if(r>80&&g>50&&b>30&&r>g&&r>b&&(r-g)>15)skinPixels++;
-      }
-      const avgBright=totalBright/(data.length/16);
-      const skinRatio=skinPixels/(data.length/16);
-
-      if(skinRatio>0.15){
-        if(!faceDetected){faceDetected=true;document.getElementById('acFaceStatus').textContent='✅ Gesicht erkannt'}
-
-        brightnessHistory.push(avgBright);
-        if(brightnessHistory.length>10)brightnessHistory.shift();
-
-        if(brightnessHistory.length>=4){
-          const recent=brightnessHistory.slice(-4);
-          const trend=recent[3]-recent[0];
-
-          if(!acFaceCooldown){
-            // Face gets closer = brighter/bigger, then moves away
-            if(acFaceDir===0&&trend>8){acFaceDir=1} // going down (face approaching)
-            else if(acFaceDir===1&&trend<-8){
-              acFaceDir=0;acCount_++;acFaceCooldown=true;
-              updateACDisplay();beepRep();vib([30]);
-              const el=document.getElementById('acCount');el.classList.add('bump');setTimeout(()=>el.classList.remove('bump'),150);
-              woRepV=acCount_;document.getElementById('woRepVal').textContent=woRepV;
-              setTimeout(()=>{acFaceCooldown=false},600);
-            }
-          }
-        }
-      }else{
-        if(faceDetected){faceDetected=false;document.getElementById('acFaceStatus').textContent='🔍 Gesicht wird gesucht...'}
-      }
-    },100); // 10fps analysis
-  }catch(e){
-    document.getElementById('acFaceStatus').textContent='❌ Kamera nicht verfügbar';
-    console.error('Camera error',e);
-  }
-}
-
-function stopCamera(){
-  if(acVideoStream){acVideoStream.getTracks().forEach(t=>t.stop());acVideoStream=null}
-  if(acFaceInterval){clearInterval(acFaceInterval);acFaceInterval=null}
-  document.getElementById('acCameraWrap').classList.remove('active');
-  document.getElementById('acLive').classList.remove('active');
-  document.getElementById('acVideo').srcObject=null;
-}
-
-/* ═══════════════════════════════════════
-   WORKOUT ENGINE
-═══════════════════════════════════════ */
-function launchWorkout(type){
-  getAC();woType=type;woExs=WORKOUTS[type];woEI=0;woSI=0;woTS=0;woPsd=false;
-  woLog=woExs.map(e=>({name:e.name,reps:[]}));woStart=Date.now();woPhase='ready';
-  document.getElementById('woOverlay').classList.add('active');
-  document.getElementById('mainTabBar').style.display='none';
-  document.getElementById('woTag').textContent='WORKOUT '+type;
-  buildWoDots();startElTmr();renderWoEx();
-  document.getElementById('woScroll').scrollTop=0;
-}
-
-function buildWoDots(){const w=document.getElementById('woDots');w.innerHTML='';woExs.forEach((_,i)=>{const d=document.createElement('div');d.className='wo-dot';d.id='wd'+i;w.appendChild(d)})}
-function startElTmr(){clearInterval(woElTmr);woElTmr=setInterval(()=>{const s=Math.floor((Date.now()-woStart)/1000);document.getElementById('woElapsed').textContent=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`},1000)}
-const CIRC=2*Math.PI*72;
-
-function renderWoEx(){
-  const ex=woExs[woEI];woPhase='ready';clearWoTmr();
-  // Stop any running auto-count
-  stopAccel();stopCamera();acSensorOn=false;acCameraOn=false;
-  document.getElementById('acSensorToggle').classList.remove('on');
-  document.getElementById('acCameraToggle').classList.remove('on');
-
-  document.getElementById('woCat').textContent=ex.cat;
-  document.getElementById('woExName').textContent=ex.name;
-  document.getElementById('woTip').textContent=ex.tip;
-  document.getElementById('woTagSets').textContent=`Satz ${woSI+1}/${ex.sets}`;
-  document.getElementById('woTagReps').textContent=ex.isPlank?ex.reps:(ex.isMax?'Max Wdh':ex.reps+' Wdh');
-  document.getElementById('woTagRest').textContent=`⏱ ${ex.rest>=60?Math.floor(ex.rest/60)+' Min':ex.rest+'s'}`;
-  document.getElementById('woStep').textContent=`Übung ${woEI+1} von ${woExs.length}`;
-
-  const sd=document.getElementById('woSetDots');sd.innerHTML='';
-  for(let i=0;i<ex.sets;i++){const d=document.createElement('div');d.className='wo-set-d'+(i<woSI?' done':i===woSI?' cur':'');sd.appendChild(d)}
-
-  const ts=woExs.reduce((a,e)=>a+e.sets,0);let ds=0;for(let i=0;i<woEI;i++)ds+=woExs[i].sets;ds+=woSI;
-  document.getElementById('woProgFill').style.width=Math.round(ds/ts*100)+'%';
-  woExs.forEach((_,i)=>{const d=document.getElementById('wd'+i);if(d)d.className='wo-dot'+(i<woEI?' done':i===woEI?' cur':'')});
-
-  document.getElementById('woPhaseDot').style.background='var(--accent)';
-  document.getElementById('woPhaseLbl').textContent='BEREIT';
-  document.getElementById('woTimerBig').textContent='—';
-  document.getElementById('woTimerBig').className='wo-timer-big';
-  document.getElementById('woTimerSub').textContent='SATZ STARTEN';
-  document.getElementById('woRingFg').style.strokeDashoffset='0';
-  document.getElementById('woRingFg').style.stroke='var(--accent)';
-
-  // Auto-count card visibility
-  const acCard=document.getElementById('acCard');
-  const sensorRow=document.getElementById('acSensorRow');
-  const cameraRow=document.getElementById('acCameraRow');
-  if(ex.accel||ex.cam){
-    acCard.classList.add('vis');
-    sensorRow.style.display=ex.accel?'flex':'none';
-    cameraRow.style.display=ex.cam?'flex':'none';
-  }else{acCard.classList.remove('vis')}
-
-  // Rep input (always visible for max-rep, or when auto-count active as "manual correction")
-  const rc=document.getElementById('woRepCard');
-  if(ex.isMax||ex.accel||ex.cam){
-    woRepV=0;document.getElementById('woRepVal').textContent='0';rc.classList.add('vis');
-    document.querySelector('#woRepCard .wo-rep-lbl').textContent=ex.isMax?'Wiederholungen eingeben':'Manuell korrigieren';
-  }else rc.classList.remove('vis');
-
-  // Last workout reference
-  showLastRef(ex.name);
-
-  document.getElementById('woBtnMain').textContent=ex.isPlank?'Plank starten →':'Satz fertig ✓';
-  document.getElementById('woScroll').scrollTo({top:0,behavior:'smooth'});
-}
-
-function showLastRef(exName){
-  const ref=document.getElementById('woLastRef');
-  const lastWo=db.history.filter(h=>h.exercises).reverse().find(h=>h.exercises.some(e=>e.name===exName));
-  if(lastWo){
-    const exData=lastWo.exercises.find(e=>e.name===exName);
-    if(exData&&exData.reps.length){
-      ref.classList.remove('hidden');
-      document.getElementById('woLastText').textContent=`Letztes Mal (${lastWo.date})`;
-      document.getElementById('woLastVal').textContent=exData.reps.join(' · ')+' Reps';
-      return;
-    }
-  }
-  ref.classList.add('hidden');
-}
-
-function woNext(){
-  const ex=woExs[woEI];
-  if(woPhase==='ready'){
-    if(ex.isPlank){startPlankTmr(ex);return}
-    const r=ex.isMax||ex.accel||ex.cam?woRepV:(parseInt(ex.reps)||0);
-    woLog[woEI].reps.push(r);woTS++;
-    if(r>0&&(!db.prs[ex.name]||r>db.prs[ex.name])){db.prs[ex.name]=r;saveDB()}
-    stopAccel();stopCamera();
-    woSI++;if(woSI>=ex.sets){woEI++;woSI=0;if(woEI>=woExs.length){woFinish();return}}
-    startWoRest(ex.rest);
-  }else if(woPhase==='rest'){clearWoTmr();renderWoEx()}
-}
-
-function startWoRest(sec){
-  woPhase='rest';woTL=sec;woTT=sec;
-  document.getElementById('woBtnMain').textContent='Pause überspringen ⏭';
-  document.getElementById('woRepCard').classList.remove('vis');
-  document.getElementById('acCard').classList.remove('vis');
-  document.getElementById('woLastRef').classList.add('hidden');
-  document.getElementById('woPhaseDot').style.background='var(--orange)';
-  document.getElementById('woPhaseLbl').textContent='PAUSE';
-  document.getElementById('woTimerSub').textContent='BIS NÄCHSTER SATZ';
-  updateWoRing();clearWoTmr();
-  // Auto-scroll to timer
-  setTimeout(()=>{
-    const timerEl=document.querySelector('.wo-timer');
-    if(timerEl)timerEl.scrollIntoView({behavior:'smooth',block:'center'});
-  },200);
-  woTmr=setInterval(()=>{if(woPsd)return;woTL--;updateWoRing();
-    if(woTL===10)beep(660,110,.12);if(woTL<=5&&woTL>0)alarmTick();
-    if(woTL<=0){clearWoTmr();alarmDone();vib([200,80,200,80,300]);renderWoEx()}
-  },1000);
-}
-
-function updateWoRing(){
-  const off=CIRC*(1-woTL/woTT);document.getElementById('woRingFg').style.strokeDashoffset=off;
-  const m=Math.floor(woTL/60),s=woTL%60;const b=document.getElementById('woTimerBig');
-  b.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  if(woTL<=5){b.className='wo-timer-big crit';document.getElementById('woRingFg').style.stroke='var(--red)'}
-  else if(woTL<=10){b.className='wo-timer-big warn';document.getElementById('woRingFg').style.stroke='var(--orange)'}
-  else{b.className='wo-timer-big';document.getElementById('woRingFg').style.stroke='var(--accent)'}
-}
-
-function clearWoTmr(){clearInterval(woTmr);woTmr=null;woPsd=false;document.getElementById('woBtnPause').textContent='⏸'}
-function woPause(){woPsd=!woPsd;document.getElementById('woBtnPause').textContent=woPsd?'▶':'⏸'}
-function woSkip(){clearWoTmr();stopAccel();stopCamera();woEI++;woSI=0;if(woEI>=woExs.length){woFinish();return}renderWoEx()}
-function adjReps(d){woRepV=Math.max(0,woRepV+d);document.getElementById('woRepVal').textContent=woRepV;beep(440,25,.06)}
-
-/* EXIT */
-function woExit(){woPsd=true;document.getElementById('exitConfirm').classList.add('open')}
-function exitStay(){woPsd=false;document.getElementById('exitConfirm').classList.remove('open')}
-function exitQuit(){
-  document.getElementById('exitConfirm').classList.remove('open');
-  clearWoTmr();clearInterval(woElTmr);stopAccel();stopCamera();
-  const elapsed=Math.floor((Date.now()-woStart)/1000);let tr=0;const exData=[];
-  woLog.forEach(e=>{const s=e.reps.reduce((a,b)=>a+b,0);tr+=s;if(e.reps.length)exData.push({name:e.name,reps:[...e.reps]})});
-  if(woTS>0){db.history.push({type:woType,date:today(),timestamp:Date.now(),durationSec:elapsed,totalReps:tr,totalSets:woTS,exercises:exData,partial:true});saveDB()}
-  closeWoOverlay();
-}
-function closeWoOverlay(){
-  document.getElementById('woOverlay').classList.remove('active');
-  document.getElementById('plankOv').classList.remove('active');
-  document.getElementById('mainTabBar').style.display='flex';
-  renderHome();renderCal();renderProgress();
-}
-
-/* PLANK */
-function startPlankTmr(ex){
-  document.getElementById('plankOv').classList.add('active');
-  document.getElementById('plankNm').textContent=ex.name;document.getElementById('plankTipBox').textContent=ex.tip;
-  const circ=2*Math.PI*95;let t=ex.plankSec;const tot=t;updPlank(t,tot,circ);clearWoTmr();
-  woTmr=setInterval(()=>{if(woPsd)return;t--;updPlank(t,tot,circ);
-    if(t===10)beep(660,110,.12);if(t<=5&&t>0)alarmTick();
-    if(t<=0){clearWoTmr();alarmDone();vib([300,80,300,80,500]);finPlank(ex)}
-  },1000);
-}
-function updPlank(t,tot,circ){
-  document.getElementById('plankRFg').style.strokeDashoffset=circ*(1-t/tot);
-  const m=Math.floor(t/60),s=t%60;const b=document.getElementById('plankBig');
-  b.textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  if(t<=5){b.className='plank-big crit';document.getElementById('plankRFg').style.stroke='var(--red)'}
-  else if(t<=10){b.className='plank-big warn';document.getElementById('plankRFg').style.stroke='var(--orange)'}
-  else{b.className='plank-big';document.getElementById('plankRFg').style.stroke='var(--green)'}
-}
-function finPlank(ex){
-  document.getElementById('plankOv').classList.remove('active');document.getElementById('plankBig').className='plank-big';
-  document.getElementById('plankRFg').style.stroke='var(--green)';
-  woLog[woEI].reps.push(ex.plankSec);woTS++;
-  woSI++;if(woSI>=ex.sets){woEI++;woSI=0;if(woEI>=woExs.length){woFinish();return}}
-  renderWoEx();if(woPhase!=='done')startWoRest(ex.rest);
-}
-function plankSkip(){clearWoTmr();finPlank(woExs[woEI])}
-
-/* FINISH */
-function woFinish(){
-  clearWoTmr();clearInterval(woElTmr);stopAccel();stopCamera();woPhase='done';
-  const elapsed=Math.floor((Date.now()-woStart)/1000),m=Math.floor(elapsed/60),s=elapsed%60;
-  let tr=0;const exData=[];
-  woLog.forEach(e=>{const sum=e.reps.reduce((a,b)=>a+b,0);tr+=sum;exData.push({name:e.name,reps:[...e.reps]})});
-  db.history.push({type:woType,date:today(),timestamp:Date.now(),durationSec:elapsed,totalReps:tr,totalSets:woTS,exercises:exData});saveDB();
-  document.getElementById('sTime').textContent=`${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
-  document.getElementById('sSets').textContent=woTS;document.getElementById('sReps').textContent=tr;document.getElementById('sEx').textContent=woExs.length;
-  document.getElementById('sumSubTxt').textContent='Workout '+woType;
-  let rows='';woLog.forEach(e=>{const sum=e.reps.reduce((a,b)=>a+b,0);rows+=`<div class="sum-log-row"><span class="sum-log-name">${e.name}</span><span class="sum-log-reps">${e.reps.join(' · ')}${e.reps.length>1?' = '+sum:''}</span></div>`});
-  document.getElementById('sLogRows').innerHTML=rows;
-  document.getElementById('woOverlay').classList.remove('active');document.getElementById('sumOv').classList.add('active');
-  alarmDone();vib([100,50,100,50,400]);
-}
-function sumClose(){document.getElementById('sumOv').classList.remove('active');document.getElementById('mainTabBar').style.display='flex';renderHome();renderCal();renderProgress()}
-
-/* INIT */
-loadDB();initCal();renderHome();renderCal();renderProgress();
+/* ═══ MODAL ═══ */
+function openModal(type){
+  const m=document.getElementById('logModal');let title,body;
+  if(type==='run'){title='🏃 Lauf eintragen';body=`<label class="modal-label">Distanz (km)</label><input type="number" id="mDist" value="7" step="0.5" class="modal-input" style="text-align:center;font-weight:700;font-size:1.1rem"><label class="modal-label">Dauer (Minuten)</label><input type="number" id="mDur" value="45" class="modal-input" style="text-align:center;font-weight:700;font-size:1.1rem"><label class="modal-label">Notiz</label><input type="text" id="mNote" placeholder="z.B. lockerer Lauf" class="modal-input"><button class="btn-primary" onclick="saveEntry('run')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()" style="margin-top:8px">Abbrechen</button>`}
+  else if(type==='rest'){title='🧘 Ruhetag';body=`<div style="text-align:center;padding:20px;font-size:3rem">😴</div><div style="text-align:center;color:var(--text2);font-size:.85rem;margin-bottom:16px">Regeneration ist wichtig!</div><label class="modal-label">Notiz</label><input type="text" id="mNote" placeholder="z.B. Mobility" class="modal-input"><button class="btn-primary" onclick="saveEntry('rest')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()" style="margin-top:8px">Abbrechen</button>`}
+  else{title='📝 Eigenes Training';body=`<label class="modal-label">Bezeichnung</label><input type="text" id="mLabel" placeholder="z.B. Stretching" class="modal-input"><label class="modal-label">Dauer (Min)</label><input type="number" id="mDur" value="30" class="modal-input" style="text-align:center;font-weight:700"><label class="modal-label">Notiz</label><input type="text" id="mNote" class="modal-input"><button class="btn-primary" onclick="saveEntry('custom')">💾 Speichern</button><button class="btn-secondary" onclick="closeModal()" style="margin-top:8px">Abbrechen</button>`}
+  document.getElementById('modalTitle').textContent=title;document.getElementById('modalBody').innerHTML=body;m.classList.add('open')}
+function closeModal(){document.getElementById('logModal').classList.remove('open')}
+function saveEntry(type){const e={type,date:tday(),timestamp:Date.now()};const n=document.getElementById('mNote');if(n&&n.value)e.note=n.value;
+if(type==='run'){e.distance=parseFloat(document.getElementById('mDist').value)||0;e.durationSec=(parseInt(document.getElementById('mDur').value)||0)*60}
+else if(type==='custom'){e.label=document.getElementById('mLabel').value||'Custom';e.durationSec=(parseInt(document.getElementById('mDur').value)||0)*60}
+db.history.push(e);saveDB();closeModal();renderHome();renderCal()}
 document.getElementById('logModal').addEventListener('click',function(e){if(e.target===this)closeModal()});
+
+/* ═══ BACKUP ═══ */
+function exportBackup(){const blob=new Blob([JSON.stringify(db,null,2)],{type:'application/json'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=`calisthenics-backup-${tday()}.json`;a.click();URL.revokeObjectURL(url)}
+function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=function(ev){try{const d=JSON.parse(ev.target.result);if(d.history){db=d;saveDB();renderHome();renderCal();renderProg();alert('✅ Backup importiert! '+d.history.length+' Einträge.')}else alert('❌ Ungültige Datei.')}catch(e){alert('❌ Fehler: '+e.message)}};r.readAsText(f)}
+
+/* ═══ WORKOUT ENGINE ═══ */
+function launchWorkout(t){getAC();rqW();woT=t;woE=W[t];woI=0;woS=0;woTS=0;woPd=false;woLg=woE.map(e=>({name:e.name,reps:[]}));woSt=Date.now();
+document.getElementById('woOverlay').classList.add('active');document.getElementById('woTag').textContent='WORKOUT '+t;
+document.getElementById('woDots').innerHTML=woE.map((_,i)=>`<div class="wo-dot" id="wd${i}"></div>`).join('');
+clearInterval(woElT);woElT=setInterval(()=>{const s=Math.floor((Date.now()-woSt)/1000);document.getElementById('woElapsed').textContent=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`},1000);renderEx()}
+
+function renderEx(){
+  stopSm();infoO=false;document.getElementById('infoToggle').classList.remove('open');document.getElementById('exDetail').classList.remove('open');
+  const x=woE[woI];woPh='ready';clearInterval(woTmr);
+  document.getElementById('woCat').textContent=x.cat;document.getElementById('woExName').textContent=x.name;document.getElementById('woTip').textContent=x.tip;
+  document.getElementById('woTS').textContent=`Satz ${woS+1}/${x.sets}`;
+  document.getElementById('woTR').textContent=x.isPlank?x.reps:(x.isMax?'Max Wdh':x.reps+' Wdh');
+  document.getElementById('woTP').textContent=`⏱ ${x.rest>=60?Math.floor(x.rest/60)+' Min':x.rest+'s'}`;
+  document.getElementById('woStep').textContent=`Übung ${woI+1}/${woE.length}`;
+  document.getElementById('exDetailInner').innerHTML=buildInfo(x.name);
+  const sd=document.getElementById('woSetDots');sd.innerHTML='';for(let i=0;i<x.sets;i++){const d=document.createElement('div');d.className='wo-set-d'+(i<woS?' done':i===woS?' cur':'');sd.appendChild(d)}
+  const ts=woE.reduce((a,e)=>a+e.sets,0);let ds=0;for(let i=0;i<woI;i++)ds+=woE[i].sets;ds+=woS;
+  document.getElementById('woProgFill').style.width=Math.round(ds/ts*100)+'%';
+  woE.forEach((_,i)=>{const d=document.getElementById('wd'+i);if(d)d.className='wo-dot'+(i<woI?' done':i===woI?' cur':'')});
+  document.getElementById('woTimerBig').textContent='—';document.getElementById('woTimerBig').className='wo-timer-big';
+  document.getElementById('woTimerSub').textContent='BEREIT';document.getElementById('woRingFg').style.strokeDashoffset='0';document.getElementById('woRingFg').style.stroke='var(--accent)';
+  // Rep card: ALWAYS show for non-plank exercises
+  const rc=document.getElementById('woRepCard');
+  if(!x.isPlank){
+    // Pre-fill with target reps (parse first number) or 0 for max
+    const targetReps=x.isMax?0:(parseInt(x.reps)||0);
+    woRV=targetReps;document.getElementById('woRepVal').textContent=woRV;rc.classList.add('vis');
+    snT=x.sensor;const ss=document.getElementById('smartSec');
+    if(snT!=='none'){ss.classList.remove('hidden');document.getElementById('sBI').textContent=snT==='camera'?'📸':'📱';document.getElementById('sBT').textContent=snT==='camera'?'Kamera-Zähler':'Bewegungs-Zähler';document.getElementById('smartBtn').className='smart-btn';document.getElementById('smartInfo').classList.remove('vis')}
+    else ss.classList.add('hidden')
+  }else rc.classList.remove('vis');
+  document.getElementById('woBM').textContent=x.isPlank?'Plank starten →':'Satz fertig ✓';
+  document.querySelector('.wo-scroll-area').scrollTop=0}
+
+function woNext(){const x=woE[woI];if(woPh==='ready'){if(x.isPlank){stPlk(x);return}stopSm();woLg[woI].reps.push(woRV);woTS++;woS++;if(woS>=x.sets){woI++;woS=0;if(woI>=woE.length){woFin();return}}stRest(woE[woI>=woE.length?woI-1:woI].rest)}else{clearInterval(woTmr);renderEx()}}
+function stRest(sec){woPh='rest';let t=sec;document.getElementById('woBM').textContent='Überspringen ⏭';document.getElementById('woRepCard').classList.remove('vis');document.getElementById('woTimerSub').textContent='PAUSE';upRT(t,sec);clearInterval(woTmr);
+woTmr=setInterval(()=>{if(woPd)return;t--;upRT(t,sec);if(t<=5&&t>0){vib(80);beep(660,80,.15)}if(t<=0){clearInterval(woTmr);alarmDone();vib([200,80,200,80,300]);renderEx()}},1000)}
+function upRT(t,tot){document.getElementById('woRingFg').style.strokeDashoffset=502.65*(1-t/tot);const b=document.getElementById('woTimerBig');b.textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;b.className='wo-timer-big'+(t<=5?' crit':t<=10?' warn':'');document.getElementById('woRingFg').style.stroke=t<=5?'var(--red)':t<=10?'var(--orange)':'var(--accent)'}
+function adjR(d){woRV=Math.max(0,woRV+d);document.getElementById('woRepVal').textContent=woRV}
+function woPause(){woPd=!woPd;document.getElementById('woBP').textContent=woPd?'▶':'⏸'}
+function woSkip(){stopSm();clearInterval(woTmr);woI++;woS=0;if(woI>=woE.length){woFin();return}renderEx()}
+function abortWo(){if(!confirm('Abbrechen?'))return;stopSm();clearInterval(woTmr);clearInterval(woElT);rlW();document.getElementById('woOverlay').classList.remove('active');document.getElementById('plankOv').classList.remove('active')}
+
+/* ═══ PLANK with RING + SIDE PLANK 2-PHASE ═══ */
+function stPlk(x){
+  document.getElementById('plankOv').classList.add('active');
+  document.getElementById('plkNm').textContent=x.name;
+  document.getElementById('plkTip').textContent=x.tip;
+  if(x.isSide){
+    // Side Plank: 2 phases
+    document.getElementById('plkPhase').textContent='◀ LINKE SEITE';
+    runPlkTimer(x.plankSec,()=>{
+      // Phase 2: Right side
+      alarmDone();vib([200,100,200]);
+      document.getElementById('plkPhase').textContent='RECHTE SEITE ▶';
+      speak('Seite wechseln');
+      // Brief 3s pause for switching
+      let sw=3;document.getElementById('plkBig').textContent='🔄';document.getElementById('plkBig').className='plank-big';
+      document.getElementById('plkRFg').style.strokeDashoffset='0';document.getElementById('plkRFg').style.stroke='var(--orange)';
+      clearInterval(woTmr);
+      woTmr=setInterval(()=>{sw--;if(sw<=0){clearInterval(woTmr);runPlkTimer(x.plankSec,()=>{plkDone(x)})}},1000);
+    });
+  } else {
+    document.getElementById('plkPhase').textContent='';
+    runPlkTimer(x.plankSec,()=>{plkDone(x)});
+  }
+}
+
+function runPlkTimer(sec,onDone){
+  let t=sec;const tot=sec;const circ=2*Math.PI*95;
+  upPlkDisp(t,tot,circ);clearInterval(woTmr);
+  woTmr=setInterval(()=>{if(woPd)return;t--;upPlkDisp(t,tot,circ);
+    if(t<=5&&t>0){vib(80);beep(660,80,.15)}
+    if(t<=0){clearInterval(woTmr);alarmDone();vib([300,100,300]);onDone()}
+  },1000);
+}
+
+function upPlkDisp(t,tot,circ){
+  const off=circ*(1-t/tot);document.getElementById('plkRFg').style.strokeDashoffset=off;
+  const b=document.getElementById('plkBig');
+  b.textContent=`${String(Math.floor(t/60)).padStart(2,'0')}:${String(t%60).padStart(2,'0')}`;
+  b.className='plank-big'+(t<=5?' crit':t<=10?' warn':'');
+  document.getElementById('plkRFg').style.stroke=t<=5?'var(--red)':t<=10?'var(--orange)':'var(--green)';
+}
+
+function plkDone(x){
+  woLg[woI].reps.push(x.isSide?x.plankSec*2:x.plankSec);woTS++;woS++;
+  if(woS>=x.sets){woI++;woS=0;if(woI>=woE.length){document.getElementById('plankOv').classList.remove('active');woFin();return}}
+  document.getElementById('plankOv').classList.remove('active');renderEx();stRest(x.rest);
+}
+
+function plkEnd(){clearInterval(woTmr);const x=woE[woI];plkDone(x)}
+
+function woFin(){stopSm();clearInterval(woTmr);clearInterval(woElT);rlW();
+  const el=Math.floor((Date.now()-woSt)/1000);let tr=0;woLg.forEach(e=>tr+=e.reps.reduce((a,b)=>a+b,0));
+  db.history.push({type:woT,date:tday(),durationSec:el,totalReps:tr,totalSets:woTS,exercises:woLg.map(e=>({name:e.name,reps:[...e.reps]}))});saveDB();
+  document.getElementById('woOverlay').classList.remove('active');
+  document.getElementById('sTime').textContent=Math.round(el/60);document.getElementById('sSets').textContent=woTS;
+  document.getElementById('sReps').textContent=tr;document.getElementById('sEx').textContent=woE.length;
+  document.getElementById('sumSub').textContent='Workout '+woT;
+  let l='';woLg.forEach(e=>{l+=`<div class="sum-log-row"><span class="sum-log-name">${e.name}</span><span class="sum-log-reps">${e.reps.join(' · ')}</span></div>`});
+  document.getElementById('sumLog').innerHTML=l;document.getElementById('sumOv').classList.add('active');alarmDone();vib([100,50,100,50,400])}
+function sumClose(){document.getElementById('sumOv').classList.remove('active');renderHome();renderCal()}
+
+/* ═══ SMART SENSOR ═══ */
+function toggleSmart(){if(smOn){stopSm();return}if(snT==='motion')stMCD();else if(snT==='camera')stCam()}
+function stMCD(){const o=document.getElementById('countdownOv'),n=document.getElementById('countdownNum');o.classList.add('active');let c=3;n.textContent=c;speak('Drei');beep(440,150);const iv=setInterval(()=>{c--;if(c>0){n.textContent=c;n.style.animation='none';void n.offsetHeight;n.style.animation='countPop .8s ease';speak(c===2?'Zwei':'Eins');beep(440,150)}else{clearInterval(iv);o.classList.remove('active');initM();speak('Los!');beep(880,200)}},1200)}
+function initM(){if(typeof DeviceMotionEvent!=='undefined'&&typeof DeviceMotionEvent.requestPermission==='function'){DeviceMotionEvent.requestPermission().then(s=>{if(s==='granted')stML();else alert('Verweigert')}).catch(e=>alert(e.message))}else stML()}
+function stML(){yH=[];clb=false;bY=0;mP='neutral';lP=0;lV=0;window.addEventListener('devicemotion',hM,true);smOn=true;document.getElementById('smartBtn').className='smart-btn active-sensor';document.getElementById('sBI').textContent='⏹';document.getElementById('sBT').textContent='Stoppen';document.getElementById('smartInfo').classList.add('vis');document.getElementById('sBdg').className='sensor-badge calibrating';document.getElementById('sBdgT').textContent='Kalibriere...';clT=setTimeout(()=>{if(!smOn||!yH.length)return;bY=yH.reduce((a,b)=>a+b,0)/yH.length;clb=true;document.getElementById('sBdg').className='sensor-badge counting';document.getElementById('sBdgT').textContent='Aktiv – leg los!';speak('Bereit')},2000)}
+function hM(e){if(!smOn)return;const a=e.accelerationIncludingGravity;if(!a||a.y===null)return;yH.push(a.y);if(yH.length>50)yH.shift();if(!clb)return;const r=yH.slice(-SM),sy=r.reduce((a,b)=>a+b,0)/r.length,d=sy-bY,T=MN;switch(mP){case'neutral':if(d>T){mP='gu';lP=sy}else if(d<-T){mP='gdf';lV=sy}break;case'gu':if(sy>lP)lP=sy;if(sy<lP-1.5)mP='cd';break;case'cd':if(d<-T*.5){mP='neutral';cMR()}else if(d>T)mP='gu';break;case'gdf':if(sy<lV)lV=sy;if(sy>lV+1.5)mP='cuf';break;case'cuf':if(d>T*.5){mP='neutral';cMR()}else if(d<-T)mP='gdf';break}}
+function cMR(){if(rCD)return;rCD=true;regR();setTimeout(()=>{rCD=false},1200)}
+async function stCam(){try{vS=await navigator.mediaDevices.getUserMedia({video:{facingMode:'user',width:{ideal:160},height:{ideal:120}}});const v=document.getElementById('camV');v.srcObject=vS;v.style.display='block';smOn=true;cBL=-1;cSt='up';cH=[];document.getElementById('smartBtn').className='smart-btn active-sensor';document.getElementById('sBI').textContent='⏹';document.getElementById('sBT').textContent='Stoppen';document.getElementById('smartInfo').classList.add('vis');document.getElementById('sBdg').className='sensor-badge calibrating';document.getElementById('sBdgT').textContent='Kalibriert...';setTimeout(()=>{cL=setInterval(pCam,120);if(smOn){document.getElementById('sBdg').className='sensor-badge counting';document.getElementById('sBdgT').textContent='Aktiv'}speak('Kamera bereit')},1500)}catch(e){alert('Kamera: '+e.message)}}
+function pCam(){const v=document.getElementById('camV'),c=document.getElementById('camC');if(!v.videoWidth)return;c.width=40;c.height=30;const x=c.getContext('2d');x.drawImage(v,0,0,40,30);const d=x.getImageData(5,5,30,20).data;let s=0;for(let i=0;i<d.length;i+=16)s+=(d[i]+d[i+1]+d[i+2])/3;const avg=s/(d.length/16);cH.push(avg);if(cH.length>10)cH.shift();const sm=cH.reduce((a,b)=>a+b,0)/cH.length;if(cBL===-1&&sm>15){cBL=sm;return}if(cBL===-1)return;if(cSt==='up'&&sm<cBL*.35)cSt='down';else if(cSt==='down'&&sm>cBL*.7){cSt='up';regR()}}
+function regR(){adjR(1);vib(120);speak(woRV)}
+function stopSm(){smOn=false;clb=false;clearTimeout(clT);window.removeEventListener('devicemotion',hM,true);yH=[];mP='neutral';clearInterval(cL);cL=null;if(vS){vS.getTracks().forEach(t=>t.stop());vS=null}document.getElementById('camV').style.display='none';const ss=document.getElementById('smartSec');if(ss&&!ss.classList.contains('hidden')){document.getElementById('sBI').textContent=snT==='camera'?'📸':'📱';document.getElementById('sBT').textContent=snT==='camera'?'Kamera-Zähler':'Bewegungs-Zähler';document.getElementById('smartBtn').className='smart-btn';document.getElementById('smartInfo').classList.remove('vis')}}
+
+loadDB();initCal();renderHome();renderCal();
 </script>
 </body>
 </html>
