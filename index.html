@@ -115,7 +115,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 .status-dot{width:8px;height:8px;border-radius:50%;background:currentColor;animation:pulse 1.5s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 .debug-info{display:none;padding:6px 10px;border-radius:8px;background:rgba(0,0,0,.4);font-size:.6rem;color:var(--text3);font-family:monospace;text-align:center;word-break:break-all}.debug-info.vis{display:block}
-.cam-preview{display:none;width:120px;height:90px;border-radius:12px;object-fit:cover;border:2px solid var(--green);box-shadow:0 4px 15px rgba(34,211,160,0.2)}
+.cam-preview{display:none;width:130px;height:98px;border-radius:14px;object-fit:cover;border:2px solid var(--green);box-shadow:0 4px 16px rgba(34,211,160,0.25)}
 .cam-preview.vis{display:block}
 .sensitivity-row{display:flex;align-items:center;gap:10px;width:100%;padding:0 4px}
 .sens-label{font-size:.68rem;color:var(--text3);flex-shrink:0;width:70px}
@@ -182,7 +182,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
 <div class="page" id="pageProgress"><div class="page-head"><div class="page-title">Fortschritt</div></div><div id="progCharts"></div></div>
 
 <div class="modal-bg" id="logModal"><div class="modal-sheet"><div class="modal-handle"></div><div class="modal-title" id="mT"></div><div id="mB"></div></div></div>
-<div class="cd-ov" id="cdOv"><div class="cd-num" id="cdNum">3</div><div class="cd-label" id="cdLabel">Handy jetzt in die Hosentasche!</div></div>
+<div class="cd-ov" id="cdOv"><div class="cd-num" id="cdNum">3</div><div class="cd-label" id="cdLabel">Mach dich bereit!</div></div>
 
 <div class="wo-overlay" id="woOv">
   <div class="wo-topbar"><div><div class="wo-topbar-tag" id="woTag"></div><div class="wo-topbar-step" id="woStep"></div></div><div class="wo-topbar-right"><div class="wo-topbar-time" id="woEl">00:00</div><button class="wo-close-btn" onclick="abortWo()">✕</button></div></div>
@@ -203,7 +203,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Ro
         <canvas id="camC" style="display:none"></canvas>
         <div class="sensitivity-row" id="sensRow" style="display:none">
           <span class="sens-label">Empfindl.</span>
-          <input type="range" class="sens-slider" id="sensSlider" min="5" max="50" value="20" oninput="camSens=parseInt(this.value)">
+          <input type="range" class="sens-slider" id="sensSlider" min="3" max="30" value="10" oninput="camSens=parseInt(this.value)">
         </div>
         <div class="debug-info" id="dbg"></div>
         <div class="sensor-hint" id="sensorHint"></div>
@@ -225,28 +225,20 @@ const W={A:[{name:'Pull-Ups',cat:CAT.pull,sets:4,reps:'Max',rest:180,isMax:true,
 
 let db={history:[]},calY,calM,calSel=null;
 let woT,woE,woI,woS,woPh,woTmr,woElT,woSt,woRV,woLg,woTS,woPd;
-let wkL=null,smOn=false,snT='none',rCD=false,infoO=false;
+let wkL=null,smOn=false,snT='none',infoO=false;
 let audioCtx=null;
 
 // Motion
-let motionHistory=[];
-let calibrated=false;
-let calibTimer=null;
-let baseline={x:0,y:0,z:0};
-let dominantAxis='y';
-let motionPhase='neutral';
-let peakVal=0,valleyVal=0;
-let lastRepTime=0;
-const MOTION_THRESHOLD=1.8;
-const MOTION_COOLDOWN=800;
+let motionHistory=[],calibrated=false,calibTimer=null;
+let baseline={x:0,y:0,z:0},dominantAxis='y';
+let motionPhase='neutral',peakVal=0,valleyVal=0,lastRepTime=0;
+const MOTION_THRESHOLD=1.8,MOTION_COOLDOWN=800;
 
-// Camera
+// Camera – NO calibration, relative change detection
 let vS=null,cL=null,cH=[];
-let camBaseline=-1;
-let camState='up';
-let camSens=20;
-let camCalibDone=false;
-let camCalibSamples=[];
+let camSens=10; // absolute brightness units needed for change
+let camPeak=-1,camValley=Infinity;
+let camPhase='idle'; // idle → falling → rising → count!
 let camRepCooldown=false;
 
 function loadDB(){try{const d=localStorage.getItem('cali_db');if(d)db=JSON.parse(d)}catch(e){}}
@@ -301,7 +293,7 @@ function importDB(e){const f=e.target.files[0];if(!f)return;const r=new FileRead
 function launchWo(t){getAC();rqW();woT=t;woE=W[t];woI=0;woS=0;woTS=0;woPd=false;woLg=woE.map(e=>({name:e.name,reps:[]}));woSt=Date.now();document.getElementById('woOv').classList.add('active');document.getElementById('woTag').textContent='WORKOUT '+t;document.getElementById('woDots').innerHTML=woE.map((_,i)=>`<div class="wo-dot" id="wd${i}"></div>`).join('');clearInterval(woElT);woElT=setInterval(()=>{const s=Math.floor((Date.now()-woSt)/1000);document.getElementById('woEl').textContent=`${String(Math.floor(s/60)).padStart(2,'0')}:${String(s%60).padStart(2,'0')}`},1000);renderEx()}
 
 function renderEx(){stopSm();infoO=false;document.getElementById('infoTog').classList.remove('open');document.getElementById('exDet').classList.remove('open');const x=woE[woI];woPh='ready';clearInterval(woTmr);document.getElementById('woCat').textContent=x.cat;document.getElementById('woName').textContent=x.name;document.getElementById('woTip').textContent=x.tip;document.getElementById('tS').textContent=`Satz ${woS+1}/${x.sets}`;document.getElementById('tR').textContent=x.isPlank?x.reps:(x.isMax?'Max':x.reps);document.getElementById('tP').textContent=`⏱${x.rest>=60?Math.floor(x.rest/60)+'m':x.rest+'s'}`;document.getElementById('woStep').textContent=`${woI+1}/${woE.length}`;document.getElementById('exDetIn').innerHTML=buildInfo(x.name);const sd=document.getElementById('setDots');sd.innerHTML='';for(let i=0;i<x.sets;i++){const d=document.createElement('div');d.className='wo-set-d'+(i<woS?' done':i===woS?' cur':'');sd.appendChild(d)}const ts=woE.reduce((a,e)=>a+e.sets,0);let ds=0;for(let i=0;i<woI;i++)ds+=woE[i].sets;ds+=woS;document.getElementById('woFill').style.width=Math.round(ds/ts*100)+'%';woE.forEach((_,i)=>{const d=document.getElementById('wd'+i);if(d)d.className='wo-dot'+(i<woI?' done':i===woI?' cur':'')});document.getElementById('tmrBig').textContent='—';document.getElementById('tmrBig').className='wo-timer-big';document.getElementById('tmrSub').textContent='BEREIT';document.getElementById('ringFg').style.strokeDashoffset='0';document.getElementById('ringFg').style.stroke='var(--accent)';
-const rc=document.getElementById('repCard');if(!x.isPlank){woRV=x.isMax?0:(parseInt(x.reps)||0);document.getElementById('repVal').textContent=woRV;rc.classList.add('vis');snT=x.sensor;const ss=document.getElementById('smartSec');const tog=document.getElementById('smartTog');if(snT!=='none'){ss.classList.remove('hidden');tog.checked=false;document.getElementById('sensRow').style.display='none';document.getElementById('dbg').classList.remove('vis');if(snT==='camera'){document.getElementById('togIco').textContent='📸';document.getElementById('togLbl').textContent='Kamera-Zähler';document.getElementById('togSub').textContent='Handy unter die Brust';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Handy flach auf den Boden, Frontkamera nach oben. Bei jeder Rep piept es – hörst du einen Extra-Piep, drück −1.'}else{document.getElementById('togIco').textContent='📱';document.getElementById('togLbl').textContent='Bewegungs-Zähler';document.getElementById('togSub').textContent='Handy in die Hosentasche';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Bei jeder Rep hörst du einen Piep. Hörst du beim Abspringen einen Extra-Piep, drück danach −1.'}document.getElementById('smStat').className='smart-status';document.getElementById('camV').classList.remove('vis')}else ss.classList.add('hidden')}else rc.classList.remove('vis');document.getElementById('btnM').textContent=x.isPlank?'Plank →':'Satz fertig ✓';document.querySelector('.wo-scroll-area').scrollTop=0}
+const rc=document.getElementById('repCard');if(!x.isPlank){woRV=x.isMax?0:(parseInt(x.reps)||0);document.getElementById('repVal').textContent=woRV;rc.classList.add('vis');snT=x.sensor;const ss=document.getElementById('smartSec');const tog=document.getElementById('smartTog');if(snT!=='none'){ss.classList.remove('hidden');tog.checked=false;document.getElementById('sensRow').style.display='none';document.getElementById('dbg').classList.remove('vis');if(snT==='camera'){document.getElementById('togIco').textContent='📸';document.getElementById('togLbl').textContent='Kamera-Zähler';document.getElementById('togSub').textContent='Handy unter die Brust';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Handy flach auf den Boden, Frontkamera oben. Sofort startklar – keine Kalibrierung! Bei jeder Rep piept es.'}else{document.getElementById('togIco').textContent='📱';document.getElementById('togLbl').textContent='Bewegungs-Zähler';document.getElementById('togSub').textContent='Handy in die Hosentasche';document.getElementById('sensorHint').innerHTML='<strong>Tipp:</strong> Bei jeder Rep hörst du einen Piep. Hörst du beim Abspringen einen Extra-Piep, drück danach −1.'}document.getElementById('smStat').className='smart-status';document.getElementById('camV').classList.remove('vis')}else ss.classList.add('hidden')}else rc.classList.remove('vis');document.getElementById('btnM').textContent=x.isPlank?'Plank →':'Satz fertig ✓';document.querySelector('.wo-scroll-area').scrollTop=0}
 
 function woNext(){const x=woE[woI];if(woPh==='ready'){if(x.isPlank){stPlk(x);return}stopSm();woLg[woI].reps.push(woRV);woTS++;woS++;if(woS>=x.sets){woI++;woS=0;if(woI>=woE.length){woFin();return}}stRest(woE[woI>=woE.length?woI-1:woI].rest)}else{clearInterval(woTmr);renderEx()}}
 function stRest(sec){woPh='rest';let t=sec;document.getElementById('btnM').textContent='Skip ⏭';document.getElementById('repCard').classList.remove('vis');document.getElementById('tmrSub').textContent='PAUSE';upRT(t,sec);clearInterval(woTmr);woTmr=setInterval(()=>{if(woPd)return;t--;upRT(t,sec);if(t<=5&&t>0){vib(80);beep(660,80,.15)}if(t<=0){clearInterval(woTmr);alarmDone();vib([200,80,200,80,300]);renderEx()}},1000)}
@@ -334,8 +326,17 @@ async function onToggle(checked){
       document.getElementById('camV').srcObject=vS;
       document.getElementById('camV').classList.add('vis');
       document.getElementById('sensRow').style.display='flex';
-      document.getElementById('cdLabel').textContent='Handy auf den Boden legen!';
-      showCD(()=>startCamera());
+      // No countdown needed – starts instantly, no calibration!
+      smOn=true;
+      camPhase='idle';cH=[];camPeak=-1;camValley=Infinity;camRepCooldown=false;
+      updateStatus('on','Kamera aktiv – leg los!');
+      speak('Kamera bereit');
+      const video=document.getElementById('camV');
+      const waitReady=()=>{
+        if(video.videoWidth>0&&smOn){cL=setInterval(processCam,80)}
+        else if(smOn){setTimeout(waitReady,100)}
+      };
+      setTimeout(waitReady,200);
     }
   }catch(err){alert('Fehler: '+err.message);document.getElementById('smartTog').checked=false}
 }
@@ -420,25 +421,18 @@ function countMotionRep(){
   regRep();
 }
 
-/* ─── CAMERA ─── */
-function startCamera(){
-  smOn=true;
-  camState='up';cH=[];
-  camBaseline=-1;
-  camCalibDone=false;
-  camCalibSamples=[];
-  camRepCooldown=false;
-  updateStatus('cal','Kalibriere Kamera...');
-  const video=document.getElementById('camV');
-  const waitReady=()=>{
-    if(video.videoWidth>0&&smOn){
-      cL=setInterval(processCam,80);
-    }else if(smOn){
-      setTimeout(waitReady,100);
-    }
-  };
-  setTimeout(waitReady,300);
-}
+/* ═══════════════════════════════════════
+   CAMERA v7 – NO CALIBRATION
+   
+   Peak/Valley tracker:
+   - Track current local peak and valley
+   - When brightness drops camSens units from peak → "falling"
+   - When brightness rises camSens units from valley → "rising" → REP!
+   - Reset peak/valley after each rep
+   
+   Works instantly, no baseline needed.
+   Adapts to any light level automatically.
+═══════════════════════════════════════ */
 
 function processCam(){
   if(!smOn)return;
@@ -455,43 +449,49 @@ function processCam(){
   }
   const brightness=sum/count;
   cH.push(brightness);
-  if(cH.length>6)cH.shift();
+  if(cH.length>5)cH.shift();
   const smooth=cH.reduce((a,b)=>a+b,0)/cH.length;
+  
+  const thr=camSens; // absolute brightness units
   const dbg=document.getElementById('dbg');
   dbg.classList.add('vis');
   
-  if(!camCalibDone){
-    camCalibSamples.push(smooth);
-    dbg.textContent=`Kalib: ${smooth.toFixed(0)} (${camCalibSamples.length}/25)`;
-    if(camCalibSamples.length>=25){
-      const sorted=[...camCalibSamples].sort((a,b)=>a-b);
-      camBaseline=sorted[Math.floor(sorted.length/2)];
-      camCalibDone=true;
-      camState='up';
-      updateStatus('on','Kamera aktiv!');
-      speak('Kamera bereit');
-    }
-    return;
-  }
-  
-  const dropPct=camSens/100;
-  const darkThreshold=camBaseline*(1-dropPct);
-  const brightThreshold=darkThreshold+(camBaseline-darkThreshold)*0.5;
-  const pctDrop=((camBaseline-smooth)/camBaseline*100);
-  dbg.textContent=`B:${smooth.toFixed(0)} base:${camBaseline.toFixed(0)} ▼${pctDrop.toFixed(0)}% ${camState}`;
-  
-  if(camState==='up'){
-    if(smooth<darkThreshold)camState='down';
-  }else if(camState==='down'){
-    if(smooth>brightThreshold){
-      camState='up';
+  switch(camPhase){
+    case 'idle':
+      // Waiting for first movement – track peak
+      if(camPeak<0)camPeak=smooth;
+      if(smooth>camPeak)camPeak=smooth;
+      // Detect first drop
+      if(camPeak-smooth>thr){
+        camPhase='falling';
+        camValley=smooth;
+      }
+      dbg.textContent=`WARTE pk:${camPeak.toFixed(0)} now:${smooth.toFixed(0)} Δ${(camPeak-smooth).toFixed(0)}/${thr}`;
+      break;
+      
+    case 'falling':
+      // Brightness is dropping (body coming close)
+      if(smooth<camValley)camValley=smooth;
+      // Detect rise from valley
+      if(smooth-camValley>thr){
+        camPhase='rising';
+      }
+      dbg.textContent=`▼ val:${camValley.toFixed(0)} now:${smooth.toFixed(0)} Δ${(smooth-camValley).toFixed(0)}/${thr}`;
+      break;
+      
+    case 'rising':
+      // Brightness rising (body moving away) → REP!
       if(!camRepCooldown){
         camRepCooldown=true;
         regRep();
-        camBaseline=camBaseline*0.93+smooth*0.07;
-        setTimeout(()=>{camRepCooldown=false},600);
+        setTimeout(()=>{camRepCooldown=false},500);
       }
-    }
+      // Reset: new peak starts from current
+      camPeak=smooth;
+      camValley=Infinity;
+      camPhase='idle';
+      dbg.textContent=`✓ REP! reset pk:${smooth.toFixed(0)}`;
+      break;
   }
 }
 
@@ -513,7 +513,7 @@ function stopSm(){
   window.removeEventListener('devicemotion',handleMotion,true);
   motionHistory=[];motionPhase='neutral';
   clearInterval(cL);cL=null;
-  camCalibDone=false;camCalibSamples=[];
+  camPhase='idle';camPeak=-1;camValley=Infinity;
   if(vS){vS.getTracks().forEach(t=>t.stop());vS=null}
   document.getElementById('camV').classList.remove('vis');
   document.getElementById('sensRow').style.display='none';
